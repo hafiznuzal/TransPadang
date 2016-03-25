@@ -301,7 +301,7 @@
         if (!$this.hasClass('active')) {
             $this.addClass('active');
         }
-        e.preventDefault();
+       // e.preventDefault();
     });
 });
 		</script>
