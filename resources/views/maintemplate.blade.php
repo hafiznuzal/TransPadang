@@ -19,6 +19,7 @@
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="{{ url('css/ace.min.css') }}" class="ace-main-stylesheet" id="main-ace-style" />
+		<link rel="stylesheet" href="{{ url('css/map-resopnsive.css') }}">
 
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
@@ -145,9 +146,9 @@
 						<span class="btn btn-danger"></span>
 					</div> -->
 				</div><!-- /.sidebar-shortcuts -->
-
+<div class="setActive">
 				<ul class="nav nav-list">
-					<li class="">
+					<li {{Request::is('/index*') ? 'class="active"' : '' }}>
 						<a href="{{ URL::to('/index') }}">
 							<i class="menu-icon fa fa-tachometer"></i>
 							<span class="menu-text"> Dashboard </span>
@@ -156,7 +157,7 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li class="">
+					<li {{ Request::is('/koridor*') ? 'class="active"' : '' }}>
 						<a href="{{ URL::to('/koridor') }}">
 							<i class="menu-icon fa fa-info"></i>
 							<span class="menu-text"> Informasi Koridor </span>
@@ -166,7 +167,7 @@
 
 					</li>
 
-					<li class="">
+					<li {{ Request::is('/jadwal*') ? 'class="active"' : '' }}>
 						<a href="{{ URL::to('/jadwal') }}">
 							<i class="menu-icon fa fa-clock-o"></i>
 							<span class="menu-text"> Jadwal </span>
@@ -175,7 +176,7 @@
 						<b class="arrow"></b>
 					</li>
 
-
+</div>
 				</ul><!-- /.nav-list -->
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -292,6 +293,7 @@
 		<script src="{{ url('js/ace.min.js')}}"></script>
 
 		<script>
+<<<<<<< HEAD
 	  $(document).ready(function () {
     $('.nav li').click(function(e) {
 
@@ -304,6 +306,9 @@
        // e.preventDefault();
     });
 });
+=======
+		
+>>>>>>> 91a2c73a8b67b284e55d319d6ccaaf8a34a606a5
 		</script>
 
 		@yield('js')
