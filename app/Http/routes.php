@@ -31,5 +31,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('index','HomeController@index');
     Route::get('koridor','HomeController@koridor');
     Route::get('jadwal','HomeController@jadwal');
+    Route::get('halte','HomeController@halte');
 
 });

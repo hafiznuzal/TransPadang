@@ -34,8 +34,7 @@
 
 		<!-- ace settings handler -->
 		<script src="{{ url('js/ace-extra.min.js') }}"></script>
-		<script src="http://maps.googleapis.com/maps/api/js"></script>
-		<script src="{{ url('js/maps.js') }}"></script>
+		
 		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
 		<!--[if lte IE 8]>

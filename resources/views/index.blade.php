@@ -1,7 +1,14 @@
 @extends('maintemplate')
 
-@section('breadcrumb')
+
+
+@section('css')
 	<li>Dashboard</li>
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+	<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
 @endsection
 
 @section('page-header')
@@ -16,7 +23,8 @@
 	<div class="row">
 		<div class="col-md-8">
 			<div class="map-responsive">
-    	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6709.195556985042!2d100.35660316641659!3d-0.9132147346254299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b942e2b117bb%3A0xb8468cb5c3046ba5!2sPadang%2C+Kota+Padang%2C+Sumatera+Barat!5e0!3m2!1sid!2sid!4v1458891427914" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    	
+    		<div id="map" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>
 		
 			</div>
 		</div>
@@ -47,4 +55,50 @@
 			</form>
 		</div>
 	</div>
+@endsection
+
+@section('js')
+	<script>
+		L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
+// Here we don't use the second argument to map, since that would automatically
+// load in non-clustered markers from the layer. Instead we add just the
+// backing tileLayer, and then use the featureLayer only for its data.
+var map = L.mapbox.map('map')
+    .setView([-0.908667,100.3872087], 13)
+    .addLayer(L.mapbox.tileLayer('mapbox.dark'));
+
+L.mapbox.featureLayer()
+    .loadURL('/TransPadang/public/halte')
+    .on('ready', function(e) {
+    // create a new MarkerClusterGroup that will show special-colored
+    // numbers to indicate the type of rail stations it contains
+    function makeGroup(color) {
+      return new L.MarkerClusterGroup({
+        iconCreateFunction: function(cluster) {
+          return new L.DivIcon({
+            iconSize: [20, 20],
+            html: '<div style="text-align:center;color:#fff;background:' +
+            color + '">' + cluster.getChildCount() + '</div>'
+          });
+        }
+      }).addTo(map);
+    }
+    // create a marker cluster group for each type of rail station
+    var groups = {
+      red: makeGroup('red'),
+      green: makeGroup('green'),
+      orange: makeGroup('orange'),
+      blue: makeGroup('blue'),
+      yellow: makeGroup('yellow')
+    };
+    e.target.eachLayer(function(layer) {
+      // add each rail station to its specific group.
+      groups[layer.feature.properties.line].addLayer(layer);
+    });
+});
+	</script>
+
+	<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+
 @endsection
