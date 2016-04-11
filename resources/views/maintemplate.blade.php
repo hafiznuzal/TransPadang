@@ -292,7 +292,6 @@
 		<script src="{{ url('js/ace.min.js')}}"></script>
 
 		<script>
-<<<<<<< HEAD
 	  $(document).ready(function () {
     $('.nav li').click(function(e) {
 
@@ -305,9 +304,7 @@
        // e.preventDefault();
     });
 });
-=======
-		
->>>>>>> 91a2c73a8b67b284e55d319d6ccaaf8a34a606a5
+
 		</script>
 
 		@yield('js')

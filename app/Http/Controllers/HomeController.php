@@ -45,7 +45,7 @@ class HomeController extends Controller
             $feature['properties'] = array();
             $feature['properties']['name'] = $value->nama;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-symbol'] = $value->simbol;
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             $feature['properties']['line'] = $value->koridor->line;
             $feature['geometry'] = array();
             $feature['geometry']['type'] = "Point";

@@ -8,7 +8,18 @@
 	<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
 	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
-
+	<style>
+	  /*body { margin:0; padding:0; }*/
+	  /*#map {  }*/
+	  #map{
+		 width:600px; 
+		 height:350px;
+		 position:absolute; 
+		 top:0; 
+		 bottom:0; 
+		 width:100%;
+		}
+	</style>
 @endsection
 
 @section('page-header')
@@ -21,12 +32,14 @@
 
 @section('content')
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-8" style="height: 400px;">
 			<div class="map-responsive">
     	
     		<div id="map" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>
-		
+			
 			</div>
+			<!-- <div id="map" > </div> -->
+
 		</div>
 		<div class="col-sm-4">
 			<form class="form-horizontal" role="form">
@@ -58,6 +71,8 @@
 @endsection
 
 @section('js')
+<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
 	<script>
 		L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
 // Here we don't use the second argument to map, since that would automatically
@@ -98,7 +113,6 @@ L.mapbox.featureLayer()
 });
 	</script>
 
-	<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
-	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+	
 
 @endsection
