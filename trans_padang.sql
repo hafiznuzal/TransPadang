@@ -1,21 +1,31 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.6.16 - MySQL Community Server (GPL)
--- Server OS:                    Win32
--- HeidiSQL Version:             9.3.0.4984
--- --------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 4.1.12
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 12, 2016 at 03:39 AM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
--- Dumping database structure for trans_padang
-CREATE DATABASE IF NOT EXISTS `trans_padang` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `trans_padang`;
+--
+-- Database: `trans_padang`
+--
 
+-- --------------------------------------------------------
 
--- Dumping structure for table trans_padang.halte
+--
+-- Table structure for table `halte`
+--
+
 CREATE TABLE IF NOT EXISTS `halte` (
   `id` int(11) NOT NULL,
   `nama` varchar(45) DEFAULT NULL,
@@ -26,14 +36,23 @@ CREATE TABLE IF NOT EXISTS `halte` (
   `deleted_at` datetime DEFAULT NULL,
   `koridor_id` int(11) NOT NULL,
   PRIMARY KEY (`id`,`koridor_id`),
-  KEY `fk_halte_koridor_idx` (`koridor_id`),
-  CONSTRAINT `fk_halte_koridor` FOREIGN KEY (`koridor_id`) REFERENCES `koridor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_halte_koridor_idx` (`koridor_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+--
+-- Dumping data for table `halte`
+--
 
+INSERT INTO `halte` (`id`, `nama`, `latitute`, `longitute`, `created_at`, `updated_at`, `deleted_at`, `koridor_id`) VALUES
+(1, 'SJS', -0.902942, 100.358, '2016-04-09 22:01:14', '2016-04-09 22:01:16', NULL, 1),
+(2, 'Rumah Hafiz', -0.903358, 100.361, '2016-04-09 22:59:50', '2016-04-09 22:59:50', NULL, 2);
 
--- Dumping structure for table trans_padang.kecamatan
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kecamatan`
+--
+
 CREATE TABLE IF NOT EXISTS `kecamatan` (
   `id` int(11) NOT NULL,
   `nama` varchar(45) DEFAULT NULL,
@@ -43,10 +62,19 @@ CREATE TABLE IF NOT EXISTS `kecamatan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+--
+-- Dumping data for table `kecamatan`
+--
 
+INSERT INTO `kecamatan` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Nanggalo', '2016-04-09 21:52:00', '2016-04-09 21:52:03', NULL);
 
--- Dumping structure for table trans_padang.kelurahan
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kelurahan`
+--
+
 CREATE TABLE IF NOT EXISTS `kelurahan` (
   `id` int(11) NOT NULL,
   `nama` varchar(45) DEFAULT NULL,
@@ -55,14 +83,22 @@ CREATE TABLE IF NOT EXISTS `kelurahan` (
   `deleted_at` datetime DEFAULT NULL,
   `Kecamatan_id` int(11) NOT NULL,
   PRIMARY KEY (`id`,`Kecamatan_id`),
-  KEY `fk_Kelurahan_Kecamatan1_idx` (`Kecamatan_id`),
-  CONSTRAINT `fk_Kelurahan_Kecamatan1` FOREIGN KEY (`Kecamatan_id`) REFERENCES `kecamatan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Kelurahan_Kecamatan1_idx` (`Kecamatan_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+--
+-- Dumping data for table `kelurahan`
+--
 
+INSERT INTO `kelurahan` (`id`, `nama`, `created_at`, `updated_at`, `deleted_at`, `Kecamatan_id`) VALUES
+(1, 'Lapai', '2016-04-09 21:52:51', '2016-04-09 21:52:52', NULL, 1);
 
--- Dumping structure for table trans_padang.koridor
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `koridor`
+--
+
 CREATE TABLE IF NOT EXISTS `koridor` (
   `id` int(11) NOT NULL,
   `nama` varchar(45) DEFAULT NULL,
@@ -76,11 +112,39 @@ CREATE TABLE IF NOT EXISTS `koridor` (
   `deleted_at` datetime DEFAULT NULL,
   `Kelurahan_id` int(11) NOT NULL,
   PRIMARY KEY (`id`,`Kelurahan_id`),
-  KEY `fk_koridor_Kelurahan1_idx` (`Kelurahan_id`),
-  CONSTRAINT `fk_koridor_Kelurahan1` FOREIGN KEY (`Kelurahan_id`) REFERENCES `kelurahan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_koridor_Kelurahan1_idx` (`Kelurahan_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+--
+-- Dumping data for table `koridor`
+--
+
+INSERT INTO `koridor` (`id`, `nama`, `detail`, `peta`, `color`, `simbol`, `line`, `created_at`, `updated_at`, `deleted_at`, `Kelurahan_id`) VALUES
+(1, 'Koridor 1', 'Apa aja boleg', NULL, '#ff0000', 'rail-metro', 'blue', '2016-04-09 21:56:40', '2016-04-09 21:56:41', NULL, 1),
+(2, 'Koridor 2', 'a', NULL, '#0000ff', 'rail-metro', 'red', '2016-04-09 23:13:56', '2016-04-09 23:13:56', NULL, 1);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `halte`
+--
+ALTER TABLE `halte`
+  ADD CONSTRAINT `fk_halte_koridor` FOREIGN KEY (`koridor_id`) REFERENCES `koridor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `kelurahan`
+--
+ALTER TABLE `kelurahan`
+  ADD CONSTRAINT `fk_Kelurahan_Kecamatan1` FOREIGN KEY (`Kecamatan_id`) REFERENCES `kecamatan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `koridor`
+--
+ALTER TABLE `koridor`
+  ADD CONSTRAINT `fk_koridor_Kelurahan1` FOREIGN KEY (`Kelurahan_id`) REFERENCES `kelurahan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
