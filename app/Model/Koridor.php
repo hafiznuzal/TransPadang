@@ -20,6 +20,6 @@ class Koridor extends Model
 
      public function Kelurahan()
     {
-        return $this->belongsTo('Kelurahan');
+        return $this->belongsToMany('Kelurahan');
     }
 }

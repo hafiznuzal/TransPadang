@@ -19,4 +19,9 @@ class Halte extends Model
         return $this->belongsTo('App\Model\Koridor');
     }
 
+      public function Kelurahan()
+    {
+        return $this->belongsTo('App\Model\Kelurahan');
+    }
+
 }
