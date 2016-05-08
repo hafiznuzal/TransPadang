@@ -15,11 +15,17 @@ class Kelurahan extends Model
 
      public function Koridor()
     {
-        return $this->hasMany('Koridor');
+        return $this->belongsToMany('Koridor');
     }
 
      public function Kecamatan()
     {
         return $this->belongsTo('Kecamatan');
     }
+
+     public function Halte()
+    {
+        return $this->hasMany('Halte');
+    }
+
 }
