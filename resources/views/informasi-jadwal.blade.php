@@ -48,7 +48,7 @@
 					<div id="koridor1" class="tab-pane fade in active">
 						<p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
 
-						<div>
+						<div class="map-responsive">
 							<div id="map" width="400" height="200" frameborder="0" style="border:0" allowfullscreen></div>		
 						</div>
 					</div>
