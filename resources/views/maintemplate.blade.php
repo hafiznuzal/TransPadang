@@ -145,7 +145,7 @@
 						<span class="btn btn-danger"></span>
 					</div> -->
 				</div><!-- /.sidebar-shortcuts -->
-<div class="setActive">
+					<div class="setActive">
 				<ul class="nav nav-list">
 					<li {{Request::is('/index*') ? 'class="active"' : '' }}>
 						<a href="{{ URL::to('/index') }}">
@@ -156,7 +156,7 @@
 						<b class="arrow"></b>
 					</li>
 
-					<li {{ Request::is('/koridor*') ? 'class="active"' : '' }}>
+					<!-- <li {{ Request::is('/koridor*') ? 'class="active"' : '' }}>
 						<a href="{{ URL::to('/koridor') }}">
 							<i class="menu-icon fa fa-info"></i>
 							<span class="menu-text"> Informasi Koridor </span>
@@ -164,12 +164,62 @@
 
 						<b class="arrow"></b>
 
+					</li> -->
+
+					<li {{Request::is('/index*') ? 'class="active"' : '' }}>
+						<a href="{{ URL::to('/index') }}" class="dropdown-toggle">
+							<i class="menu-icon fa fa-info"></i>
+							<span class="menu-text"> Informasi Koridor </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="{{ URL::to('/jadwal') }}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Koridor 1
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="elements.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Koridor 2
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="buttons.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Koridor 3
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+						</ul>
 					</li>
 
 					<li {{ Request::is('/jadwal*') ? 'class="active"' : '' }}>
 						<a href="{{ URL::to('/jadwal') }}">
 							<i class="menu-icon fa fa-clock-o"></i>
 							<span class="menu-text"> Jadwal </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li {{ Request::is('/test*') ? 'class="active"' : '' }}>
+						<a href="{{ URL::to('/test') }}">
+							<i class="menu-icon fa fa-clock-o"></i>
+							<span class="menu-text"> Test </span>
 						</a>
 
 						<b class="arrow"></b>
