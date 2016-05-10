@@ -63,31 +63,21 @@ class HomeController extends Controller
     }
     public function halte_k1a()
     {
-        $FeatureCollection = array();
-        $FeatureCollection['type'] = "FeatureCollection";
-        $FeatureCollection['crs'] = array();
-        $FeatureCollection['crs']['type'] = "name";
-        $FeatureCollection['crs']['properties'] = array();
-        $FeatureCollection['crs']['properties']['name'] = "urn:ogc:def:crs:OGC:1.3:CRS84";
-        $FeatureCollection['features'] = array();
+        $FeatureCollection = array();        
+        $FeatureCollection['route'] = array();
+        $FeatureCollection['route']['type'] = "geojson";
+        $FeatureCollection['route']['data'] = array();
+        $FeatureCollection['route']['data']['type'] = "line-string";
+        $FeatureCollection['coordinates'] = array();
 
 
         $halte = Halte::with('Koridor')->get();
         foreach ($halte as $key => $value) {
-            $feature = array();
-            $feature['type'] = "Feature";
-            $feature['properties'] = array();
-            $feature['properties']['name'] = $value->nama;
-            $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
-            $feature['properties']['line'] = $value->koridor->line;
-            $feature['geometry'] = array();
-            $feature['geometry']['type'] = "Point";
-            $feature['geometry']['coordinates'] = array();
-            array_push($feature['geometry']['coordinates'], $value->longitute);
-            array_push($feature['geometry']['coordinates'], $value->latitute);
+            $coordinate = array();
+            array_push($coordinate, $value->longitute);
+            array_push($coordinate, $value->latitute);
             
-            array_push($FeatureCollection['features'], $feature);
+            array_push($FeatureCollection['coordinates'], $coordinate);
         }
         return json_encode($FeatureCollection);
     }
