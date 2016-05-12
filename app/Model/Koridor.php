@@ -18,8 +18,8 @@ class Koridor extends Model
         return $this->hasMany('Halte');
     }
 
-     public function Kelurahan()
+    public function Point()
     {
-        return $this->belongsToMany('Kelurahan');
+        return $this->hasMany('Point');
     }
 }

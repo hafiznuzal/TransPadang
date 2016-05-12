@@ -54,8 +54,8 @@ class HomeController extends Controller
             $feature['geometry'] = array();
             $feature['geometry']['type'] = "Point";
             $feature['geometry']['coordinates'] = array();
-            array_push($feature['geometry']['coordinates'], $value->longitute);
-            array_push($feature['geometry']['coordinates'], $value->latitute);
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
             
             array_push($FeatureCollection['features'], $feature);
         }
@@ -64,20 +64,20 @@ class HomeController extends Controller
     public function halte_k1a()
     {
         $FeatureCollection = array();        
-        $FeatureCollection['route'] = array();
-        $FeatureCollection['route']['type'] = "geojson";
-        $FeatureCollection['route']['data'] = array();
-        $FeatureCollection['route']['data']['type'] = "line-string";
-        $FeatureCollection['coordinates'] = array();
+        // $FeatureCollection['route'] = array();
+        // $FeatureCollection['route']['type'] = "geojson";
+        // $FeatureCollection['route']['data'] = array();
+        // $FeatureCollection['route']['data']['type'] = "line-string";
+        // $FeatureCollection['coordinates'] = array();
 
 
         $halte = Halte::with('Koridor')->get();
         foreach ($halte as $key => $value) {
             $coordinate = array();
-            array_push($coordinate, $value->longitute);
-            array_push($coordinate, $value->latitute);
+            array_push($coordinate, $value->longitude);
+            array_push($coordinate, $value->latitude);
             
-            array_push($FeatureCollection['coordinates'], $coordinate);
+            array_push($FeatureCollection, $coordinate);
         }
         return json_encode($FeatureCollection);
     }

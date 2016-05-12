@@ -14,14 +14,13 @@ class Halte extends Model
      public $timestamps = true;     
      protected $dates = ['deleted_at'];
 
-      public function Koridor()
+    public function Koridor()
     {
         return $this->belongsTo('App\Model\Koridor');
     }
-
-      public function Kelurahan()
+    public function Point()
     {
-        return $this->belongsTo('App\Model\Kelurahan');
-    }
+        return $this->hasMany('App\Model\Point');
+    }      
 
 }
