@@ -126,28 +126,54 @@ L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5a
 //             "line-width": 8
 //         }
 //     });
-// });
+// // });
+// var halte_kor = $.get( "/TransPadang/public/halte_k1a", function( data ) {
+//        data = data + ";";
+//        alert(data)
+//     });
+
+// var tanda = ";";
+
+// var hasil = halte_kor+tanda;
 
 var map = L.mapbox.map('map')
 .setView([-0.908667,100.3872087], 13)
 .addLayer(L.mapbox.tileLayer('mapbox.streets'));
 
-var line_points = [
-    [-0.952708,100.363513],
-    [-0.810192,100.316339]
-];
 
 
-// Define polyline options
-// http://leafletjs.com/reference.html#polyline
-var polyline_options = {
-    color: '#000'
-};
 
-// Defining a polygon here instead of a polyline will connect the
-// endpoints and fill the path.
-// http://leafletjs.com/reference.html#polygon
-var polyline = L.polyline(line_points, polyline_options).addTo(map);
+ $.get( "/TransPadang/public/halte_k1a", function( data ) {
+       // data = data + ";";
+       var line_points = JSON.parse(data);
+
+       // Define polyline options
+        // http://leafletjs.com/reference.html#polyline
+        var polyline_options = {
+            color: '#000'
+        };
+
+        // Defining a polygon here instead of a polyline will connect the
+        // endpoints and fill the path.
+        // http://leafletjs.com/reference.html#polygon
+        var polyline = L.polyline(line_points, polyline_options).addTo(map);
+
+    });
+
+
+
+// alert(halte_kor);
+
+
+// [[-0.952708,100.363513],[-0.949802,100.363544],[-0.947088,100.36275],[-0.94485,100.362239],[-0.94052,100.361448],[-0.937019,100.361151],[-0.933072,100.361381],[-0.929559,100.361276],[-0.927609,100.36125],[-0.92258,100.36125],[-0.918575,100.360565],[-0.914956,100.358458],[-0.91283,100.357059],[-0.910821,100.355446],[-0.907439,100.352804],[-0.90104,100.350386]];
+
+// [
+//     [-0.952708,100.363513],
+//     [-0.810192,100.316339]
+// ];
+
+
+
 
 
 </script>

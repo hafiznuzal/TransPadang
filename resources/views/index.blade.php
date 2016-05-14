@@ -80,7 +80,7 @@
 // backing tileLayer, and then use the featureLayer only for its data.
 var map = L.mapbox.map('map')
     .setView([-0.908667,100.3872087], 13)
-    .addLayer(L.mapbox.tileLayer('mapbox.dark'));
+    .addLayer(L.mapbox.tileLayer('mapbox.streets'));
 
 L.mapbox.featureLayer()
     .loadURL('/TransPadang/public/halte')

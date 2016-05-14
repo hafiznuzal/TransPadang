@@ -69,16 +69,23 @@ class HomeController extends Controller
         // $FeatureCollection['route']['data'] = array();
         // $FeatureCollection['route']['data']['type'] = "line-string";
         // $FeatureCollection['coordinates'] = array();
-
+        // var temp = 0;
 
         $halte = Halte::with('Koridor')->get();
         foreach ($halte as $key => $value) {
             $coordinate = array();
-            array_push($coordinate, $value->longitude);
             array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);
             
             array_push($FeatureCollection, $coordinate);
+            // temp++;
         }
+        // $temp = count($FeatureCollection);
+        // $temp = $temp-1;
+        // $tempcor = $coordinate.";";
+        
+        // array_push($FeatureCollection, $temp);
+        // // $FeatureCollection[$temp]= ;
         return json_encode($FeatureCollection);
     }
 
