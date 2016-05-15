@@ -132,10 +132,7 @@ var map = L.mapbox.map('map')
 .setView([-0.908667,100.3872087], 13)
 .addLayer(L.mapbox.tileLayer('mapbox.streets'));
 
-var line_points = [
-    [-0.952708,100.363513],
-    [-0.810192,100.316339]
-];
+var line_points = loadURL('/TransPadang/public/halte');
 
 
 // Define polyline options
