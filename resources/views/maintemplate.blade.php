@@ -225,6 +225,15 @@
 						<b class="arrow"></b>
 					</li>
 
+					<li {{ Request::is('/ungroup*') ? 'class="active"' : '' }}>
+						<a href="{{ URL::to('/ungroup') }}">
+							<i class="menu-icon fa fa-clock-o"></i>
+							<span class="menu-text"> Ungroup </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
 </div>
 				</ul><!-- /.nav-list -->
 
