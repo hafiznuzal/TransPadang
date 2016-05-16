@@ -89,4 +89,11 @@ class HomeController extends Controller
         return json_encode($FeatureCollection);
     }
 
+    public function halte1()
+    {
+        
+        $temp = DB::table('halte')->where('id_koridor', '=', 1)->get();
+        // alert($temp);
+    }
+
 }

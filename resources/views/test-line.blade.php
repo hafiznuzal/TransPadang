@@ -140,10 +140,6 @@ var map = L.mapbox.map('map')
 .setView([-0.908667,100.3872087], 13)
 .addLayer(L.mapbox.tileLayer('mapbox.streets'));
 
-<<<<<<< HEAD
-var line_points = loadURL('/TransPadang/public/halte');
-=======
->>>>>>> 8e492cd75053fa64dc51d15a9548b23b27c7f1d8
 
 
 
