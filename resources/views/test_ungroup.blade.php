@@ -20,6 +20,12 @@
 		 width:100%;
 		}
 	</style>
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+  
+
+
+	
 @endsection
 
 @section('page-header')
@@ -71,48 +77,66 @@
 @endsection
 
 @section('js')
-<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
-	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
-	<script>
-		L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
-// Here we don't use the second argument to map, since that would automatically
-// load in non-clustered markers from the layer. Instead we add just the
-// backing tileLayer, and then use the featureLayer only for its data.
-var map = L.mapbox.map('map')
-    .setView([-0.908667,100.3872087], 13)
-    .addLayer(L.mapbox.tileLayer('mapbox.streets'));
+<!-- <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script> -->
+<!-- <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script> -->
+<script>
+L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
+var mapTooltipsJS = L.mapbox.map('map-tooltips-js', 'mapbox.light')
+  .setView([37.8, -96], 4);
+var myLayer = L.mapbox.featureLayer().addTo(mapTooltipsJS);
 
-L.mapbox.featureLayer()
-    .loadURL('/TransPadang/public/halte_ungroup')
-    .on('ready', function(e) {
-    // create a new MarkerClusterGroup that will show special-colored
-    // numbers to indicate the type of rail stations it contains
-    function makeGroup(color) {
-      return new L.MarkerClusterGroup({
-        iconCreateFunction: function(cluster) {
-          return new L.DivIcon({
-            iconSize: [20, 20],
-            html: '<div style="text-align:center;color:#fff;background:' +
-            color + '">' + cluster.getChildCount() + '</div>'
-          });
-        }
-      }).addTo(map);
+var geojson = [
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-77.031952,38.913184]
+    },
+    "properties": {
+      "title": "Mapbox DC",
+      "description": "1714 14th St NW, Washington DC",
+      "image": "https://farm9.staticflickr.com/8604/15769066303_3e4dcce464_n.jpg",
+      "icon": {
+          "iconUrl": "https://www.mapbox.com/mapbox.js/assets/images/astronaut1.png",
+          "iconSize": [50, 50], // size of the icon
+          "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+          "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+          "className": "dot"
+      }
     }
-    // create a marker cluster group for each type of rail station
-    var groups = {
-      red: makeGroup('red'),
-      green: makeGroup('green'),
-      orange: makeGroup('orange'),
-      blue: makeGroup('blue'),
-      yellow: makeGroup('yellow')
-    };
-    e.target.eachLayer(function(layer) {
-      // add each rail station to its specific group.
-      groups[layer.feature.properties.line].addLayer(layer);
-    });
-});
-	</script>
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-122.413682,37.775408]
+    },
+    "properties": {
+      "title": "Mapbox SF",
+      "description": "155 9th St, San Francisco",
+      "image": "https://farm9.staticflickr.com/8571/15844010757_63b093d527_n.jpg",
+      "icon": {
+          "iconUrl": "https://www.mapbox.com/mapbox.js/assets/images/astronaut2.png",
+          "iconSize": [50, 50], // size of the icon
+          "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
+          "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
+          "className": "dot"
+      }
+    }
+  }
+];
 
+// Set a custom icon on each marker based on feature properties.
+myLayer.on('layeradd', function(e) {
+  var marker = e.layer,
+    feature = marker.feature;
+  marker.setIcon(L.icon(feature.properties.icon));
+  var content = '<h2>'+ feature.properties.title+'<\/h2>' + '<img src="'+feature.properties.image+'" alt="">';
+  marker.bindPopup(content);
+});
+myLayer.setGeoJSON(geojson);
+mapTooltipsJS.scrollWheelZoom.disable();
+</script>	
 	
 
 @endsection

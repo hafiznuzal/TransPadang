@@ -95,13 +95,6 @@ class HomeController extends Controller
         return json_encode($FeatureCollection);
     }
 
-<<<<<<< HEAD
-    public function halte1()
-    {
-        
-        $temp = DB::table('halte')->where('id_koridor', '=', 1)->get();
-        // alert($temp);
-=======
      public function halte_ungroup()
     {
         $FeatureCollection = array();
@@ -132,7 +125,7 @@ class HomeController extends Controller
             array_push($FeatureCollection['features'], $feature);
         }
         return json_encode($FeatureCollection);
->>>>>>> d25c25d407b74a650ff4e3a0280326ce56db9e43
+
     }
 
 }
