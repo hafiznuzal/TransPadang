@@ -34,5 +34,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('halte','HomeController@halte');
     Route::get('halte_k1a','HomeController@halte_k1a');
     Route::get('test','HomeController@testline');
+    Route::get('halte_ungroup','HomeController@halte_ungroup');
+    Route::get('ungroup','HomeController@ungroup');
 
 });

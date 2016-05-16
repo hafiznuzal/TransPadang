@@ -31,6 +31,11 @@ class HomeController extends Controller
         return view('test-line');    
     }
 
+    public function ungroup()
+    {
+        return view('test_ungroup');    
+    }
+
     public function halte()
     {
         $FeatureCollection = array();
@@ -41,8 +46,9 @@ class HomeController extends Controller
         $FeatureCollection['crs']['properties']['name'] = "urn:ogc:def:crs:OGC:1.3:CRS84";
         $FeatureCollection['features'] = array();
 
-
-        $halte = Halte::with('Koridor')->get();
+        $where = array('koridor_id' => 1);
+        $halte = Halte::with('Koridor')-> where($where)->
+        get();
         foreach ($halte as $key => $value) {
             $feature = array();
             $feature['type'] = "Feature";
@@ -89,11 +95,44 @@ class HomeController extends Controller
         return json_encode($FeatureCollection);
     }
 
+<<<<<<< HEAD
     public function halte1()
     {
         
         $temp = DB::table('halte')->where('id_koridor', '=', 1)->get();
         // alert($temp);
+=======
+     public function halte_ungroup()
+    {
+        $FeatureCollection = array();
+        $FeatureCollection['type'] = "FeatureCollection";
+        $FeatureCollection['crs'] = array();
+        $FeatureCollection['crs']['type'] = "name";
+        $FeatureCollection['crs']['properties'] = array();
+        $FeatureCollection['crs']['properties']['name'] = "urn:ogc:def:crs:OGC:1.3:CRS84";
+        $FeatureCollection['features'] = array();
+
+        $where = array('koridor_id' => 1);
+        $halte = Halte::with('Koridor')-> where($where)->
+        get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['properties'] = array();
+            $feature['properties']['name'] = $value->nama;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            $feature['properties']['line'] = $value->koridor->line;
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            
+            array_push($FeatureCollection['features'], $feature);
+        }
+        return json_encode($FeatureCollection);
+>>>>>>> d25c25d407b74a650ff4e3a0280326ce56db9e43
     }
 
 }
