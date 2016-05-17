@@ -81,49 +81,30 @@
 <!-- <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script> -->
 <script>
 L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
-var mapTooltipsJS = L.mapbox.map('map-tooltips-js', 'mapbox.light')
+var mapTooltipsJS = L.mapbox.map('map', 'mapbox.streets')
   .setView([37.8, -96], 4);
 var myLayer = L.mapbox.featureLayer().addTo(mapTooltipsJS);
 
 var geojson = [
   {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [-77.031952,38.913184]
-    },
-    "properties": {
-      "title": "Mapbox DC",
-      "description": "1714 14th St NW, Washington DC",
-      "image": "https://farm9.staticflickr.com/8604/15769066303_3e4dcce464_n.jpg",
-      "icon": {
-          "iconUrl": "https://www.mapbox.com/mapbox.js/assets/images/astronaut1.png",
-          "iconSize": [50, 50], // size of the icon
-          "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-          "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-          "className": "dot"
-      }
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-      "type": "Point",
-      "coordinates": [-122.413682,37.775408]
-    },
-    "properties": {
-      "title": "Mapbox SF",
-      "description": "155 9th St, San Francisco",
-      "image": "https://farm9.staticflickr.com/8571/15844010757_63b093d527_n.jpg",
-      "icon": {
-          "iconUrl": "https://www.mapbox.com/mapbox.js/assets/images/astronaut2.png",
-          "iconSize": [50, 50], // size of the icon
-          "iconAnchor": [25, 25], // point of the icon which will correspond to marker's location
-          "popupAnchor": [0, -25], // point from which the popup should open relative to the iconAnchor
-          "className": "dot"
-      }
-    }
-  }
+  	"type":"FeatureCollection",
+  		"features":[
+  			{"type":"Feature",
+  			"properties":
+  				{
+  				"title":"RTH Imam Bonjol",
+  				"description":"Ini halte Utama <br>\n<img src='https://i.imgur.com/V1JfU8j.jpg' alt='Velo Cult'/><a href=\"http://velocult.com/\">",
+  				"marker-size":"medium",
+  				"marker-color":"#1087bf",
+  				"marker-symbol":"bus"
+  				},
+  			"geometry":
+  				{"coordinates":[100.363513,-0.952708],
+  				"type":"Point"
+  				}
+  			}
+  			],
+  		}  
 ];
 
 // Set a custom icon on each marker based on feature properties.

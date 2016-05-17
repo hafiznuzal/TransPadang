@@ -97,12 +97,9 @@ class HomeController extends Controller
 
      public function halte_ungroup()
     {
+        $variable = array();
         $FeatureCollection = array();
         $FeatureCollection['type'] = "FeatureCollection";
-        $FeatureCollection['crs'] = array();
-        $FeatureCollection['crs']['type'] = "name";
-        $FeatureCollection['crs']['properties'] = array();
-        $FeatureCollection['crs']['properties']['name'] = "urn:ogc:def:crs:OGC:1.3:CRS84";
         $FeatureCollection['features'] = array();
 
         $where = array('koridor_id' => 1);
@@ -112,19 +109,27 @@ class HomeController extends Controller
             $feature = array();
             $feature['type'] = "Feature";
             $feature['properties'] = array();
-            $feature['properties']['name'] = $value->nama;
+            $feature['properties']['id'] = $value->id;
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-color'] = $value->Koridor->color;
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
-            $feature['properties']['line'] = $value->koridor->line;
+            
             $feature['geometry'] = array();
-            $feature['geometry']['type'] = "Point";
+            
             $feature['geometry']['coordinates'] = array();
             array_push($feature['geometry']['coordinates'], $value->longitude);
             array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['geometry']['type'] = "Point";
+
             
             array_push($FeatureCollection['features'], $feature);
+
         }
-        return json_encode($FeatureCollection);
+        array_push($variable, $FeatureCollection);
+
+        return json_encode($variable);
 
     }
 
