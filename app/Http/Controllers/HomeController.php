@@ -97,39 +97,32 @@ class HomeController extends Controller
 
      public function halte_ungroup()
     {
-        $variable = array();
-        $FeatureCollection = array();
-        $FeatureCollection['type'] = "FeatureCollection";
-        $FeatureCollection['features'] = array();
-
+        
+       
+        $FeatureCollection = array(); 
         $where = array('koridor_id' => 1);
-        $halte = Halte::with('Koridor')-> where($where)->
-        get();
+        $halte = Halte::with('Koridor')-> where($where)->get();
         foreach ($halte as $key => $value) {
             $feature = array();
             $feature['type'] = "Feature";
-            $feature['properties'] = array();
-            $feature['properties']['id'] = $value->id;
-            $feature['properties']['title'] = $value->nama;
-            $feature['properties']['description'] = $value->keterangan;
-            $feature['properties']['marker-size'] = "medium";
-            $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
-            
             $feature['geometry'] = array();
-            
+            $feature['geometry']['type'] = "Point";
             $feature['geometry']['coordinates'] = array();
             array_push($feature['geometry']['coordinates'], $value->longitude);
             array_push($feature['geometry']['coordinates'], $value->latitude);
-            $feature['geometry']['type'] = "Point";
-
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
-            array_push($FeatureCollection['features'], $feature);
-
+            array_push($FeatureCollection, $feature);
         }
-        array_push($variable, $FeatureCollection);
+        
+        
 
-        return json_encode($variable);
+        return json_encode($FeatureCollection);
 
     }
 

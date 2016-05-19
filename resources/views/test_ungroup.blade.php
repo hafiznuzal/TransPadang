@@ -20,6 +20,12 @@
 		 width:100%;
 		}
 	</style>
+
+	<style>
+.leaflet-popup-content img {
+  max-width:100%;
+  }
+</style>
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
   
@@ -81,42 +87,22 @@
 <!-- <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script> -->
 <script>
 L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
-var mapTooltipsJS = L.mapbox.map('map', 'mapbox.streets')
-  .setView([37.8, -96], 4);
-var myLayer = L.mapbox.featureLayer().addTo(mapTooltipsJS);
+var mapTooltips = L.mapbox.map('map', 'mapbox.streets')
+  .setView([-0.908667,100.3872087], 13);
+var myLayer = L.mapbox.featureLayer().addTo(mapTooltips);
+ $.get( "/TransPadang/public/halte_ungroup", function( data ) {
+       // data = data + ";";
+      	var geojson = JSON.parse(data);
 
-var geojson = [
-  {
-  	"type":"FeatureCollection",
-  		"features":[
-  			{"type":"Feature",
-  			"properties":
-  				{
-  				"title":"RTH Imam Bonjol",
-  				"description":"Ini halte Utama <br>\n<img src='https://i.imgur.com/V1JfU8j.jpg' alt='Velo Cult'/><a href=\"http://velocult.com/\">",
-  				"marker-size":"medium",
-  				"marker-color":"#1087bf",
-  				"marker-symbol":"bus"
-  				},
-  			"geometry":
-  				{"coordinates":[100.363513,-0.952708],
-  				"type":"Point"
-  				}
-  			}
-  			],
-  		}  
-];
+       // Define polyline options
+        // http://leafletjs.com/reference.html#polyline
+       	myLayer.setGeoJSON(geojson);
+		mapTooltips.scrollWheelZoom.disable();
 
-// Set a custom icon on each marker based on feature properties.
-myLayer.on('layeradd', function(e) {
-  var marker = e.layer,
-    feature = marker.feature;
-  marker.setIcon(L.icon(feature.properties.icon));
-  var content = '<h2>'+ feature.properties.title+'<\/h2>' + '<img src="'+feature.properties.image+'" alt="">';
-  marker.bindPopup(content);
-});
-myLayer.setGeoJSON(geojson);
-mapTooltipsJS.scrollWheelZoom.disable();
+    });
+ 
+
+</script>
 </script>	
 	
 
