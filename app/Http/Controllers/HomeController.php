@@ -9,8 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\Model\Halte;
 use App\Model\Koridor;
-use App\Model\Kelurahan;
-use App\Model\Kecamatan;
+use App\Model\Point;
+use App\Model\Rute;
 
 class HomeController extends Controller
 {
@@ -46,9 +46,10 @@ class HomeController extends Controller
         $FeatureCollection['crs']['properties']['name'] = "urn:ogc:def:crs:OGC:1.3:CRS84";
         $FeatureCollection['features'] = array();
 
-        $where = array('koridor_id' => 1);
-        $halte = Halte::with('Koridor')-> where($where)->
+        $where = array('koridor_id' => 1, 'halte_id' => !0);
+        $halte = Point::with('Koridor')-> where($where)->orWhere(array('koridor_id' => 2,'halte_id'=>!0))->
         get();
+        return json_encode($halte);
         foreach ($halte as $key => $value) {
             $feature = array();
             $feature['type'] = "Feature";
@@ -65,7 +66,7 @@ class HomeController extends Controller
             
             array_push($FeatureCollection['features'], $feature);
         }
-        return json_encode($FeatureCollection);
+        //return json_encode($FeatureCollection);
     }
     public function halte_k1a()
     {
@@ -100,7 +101,7 @@ class HomeController extends Controller
         
        
         $FeatureCollection = array(); 
-        $where = array('koridor_id' => 1);
+        $where = array('koridor_id' => 2);
         $halte = Halte::with('Koridor')-> where($where)->get();
         foreach ($halte as $key => $value) {
             $feature = array();
@@ -125,5 +126,195 @@ class HomeController extends Controller
         return json_encode($FeatureCollection);
 
     }
+    
 
+
+    public function rute1a()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 1);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    }
+
+    public function rute1b()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 2);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    }
+
+
+
+
+
+    public function rute2a()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 3);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    }
+
+    public function rute2b()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 4);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    }
+
+
+
+
+    public function rute3a()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 5);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    } 
+    public function rute3b()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 6);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    }
+
+
+
+
+    public function rute5a()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 7);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    } 
+    public function rute5b()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 8);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    }    
+
+
+
+     public function rute6a()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 7);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    } 
+    public function rute6b()
+    {
+      $FeatureCollection = array();        
+      
+        $where = array('koridor_id' => 8);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);            
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    } 
 }

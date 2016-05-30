@@ -101,7 +101,22 @@ var myLayer = L.mapbox.featureLayer().addTo(mapTooltips);
 
     });
  
+ $.get( "/TransPadang/public/rute1a", function( data ) {
+       // data = data + ";";
+       var line_points = JSON.parse(data);
 
+       // Define polyline options
+        // http://leafletjs.com/reference.html#polyline
+        var polyline_options = {
+            color: '#000'
+        };
+
+        // Defining a polygon here instead of a polyline will connect the
+        // endpoints and fill the path.
+        // http://leafletjs.com/reference.html#polygon
+        var polyline = L.polyline(line_points, polyline_options).addTo(myLayer);
+
+    });
 </script>
 </script>	
 	

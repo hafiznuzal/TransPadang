@@ -13,13 +13,8 @@ class Koridor extends Model
 	public $timestamps = true;     
 	protected $dates = ['deleted_at'];
 
-    public function Halte()
-    {
-        return $this->hasMany('Halte');
-    }
-
     public function Point()
     {
-        return $this->hasMany('Point');
+        return $this->hasMany('App\Model\Point');
     }
 }

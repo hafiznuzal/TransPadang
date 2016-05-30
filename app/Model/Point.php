@@ -14,10 +14,10 @@ class Point extends Model
 
      public function Halte()
     {
-        return $this->belongsTo('Halte');
+        return $this->belongsTo('App\Model\Halte');
     }
      public function Koridor()
     {
-        return $this->belongsTo('Koridor');
-    }
+        return $this->belongsTo('App\Model\Koridor');
+    }    
 }
