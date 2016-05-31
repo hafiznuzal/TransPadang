@@ -101,7 +101,7 @@ class HomeController extends Controller
         
        
         $FeatureCollection = array(); 
-        $where = array('koridor_id' => 2);
+        $where = array('koridor_id' => 3);
         $halte = Halte::with('Koridor')-> where($where)->get();
         foreach ($halte as $key => $value) {
             $feature = array();

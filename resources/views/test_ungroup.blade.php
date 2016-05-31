@@ -101,7 +101,7 @@ var myLayer = L.mapbox.featureLayer().addTo(mapTooltips);
 
     });
  
- $.get( "/TransPadang/public/rute1a", function( data ) {
+ $.get( "/TransPadang/public/rute3a", function( data ) {
        // data = data + ";";
        var line_points = JSON.parse(data);
 
