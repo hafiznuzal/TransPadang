@@ -36,6 +36,28 @@ class HomeController extends Controller
         return view('test_ungroup');    
     }
 
+    public function k1()
+    {
+        return view('k1');    
+    }
+     public function k2()
+    {
+        return view('k2');    
+    }
+     public function k3()
+    {
+        return view('k3');    
+    }
+     public function k5()
+    {
+        return view('k5');    
+    }
+     public function k6()
+    {
+        return view('k6');    
+    }
+
+
     public function halte()
     {
         $FeatureCollection = array();
@@ -46,10 +68,11 @@ class HomeController extends Controller
         $FeatureCollection['crs']['properties']['name'] = "urn:ogc:def:crs:OGC:1.3:CRS84";
         $FeatureCollection['features'] = array();
 
-        $where = array('koridor_id' => 1, 'halte_id' => !0);
-        $halte = Point::with('Koridor')-> where($where)->orWhere(array('koridor_id' => 2,'halte_id'=>!0))->
+        // $where = array('koridor_id' => 1);
+        // $
+        $halte = Point::with('Koridor')-> where('halte_id','>',0)->
         get();
-        return json_encode($halte);
+        // return json_encode($halte);
         foreach ($halte as $key => $value) {
             $feature = array();
             $feature['type'] = "Feature";
@@ -66,19 +89,14 @@ class HomeController extends Controller
             
             array_push($FeatureCollection['features'], $feature);
         }
-        //return json_encode($FeatureCollection);
+        return json_encode($FeatureCollection);
     }
     public function halte_k1a()
     {
         $FeatureCollection = array();        
-        // $FeatureCollection['route'] = array();
-        // $FeatureCollection['route']['type'] = "geojson";
-        // $FeatureCollection['route']['data'] = array();
-        // $FeatureCollection['route']['data']['type'] = "line-string";
-        // $FeatureCollection['coordinates'] = array();
-        // var temp = 0;
+        
 
-        $halte = Halte::with('Koridor')->get();
+        $halte = Point::with('Koridor')->get();
         foreach ($halte as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
@@ -87,12 +105,7 @@ class HomeController extends Controller
             array_push($FeatureCollection, $coordinate);
             // temp++;
         }
-        // $temp = count($FeatureCollection);
-        // $temp = $temp-1;
-        // $tempcor = $coordinate.";";
-        
-        // array_push($FeatureCollection, $temp);
-        // // $FeatureCollection[$temp]= ;
+       
         return json_encode($FeatureCollection);
     }
 
@@ -102,7 +115,7 @@ class HomeController extends Controller
        
         $FeatureCollection = array(); 
         $where = array('koridor_id' => 3);
-        $halte = Halte::with('Koridor')-> where($where)->get();
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
         foreach ($halte as $key => $value) {
             $feature = array();
             $feature['type'] = "Feature";
@@ -121,12 +134,299 @@ class HomeController extends Controller
             array_push($FeatureCollection, $feature);
         }
         
-        
-
         return json_encode($FeatureCollection);
 
     }
-    
+
+     public function halte_ka1a()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 1);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
+     public function halte_k1b()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 2);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
+     public function halte_k2a()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 3);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
+     public function halte_k2b()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 4);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
+     public function halte_k3a()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 5);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
+     public function halte_k3b()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 6);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
+     public function halte_k5a()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 7);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
+     public function halte_k5b()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 8);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
+     public function halte_k6a()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 9);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }   
+
+     public function halte_k6b()
+    {
+        
+       
+        $FeatureCollection = array(); 
+        $where = array('koridor_id' => 10);
+        $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }      
 
 
     public function rute1a()

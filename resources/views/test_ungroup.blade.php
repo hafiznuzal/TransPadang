@@ -20,7 +20,17 @@
 		 width:100%;
 		}
 	</style>
-
+	<style>
+	.ui-select {
+	  background:#fff;
+	  position:absolute;
+	  top:10px;
+	  right:10px;
+	  z-index:100;
+	  padding:10px;
+	  border-radius:3px;
+	  }
+	</style>
 	<style>
 .leaflet-popup-content img {
   max-width:100%;
@@ -46,38 +56,20 @@
 	<div class="row">
 		<div class="col-md-8" style="height: 400px;">
 			<div class="map-responsive">
-    	
+    		<div id='filters' class='ui-select'>
+				  <div><input type='checkbox' class='filter'
+				             name='filter' id='Pergi' value='Pergi'/><label for='Pergi'>Pergi (Pusat Kota)</label></div>
+				  <div><input type='checkbox' class='filter'
+				             name='filter' id='Pulang' value='Pulang'/><label for='Pulang'>Pulang</label></div>				  
+			</div>			
     		<div id="map" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>
 			
 			</div>
-			<!-- <div id="map" > </div> -->
+			
 
 		</div>
 		<div class="col-sm-4">
-			<form class="form-horizontal" role="form">
-			<div class="form-group">
-				<label class="col-sm-4 control-label no-padding-right" for="form-field-1"> Keberangkatan </label>
-
-				<div class="col-sm-8">
-					<span class="input-icon">
-						<input type="text" id="form-field-icon-1" />
-						<i class="ace-icon fa fa-bus blue"></i>
-					</span>
-				</div>
-
-				<label class="col-sm-4 control-label no-padding-right" for="form-field-1"> Kedatangan </label>
-
-				<div class="col-sm-8">
-					<span class="input-icon">
-						<input type="text" id="form-field-icon-1" />
-						<i class="ace-icon fa fa-bus blue"></i>
-					</span>
-				</div>		
-				<!-- <div class="col-sm-9">
-					<input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />
-				</div> -->
-			</div>
-			</form>
+			
 		</div>
 	</div>
 @endsection
@@ -87,36 +79,43 @@
 <!-- <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script> -->
 <script>
 L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
-var mapTooltips = L.mapbox.map('map', 'mapbox.streets')
-  .setView([-0.908667,100.3872087], 13);
-var myLayer = L.mapbox.featureLayer().addTo(mapTooltips);
- $.get( "/TransPadang/public/halte_ungroup", function( data ) {
-       // data = data + ";";
-      	var geojson = JSON.parse(data);
+var map = L.mapbox.map('map')
+.setView([-0.908667,100.3872087], 13)
+.addLayer(L.mapbox.tileLayer('mapbox.streets'));
 
-       // Define polyline options
-        // http://leafletjs.com/reference.html#polyline
-       	myLayer.setGeoJSON(geojson);
-		mapTooltips.scrollWheelZoom.disable();
+var filters = document.getElementById('filters');
+var checkboxes = document.getElementsByClassName('filter');
 
-    });
- 
- $.get( "/TransPadang/public/rute3a", function( data ) {
-       // data = data + ";";
-       var line_points = JSON.parse(data);
 
-       // Define polyline options
-        // http://leafletjs.com/reference.html#polyline
-        var polyline_options = {
-            color: '#000'
-        };
 
-        // Defining a polygon here instead of a polyline will connect the
-        // endpoints and fill the path.
-        // http://leafletjs.com/reference.html#polygon
-        var polyline = L.polyline(line_points, polyline_options).addTo(myLayer);
-
-    });
+function change() {
+    // Find all checkboxes that are checked and build a list of their values
+    var on = [];
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) on.push(checkboxes[i].value);
+    }
+    
+    if (on.length == 2) 
+    {
+    	@yield('rute_js_pergi');
+    	@yield('rute_js_pulang');
+    }
+    else if (on[0] == "Pergi") 
+    {
+    	@yield('rute_pergi');
+    }
+    else 
+    {
+    	@yield('rute_pulang');
+    }
+    console.log(on.length);
+    return false;
+}
+// When the form is touched, re-filter markers
+filters.onchange = change;
+// Initially filter the markers
+change();
+ 	
 </script>
 </script>	
 	
