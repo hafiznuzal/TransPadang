@@ -58,6 +58,15 @@ class HomeController extends Controller
     }
 
 
+    public function halte_form()
+    {
+       
+        $halte = Halte::where('id','>',0)->get();
+        return view("index")->with('halte',$halte);
+       
+        // return json_encode($halte);
+    }
+
     public function halte()
     {
         $FeatureCollection = array();
@@ -91,6 +100,22 @@ class HomeController extends Controller
         }
         return json_encode($FeatureCollection);
     }
+
+    public function pencarian($awal,$akhir)
+    {
+      $FeatureCollection = array();        
+      
+        $where_brgkt = array('halte_id' => $awal);
+        $halte_keberangkatan = Point::with('Koridor')->where($where_brgkt)->first();
+        $where_dtg = array('halte_id' => $akhir);
+        $halte_kedatangan = Point::with('Koridor')->where($where_dtg)->first();
+        // return json_encode($rute);
+        $FeatureCollection['brkgt'] = $halte_keberangkatan->koridor_id;
+        $FeatureCollection['dtg'] = $halte_kedatangan->koridor_id;
+                
+        return json_encode($FeatureCollection);
+    }
+
     public function halte_k1a()
     {
         $FeatureCollection = array();        
@@ -587,7 +612,7 @@ class HomeController extends Controller
     {
       $FeatureCollection = array();        
       
-        $where = array('koridor_id' => 7);
+        $where = array('koridor_id' => 9);
         $rute = Point::with('Koridor')->where($where)->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
@@ -604,7 +629,7 @@ class HomeController extends Controller
     {
       $FeatureCollection = array();        
       
-        $where = array('koridor_id' => 8);
+        $where = array('koridor_id' => 10);
         $rute = Point::with('Koridor')->where($where)->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {

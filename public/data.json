@@ -1,0 +1,25 @@
+{
+    "success": true,
+    "results": [
+      {
+        "name"  : "Choice 1",
+        "value" : "value1"
+      },
+      {
+        "name"  : "Choice 2",
+        "value" : "value2"
+      },
+      {
+        "name"  : "Choice 3",
+        "value" : "value3"
+      },
+      {
+        "name"  : "Choice 4",
+        "value" : "value4"
+      },
+      {
+        "name"  : "Choice 5",
+        "value" : "value5"
+      }
+    ]
+}

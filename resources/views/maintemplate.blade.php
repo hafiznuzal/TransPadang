@@ -178,7 +178,7 @@
 
 						<ul class="submenu">
 							<li class="">
-								<a href="{{ URL::to('/jadwal') }}">
+								<a href="{{ URL::to('/k1') }}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Koridor 1
 								</a>
@@ -187,7 +187,7 @@
 							</li>
 
 							<li class="">
-								<a href="elements.html">
+								<a href="{{ URL::to('/k2') }}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Koridor 2
 								</a>
@@ -196,9 +196,27 @@
 							</li>
 
 							<li class="">
-								<a href="buttons.html">
+								<a href="{{ URL::to('/k3') }}">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Koridor 3
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="{{ URL::to('/k5') }}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Koridor 5
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="{{ URL::to('/k6') }}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Koridor 6
 								</a>
 
 								<b class="arrow"></b>

@@ -58,9 +58,9 @@
 			<div class="map-responsive">
     		<div id='filters' class='ui-select'>
 				  <div><input type='checkbox' class='filter'
-				             name='filter' id='Pergi' value='Pergi'/><label for='Pergi'>Pergi (Pusat Kota)</label></div>
+				             name='filter' id='Pergi' value='Pergi' onclick="change()"/><label for='Pergi'>Pergi (Pusat Kota)</label></div>
 				  <div><input type='checkbox' class='filter'
-				             name='filter' id='Pulang' value='Pulang'/><label for='Pulang'>Pulang</label></div>				  
+				             name='filter' id='Pulang' value='Pulang' onclick="change()"/><label for='Pulang'>Pulang</label></div>				  
 			</div>			
     		<div id="map" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>
 			
@@ -85,11 +85,14 @@ var map = L.mapbox.map('map')
 
 var filters = document.getElementById('filters');
 var checkboxes = document.getElementsByClassName('filter');
-
+var layer = []
 
 
 function change() {
     // Find all checkboxes that are checked and build a list of their values
+    for (var i = 0; i < layer.length; i++) {
+    	map.removeLayer(layer[i])
+    }
     var on = [];
     for (var i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked) on.push(checkboxes[i].value);
@@ -102,19 +105,19 @@ function change() {
     }
     else if (on[0] == "Pergi") 
     {
-    	@yield('rute_pergi');
+
+    	@yield('rute_js_pergi');
     }
-    else 
+    else if (on[0] == "Pulang")
     {
-    	@yield('rute_pulang');
+    	@yield('rute_js_pulang');
     }
-    console.log(on.length);
     return false;
 }
 // When the form is touched, re-filter markers
-filters.onchange = change;
+// filters.onchange = change;
 // Initially filter the markers
-change();
+// change();
  	
 </script>
 </script>	

@@ -8,6 +8,8 @@
 	<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
 	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
 	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+	<link rel="stylesheet" href="{{ url('css/transition.min.css') }}"/>
+	<link rel="stylesheet" href="{{ url('css/dropdown.min.css') }}"/>
 	<style>
 	  /*body { margin:0; padding:0; }*/
 	  /*#map {  }*/
@@ -42,37 +44,63 @@
 
 		</div>
 		<div class="col-sm-4">
-			<form class="form-horizontal" role="form">
+			<div class="form-horizontal" role="form">
 			<div class="form-group">
-				<label class="col-sm-4 control-label no-padding-right" for="form-field-1"> Keberangkatan </label>
-
+			<div class="col-sm-4">
+				<label class="control-label no-padding-right" for="form-field-1"> Keberangkatan </label>
+				<br>
+				<label class="control-label no-padding-right" for="form-field-1"> Kedatangan </label>
+			</div>	
 				<div class="col-sm-8">
-					<span class="input-icon">
-						<input type="text" id="form-field-icon-1" />
-						<i class="ace-icon fa fa-bus blue"></i>
-					</span>
-				</div>
+					
+						<div class="ui fluid search selection dropdown">
+ 							  <i class="ace-icon fa fa-bus blue"></i>
 
-				<label class="col-sm-4 control-label no-padding-right" for="form-field-1"> Kedatangan </label>
+							  <input id="keberangkatan" type="hidden" name="country">
+							  <i class="dropdown icon"></i>
+							  <div class="default text">Select Country</div>
+							  <div class="menu">
+							  <?php foreach ($halte as $key => $value) {?>
+							  	<div class="item" data-value="<?php echo $value->id?>"></i> <?php echo $value->nama?> </div>
+							  
+							  <?php } ?>
+							</div>
+						</div>
 
-				<div class="col-sm-8">
-					<span class="input-icon">
-						<input type="text" id="form-field-icon-1" />
-						<i class="ace-icon fa fa-bus blue"></i>
-					</span>
+						<div class="ui fluid search selection dropdown">
+ 							  <i class="ace-icon fa fa-bus blue"></i>
+
+							  <input id="kedatangan" type="hidden" name="country">
+							  <i class="dropdown icon"></i>
+							  <div class="default text">Select Country</div>
+							  <div class="menu">
+							  <?php foreach ($halte as $key => $value) {?>
+							  	<div class="item" data-value="<?php echo $value->id?>"></i> <?php echo $value->nama?> </div>
+							  
+							  <?php } ?>			  
+							  
+							</div>
+						</div>
+
+						<button class="btn btn-sm btn-primary" onclick="telusuri()">
+							<i class="ace-icon fa fa-flask"></i>
+							Telusur
+						</button>
 				</div>		
-				<!-- <div class="col-sm-9">
-					<input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />
-				</div> -->
+				
 			</div>
-			</form>
+			</div>
 		</div>
-	</div>
+		</div>
+
+	
 @endsection
 
 @section('js')
 <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
 	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+	<script src="{{ url('js/dropdown.min.js')}}"></script>
+	<script src="{{ url('js/transition.min.js')}}"></script>
 	<script>
 		L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
 // Here we don't use the second argument to map, since that would automatically
@@ -111,7 +139,24 @@ L.mapbox.featureLayer()
       groups[layer.feature.properties.line].addLayer(layer);
     });
 });
+
+  $('.ui.dropdown')
+  .dropdown({
+  });
+	
+	function telusuri()
+	{
+		var temp_berangkat= document.getElementById("keberangkatan");
+		var halte_berangkat = temp_berangkat.value;
+		var temp_datang= document.getElementById("kedatangan");
+		var halte_datang = temp_datang.value;
+		
+		window.alert(halte_datang);
+
+	}
 	</script>
+
+
 
 	
 
