@@ -187,13 +187,13 @@ class HomeController extends Controller
             }
 
         }
-        print_r(sizeof($poins));
+        // print_r($poins);
         // $hasil['asal'] = $cari->koridor_asal;        
         // $hasil['tujuan'] = $cari->koridor_tujuan;
         // $hasil['via'] = $cari->koridor_via;
         // $hasil['halte'] = $cari->halte_transisi;
         
-        // return json_encode($poins);
+        return json_encode($poins);
     }
 
     public function halte_k1a()
