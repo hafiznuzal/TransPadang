@@ -17,4 +17,8 @@ class Koridor extends Model
     {
         return $this->hasMany('App\Model\Point');
     }
+    public function Rute()
+    {
+        return $this->hasMany('App\Model\Rute');
+    }
 }

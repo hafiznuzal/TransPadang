@@ -151,7 +151,23 @@ L.mapbox.featureLayer()
 		var temp_datang= document.getElementById("kedatangan");
 		var halte_datang = temp_datang.value;
 		
-		window.alert(halte_datang);
+		// window.alert(halte_datang);
+// 		L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
+// var map = L.mapbox.map('map')
+// .setView([-0.908667,100.3872087], 13)
+// .addLayer(L.mapbox.tileLayer('mapbox.streets'));
+
+		var filters = document.getElementById('filters');
+		var checkboxes = document.getElementsByClassName('filter');
+		var layer = []
+		$.get( "/TransPadang/public/pencarian/"+halte_berangkat+"/"+halte_datang, function( data ) 
+		{
+	        var geojson = JSON.parse(data);
+	        var mark = L.mapbox.featureLayer(geojson);
+	        mark.addTo(map);
+	        layer.push(mark);    
+	        
+    	}); 
 
 	}
 	</script>
