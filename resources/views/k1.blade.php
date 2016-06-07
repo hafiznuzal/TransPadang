@@ -4,7 +4,7 @@
 
  $.get( "/TransPadang/public/rute1a", function( data ) {
        
-       var line_points = JSON.parse(data);       
+        var line_points = JSON.parse(data);       
         var polyline_options = {
             color: 'red'
         };       

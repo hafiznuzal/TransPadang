@@ -106,6 +106,7 @@
 // Here we don't use the second argument to map, since that would automatically
 // load in non-clustered markers from the layer. Instead we add just the
 // backing tileLayer, and then use the featureLayer only for its data.
+var fL = []
 var map = L.mapbox.map('map')
     .setView([-0.908667,100.3872087], 13)
     .addLayer(L.mapbox.tileLayer('mapbox.streets'));
@@ -143,7 +144,7 @@ L.mapbox.featureLayer()
   $('.ui.dropdown')
   .dropdown({
   });
-	
+	var layer = []
 	function telusuri()
 	{
 		var temp_berangkat= document.getElementById("keberangkatan");
@@ -159,13 +160,19 @@ L.mapbox.featureLayer()
 
 		var filters = document.getElementById('filters');
 		var checkboxes = document.getElementsByClassName('filter');
-		var layer = []
+		
 		$.get( "/TransPadang/public/pencarian/"+halte_berangkat+"/"+halte_datang, function( data ) 
 		{
-	        var geojson = JSON.parse(data);
-	        var mark = L.mapbox.featureLayer(geojson);
-	        mark.addTo(map);
-	        layer.push(mark);    
+			for (var i = 0; i < layer.length; i++) {
+				map.removeLayer(layer[i])
+			}
+
+			var line_points = JSON.parse(data);       
+	        var polyline_options = {
+	            color: 'red'
+	        };       
+	        var polyline = L.polyline(line_points, polyline_options).addTo(map);
+	        layer.push(polyline);  
 	        
     	}); 
 
