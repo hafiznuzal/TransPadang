@@ -14,7 +14,7 @@
        
        var line_points = JSON.parse(data);       
         var polyline_options = {
-            color: '#000'
+            color: '#red'
         };       
         var polyline = L.polyline(line_points, polyline_options).addTo(map);
         layer.push(polyline);
@@ -49,7 +49,7 @@
        
         var line_points = JSON.parse(data);       
         var polyline_options = {
-            color: 'red'
+            color: 'blue'
         };       
         var polyline = L.polyline(line_points, polyline_options).addTo(map);
         layer.push(polyline);
@@ -58,7 +58,7 @@
        
        var line_points = JSON.parse(data);       
         var polyline_options = {
-            color: '#000'
+            color: 'blue'
         };       
         var polyline = L.polyline(line_points, polyline_options).addTo(map);
         layer.push(polyline);
@@ -93,7 +93,7 @@
        
         var line_points = JSON.parse(data);       
         var polyline_options = {
-            color: 'red'
+            color: 'green'
         };       
         var polyline = L.polyline(line_points, polyline_options).addTo(map);
         layer.push(polyline);
@@ -102,7 +102,7 @@
        
        var line_points = JSON.parse(data);       
         var polyline_options = {
-            color: '#000'
+            color: 'green'
         };       
         var polyline = L.polyline(line_points, polyline_options).addTo(map);
         layer.push(polyline);
@@ -136,7 +136,7 @@
        
         var line_points = JSON.parse(data);       
         var polyline_options = {
-            color: 'red'
+            color: 'yellow'
         };       
         var polyline = L.polyline(line_points, polyline_options).addTo(map);
         layer.push(polyline);
@@ -145,7 +145,7 @@
        
        var line_points = JSON.parse(data);       
         var polyline_options = {
-            color: '#000'
+            color: 'yellow'
         };       
         var polyline = L.polyline(line_points, polyline_options).addTo(map);
         layer.push(polyline);
@@ -180,7 +180,7 @@
        
         var line_points = JSON.parse(data);       
         var polyline_options = {
-            color: 'red'
+            color: '#000'
         };       
         var polyline = L.polyline(line_points, polyline_options).addTo(map);
         layer.push(polyline);
