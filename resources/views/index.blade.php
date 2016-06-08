@@ -36,7 +36,7 @@
 	<div class="row">
 		<div class="col-md-8" style="height: 400px;">
 			<div class="map-responsive">
-    	
+    		<div id="halte" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>    	
     		<div id="map" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>
 			
 			</div>
@@ -86,6 +86,10 @@
 							<i class="ace-icon fa fa-flask"></i>
 							Telusur
 						</button>
+						<button class="btn btn-sm btn-primary" onclick="berhenti_telusur()">
+							<i class="ace-icon fa fa-flask"></i>
+							Reset
+						</button>
 				</div>		
 				
 			</div>
@@ -107,9 +111,11 @@
 // load in non-clustered markers from the layer. Instead we add just the
 // backing tileLayer, and then use the featureLayer only for its data.
 var fL = []
+var groups= {};
 var map = L.mapbox.map('map')
     .setView([-0.908667,100.3872087], 13)
     .addLayer(L.mapbox.tileLayer('mapbox.streets'));
+
 
 L.mapbox.featureLayer()
     .loadURL('/TransPadang/public/halte')
@@ -128,7 +134,7 @@ L.mapbox.featureLayer()
       }).addTo(map);
     }
     // create a marker cluster group for each type of rail station
-    var groups = {
+    groups = {
       red: makeGroup('red'),
       green: makeGroup('green'),
       orange: makeGroup('orange'),
@@ -145,27 +151,53 @@ L.mapbox.featureLayer()
   .dropdown({
   });
 	var layer = []
+	function berhenti_telusur(){
+		groups.blue.addTo(map);
+	}
 	function telusuri()
 	{
 		var temp_berangkat= document.getElementById("keberangkatan");
 		var halte_berangkat = temp_berangkat.value;
 		var temp_datang= document.getElementById("kedatangan");
 		var halte_datang = temp_datang.value;
-		
-		// window.alert(halte_datang);
-// 		L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
-// var map = L.mapbox.map('map')
-// .setView([-0.908667,100.3872087], 13)
-// .addLayer(L.mapbox.tileLayer('mapbox.streets'));
 
-		var filters = document.getElementById('filters');
-		var checkboxes = document.getElementsByClassName('filter');
-		
-		$.get( "/TransPadang/public/pencarian/"+halte_berangkat+"/"+halte_datang, function( data ) 
-		{
+		if(halte_datang=='' || halte_berangkat==''){
+
+			return;
+		}
 			for (var i = 0; i < layer.length; i++) {
 				map.removeLayer(layer[i])
 			}
+			map.removeLayer(groups.blue);
+			map.removeLayer(groups.red);
+			map.removeLayer(groups.yellow);
+			map.removeLayer(groups.green);
+			map.removeLayer(groups.orange);
+		 $.get( "/TransPadang/public/pencarian_halte/"+halte_berangkat+"/"+halte_datang, function( data ) {
+	       
+	       
+	        var geojson = JSON.parse(data);
+	        var mark = L.mapbox.featureLayer(geojson);
+	        mark.addTo(map);
+	        layer.push(mark);
+	      
+	        
+	    });
+
+		 // $.get( "/TransPadang/public/menampilkan_halte/"+halte_berangkat+"/"+halte_datang, function( data ) {
+	       
+	       
+	  //       var geojson = JSON.parse(data);
+	  //       var mark = L.mapbox.featureLayer(geojson);
+	  //       mark.addTo(map);
+	  //       layer.push(mark);
+	      
+	        
+	  //   });
+		
+		$.get( "/TransPadang/public/pencarian/"+halte_berangkat+"/"+halte_datang, function( data ) 
+		{
+			
 
 			var line_points = JSON.parse(data);       
 	        var polyline_options = {
