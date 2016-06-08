@@ -40,6 +40,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('halte_form','HomeController@halte_form');
     Route::get('ungroup','HomeController@ungroup');
     Route::get('pencarian/{awal}/{akhir}','HomeController@pencarian');
+    Route::get('pencarian_halte/{awal}/{akhir}','HomeController@pencarian_halte');
+    Route::get('menampilkan_halte/{awal}/{akhir}','HomeController@menampilkan_halte');
 
     Route::get('k_all','HomeController@k_all');
     Route::get('k1','HomeController@k1');

@@ -204,6 +204,69 @@ class HomeController extends Controller
         return json_encode($poins);
     }
 
+
+    public function pencarian_halte($awal,$akhir)
+    {
+        
+       
+        $FeatureCollection = array(); 
+
+        $halte = Point::with('Halte')->where('halte_id',$awal)->orWhere('halte_id',$akhir)->get();
+        foreach ($halte as $key => $value) {
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            if($value->halte_id==$akhir)$feature['properties']['marker-color'] = '#fc4353';
+            else $feature['properties']['marker-color'] = '#00ff00';
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
+    public function menampilkan_halte($awal,$akhir)
+    {
+        
+       
+        $FeatureCollection = array(); 
+
+        $halte = Point::with('Halte')->get();
+        foreach ($halte as $key => $value) {
+            
+            $feature = array();
+            $feature['type'] = "Feature";
+            $feature['geometry'] = array();
+            $feature['geometry']['type'] = "Point";
+            $feature['geometry']['coordinates'] = array();
+            array_push($feature['geometry']['coordinates'], $value->longitude);
+            array_push($feature['geometry']['coordinates'], $value->latitude);
+            $feature['properties'] = array();
+            $feature['properties']['title'] = $value->nama;
+            $feature['properties']['description'] = $value->keterangan;
+            if($value->halte_id==$akhir)$feature['properties']['marker-color'] = '#fc4353';
+            else if($value->halte_id==$awal) $feature['properties']['marker-color'] = '#00ff00';
+            else $feature['properties']['marker-color'] = $value->Halte->warna;
+            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
+            
+            array_push($FeatureCollection, $feature);
+        }
+        
+        return json_encode($FeatureCollection);
+
+    }
+
     public function halte_k1a()
     {
         $FeatureCollection = array();        
