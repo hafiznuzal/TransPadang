@@ -35,11 +35,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('halte_k1a','HomeController@halte_k1a');
    
     Route::get('test','HomeController@testline');
+    Route::get('koridor_all','HomeController@koridor_all');    
     Route::get('halte_ungroup','HomeController@halte_ungroup');
     Route::get('halte_form','HomeController@halte_form');
     Route::get('ungroup','HomeController@ungroup');
     Route::get('pencarian/{awal}/{akhir}','HomeController@pencarian');
 
+    Route::get('k_all','HomeController@k_all');
     Route::get('k1','HomeController@k1');
     Route::get('k2','HomeController@k2');
     Route::get('k3','HomeController@k3');

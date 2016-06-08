@@ -35,6 +35,14 @@ class HomeController extends Controller
     {
         return view('test_ungroup');    
     }
+    public function koridor_all()
+    {
+        return view('koridor_all');    
+    }
+    public function k_all()
+    {
+        return view('k_all');    
+    }
 
     public function k1()
     {
