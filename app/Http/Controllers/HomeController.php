@@ -298,7 +298,7 @@ class HomeController extends Controller
             $feature['properties'] = array();
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
-            $feature['properties']['marker-color'] = $value->Koridor->color;
+            $feature['properties']['marker-color'] = $value->Halte->warna;
             $feature['properties']['marker-size'] = "medium";            
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             

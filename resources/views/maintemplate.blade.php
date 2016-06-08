@@ -148,7 +148,7 @@
 					<div class="setActive">
 				<ul class="nav nav-list">
 					<li {{Request::is('/index*') ? 'class="active"' : '' }}>
-						<a href="{{ URL::to('/index') }}">
+						<a href="{{ URL::to('/halte_form') }}">
 							<i class="menu-icon fa fa-tachometer"></i>
 							<span class="menu-text"> Dashboard </span>
 						</a>
@@ -177,6 +177,14 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
+							<li class="">
+								<a href="{{ URL::to('/k_all') }}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Semua Koridor
+								</a>
+
+								<b class="arrow"></b>
+							</li>
 							<li class="">
 								<a href="{{ URL::to('/k1') }}">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -225,7 +233,7 @@
 						</ul>
 					</li>
 
-					<li {{ Request::is('/jadwal*') ? 'class="active"' : '' }}>
+					<!-- <li {{ Request::is('/jadwal*') ? 'class="active"' : '' }}>
 						<a href="{{ URL::to('/jadwal') }}">
 							<i class="menu-icon fa fa-clock-o"></i>
 							<span class="menu-text"> Jadwal </span>
@@ -250,7 +258,7 @@
 						</a>
 
 						<b class="arrow"></b>
-					</li>
+					</li> -->
 
 </div>
 				</ul><!-- /.nav-list -->
