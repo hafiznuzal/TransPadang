@@ -104,18 +104,51 @@ function change() {
         if (checkboxes[i].checked) on.push(checkboxes[i].value);
     }
     
-
-    if (on.length > 0) 
+    var temp = [];
+    for (var i = 0; i < on.length; i++) 
     {
-    	for (var i = 0; i < on.length; i++) 
+    	if(on[i] == 'js_koridor_1')
     	{
-    		console.log(on[i]);
-    		@yield('on[i]');
+    		temp[0] = 1;
     	}
-    	
-    	
+    	else if (on[i] == 'js_koridor_2') 
+    	{
+    		temp[1] = 1;
+    	}
+    	else if(on[i] == 'js_koridor_3')
+    	{
+    		temp[2] = 1; 
+    	}
+    	else if (on[i] == 'js_koridor_5') 
+    	{
+    		temp[3] = 1;
+    	}
+    	else
+    	{
+    		temp[4] = 1;
+    	}
     }
 
+    if (temp[0] == 1) 
+    {
+    	@yield('js_koridor_1');
+    }
+    if (temp[1] == 1) 
+    {
+    	@yield('js_koridor_2');
+    }
+    if (temp[2] == 1) 
+    {
+    	@yield('js_koridor_3');
+    }
+    if (temp[3] == 1) 
+    {
+    	@yield('js_koridor_5');
+    }
+    if (temp[4] == 1) 
+    {
+    	@yield('js_koridor_6');
+    }
 
    
 
