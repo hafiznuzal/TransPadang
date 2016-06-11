@@ -70,46 +70,10 @@
 					<ul class="nav ace-nav">
 						
 					
-<!-- 
-						<li class="light-blue">
-							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
-								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
-								</span>
 
-								<i class="ace-icon fa fa-caret-down"></i>
-							</a>
-
-							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a href="#">
-										<i class="ace-icon fa fa-cog"></i>
-										Settings
-									</a>
-								</li>
-
-								<li>
-									<a href="profile.html">
-										<i class="ace-icon fa fa-user"></i>
-										Profile
-									</a>
-								</li>
-
-								<li class="divider"></li>
-
-								<li>
-									<a href="#">
-										<i class="ace-icon fa fa-power-off"></i>
-										Logout
-									</a>
-								</li>
-							</ul>
-						</li> -->
 					</ul>
 				</div>
-			</div><!-- /.navbar-container -->
+			</div>
 		</div>
 
 		<div class="main-container" id="main-container">
@@ -156,16 +120,7 @@
 						<b class="arrow"></b>
 					</li>
 
-					<!-- <li {{ Request::is('/koridor*') ? 'class="active"' : '' }}>
-						<a href="{{ URL::to('/koridor') }}">
-							<i class="menu-icon fa fa-info"></i>
-							<span class="menu-text"> Informasi Koridor </span>
-						</a>
-
-						<b class="arrow"></b>
-
-					</li> -->
-
+					
 					<li {{Request::is('/index*') ? 'class="active"' : '' }}>
 						<a href="{{ URL::to('/index') }}" class="dropdown-toggle">
 							<i class="menu-icon fa fa-info"></i>
@@ -377,18 +332,17 @@
 		<script src="{{ url('js/ace.min.js')}}"></script>
 
 		<script>
-	  $(document).ready(function () {
-    $('.nav li').click(function(e) {
+		$(document).ready(function () {
+	    $('.nav li').click(function(e) {
 
         $('.nav li').removeClass('active');
 
         var $this = $(this);
         if (!$this.hasClass('active')) {
             $this.addClass('active');
-        }
-       // e.preventDefault();
-    });
-});
+	        }
+	    	});
+		});
 
 		</script>
 

@@ -58,7 +58,7 @@
 
 							  <input id="keberangkatan" type="hidden" name="country">
 							  <i class="dropdown icon"></i>
-							  <div class="default text">Select Country</div>
+							  <div class="default text">Keberangkatan</div>
 							  <div class="menu">
 							  <?php foreach ($halte as $key => $value) {?>
 							  	<div class="item" data-value="<?php echo $value->id?>"></i> <?php echo $value->nama?> </div>
@@ -72,7 +72,7 @@
 
 							  <input id="kedatangan" type="hidden" name="country">
 							  <i class="dropdown icon"></i>
-							  <div class="default text">Select Country</div>
+							  <div class="default text">Kedatangan</div>
 							  <div class="menu">
 							  <?php foreach ($halte as $key => $value) {?>
 							  	<div class="item" data-value="<?php echo $value->id?>"></i> <?php echo $value->nama?> </div>
