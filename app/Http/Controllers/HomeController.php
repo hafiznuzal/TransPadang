@@ -204,6 +204,80 @@ class HomeController extends Controller
         return json_encode($poins);
     }
 
+     public function pencarian_nyebrang($awal,$akhir)
+    {
+      
+
+        $keberangkatan = array();
+        $kedatangan = array();
+        $halte_transisi = array();
+        $via= array();
+
+
+        $hasil = array();
+        $hasil['berangkat'][0] = $awal;
+        $hasil['kedatangan'][0] = $akhir;
+       
+        $poins = array();
+
+
+        $where = array('halte_id' => $awal);
+        $temp = Point::where($where)->first();
+        $koridor_awal = $temp->koridor_id;
+
+        $where = array('halte_id' => $akhir);
+        $temp = Point::where($where)->first();
+        $koridor_akhir = $temp->koridor_id;
+        $nomor_akhir = $temp->nomor;
+
+
+        $temp_asal = $koridor_awal;
+        $tujuan_akhir = $koridor_akhir;
+
+        $where = array('halte_id' => $awal);
+        $temp = Point::where($where)->first();
+        $temp_start = $temp->nomor;
+        
+
+        $temp_start = $awal;
+       
+        while(1)
+        {   
+            $halte_transisi = Point::where('koridor_id',$koridor_awal)->where('halte_id',$temp_start)->first();
+            
+            if($koridor_awal==$koridor_akhir){
+                $halte_akhir = Point::where('koridor_id',$koridor_awal)->where('halte_id',$akhir)->first();
+                $poin = Point::where('koridor_id',$koridor_awal)->whereBetween('nomor',array($halte_transisi->nomor,$halte_akhir->nomor))->get();
+                
+            }
+            else $poin = Point::where('koridor_id',$koridor_awal)->where('nomor','>=',$halte_transisi->nomor)->get();
+            foreach ($poin as $key => $value) {
+                $coordinates = array();
+                array_push($coordinates, $value->latitude);
+                array_push($coordinates, $value->longitude);
+                array_push($poins,$coordinates);
+            }
+            if($koridor_awal == $koridor_akhir){
+                
+                break;
+            }
+            $next = Rute::where('koridor_asal',$koridor_awal)->where('koridor_tujuan',$koridor_akhir)->first();
+            $temp_start = $next->halte_transisi;
+            $koridor_awal = $next->koridor_via;
+            if($koridor_awal==0){
+                $koridor_awal = $next->koridor_tujuan;
+            }
+
+        }
+        // print_r($poins);
+        // $hasil['asal'] = $cari->koridor_asal;        
+        // $hasil['tujuan'] = $cari->koridor_tujuan;
+        // $hasil['via'] = $cari->koridor_via;
+        // $hasil['halte'] = $cari->halte_transisi;
+        
+        return json_encode($poins);
+    }
+
 
     public function pencarian_halte($awal,$akhir)
     {

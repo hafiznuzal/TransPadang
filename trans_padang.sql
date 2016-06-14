@@ -31,45 +31,45 @@ CREATE TABLE IF NOT EXISTS `halte` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table trans_padang.halte: ~319 rows (approximately)
+-- Dumping data for table trans_padang.halte: ~320 rows (approximately)
 DELETE FROM `halte`;
 /*!40000 ALTER TABLE `halte` DISABLE KEYS */;
 INSERT INTO `halte` (`id`, `nama`, `latitude`, `longitude`, `relasi`, `photo`, `keterangan`, `warna`, `created_at`, `updated_at`, `deleted_at`) VALUES
-	(0, 'Tidak Ada', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(1, 'RTH Imam Bonjol I', -0.952719, 100.363636, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, 'Kantor Pos', -0.94983, 100.363485, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(3, 'SMP 1', -0.947088, 100.36275, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(4, 'IAIN I', -0.94485, 100.362239, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(5, 'Korem I', -0.94052, 100.361448, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(6, 'Kantor Gubernur', -0.937019, 100.361151, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(7, 'BTN I', -0.933066, 100.361206, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(8, 'GOR I', -0.929559, 100.361276, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(9, 'Telkom Padang Baru I', -0.927609, 100.36125, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(10, 'Masjid Raya I', -0.92258, 100.36125, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(11, 'Belanti I', -0.918575, 100.360565, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(12, 'AKBP I', -0.914956, 100.358458, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(13, 'RS Jantung I', -0.91283, 100.357059, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(14, 'Elang Perkasa I', -0.910631, 100.355464, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(15, 'DPRD I', -0.907416, 100.352863, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(16, 'Simpang Labor', -0.901047, 100.350437, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(17, 'UNP I', -0.897393, 100.351686, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(18, 'Tunggul Hitam I', -0.891828, 100.352177, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(19, 'Simpang GIA I', -0.88418, 100.350686, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(20, 'Asrama Haji I', -0.877587, 100.348089, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(21, 'Asia Biskuit I', -0.87195, 100.345233, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22, 'Stasiun Tabing I', -0.866227, 100.34226, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(23, 'Pasir Jambak I', -0.858981, 100.338845, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(24, 'Singgalang I', -0.855633, 100.337297, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(25, 'Griya Bunga Mas I', -0.850339, 100.334267, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(26, 'Mutiara Putih I', -0.846174, 100.332301, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(27, 'Kalumpang I', -0.838882, 100.328468, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(28, 'Pasar Lubuk Buaya I', -0.831705, 100.327402, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(29, 'Anak Air I', -0.826896, 100.327836, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(30, 'Monang I', -0.821743, 100.325331, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(31, 'SMP 15 I', -0.818582, 100.32352, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(32, 'SGO I', -0.814877, 100.320959, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(33, 'Kayu Kalek I', -0.811526, 100.31757, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(34, 'Mega Permai I', -0.810192, 100.316339, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(0, 'Tidak Ada', NULL, NULL, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(1, 'RTH Imam Bonjol I', -0.952719, 100.363636, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(2, 'Kantor Pos', -0.94983, 100.363485, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(3, 'SMP 1', -0.947088, 100.36275, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(4, 'IAIN I', -0.94485, 100.362239, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(5, 'Korem I', -0.94052, 100.361448, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(6, 'Kantor Gubernur', -0.937019, 100.361151, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(7, 'BTN I', -0.933066, 100.361206, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(8, 'GOR I', -0.929559, 100.361276, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(9, 'Telkom Padang Baru I', -0.927609, 100.36125, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(10, 'Masjid Raya I', -0.92258, 100.36125, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(11, 'Belanti I', -0.918575, 100.360565, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(12, 'AKBP I', -0.914956, 100.358458, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(13, 'RS Jantung I', -0.91283, 100.357059, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(14, 'Elang Perkasa I', -0.910631, 100.355464, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(15, 'DPRD I', -0.907416, 100.352863, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(16, 'Simpang Labor', -0.901047, 100.350437, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(17, 'UNP I', -0.897393, 100.351686, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(18, 'Tunggul Hitam I', -0.891828, 100.352177, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(19, 'Simpang GIA I', -0.88418, 100.350686, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(20, 'Asrama Haji I', -0.877587, 100.348089, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(21, 'Asia Biskuit I', -0.87195, 100.345233, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(22, 'Stasiun Tabing I', -0.866227, 100.34226, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(23, 'Pasir Jambak I', -0.858981, 100.338845, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(24, 'Singgalang I', -0.855633, 100.337297, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(25, 'Griya Bunga Mas I', -0.850339, 100.334267, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(26, 'Mutiara Putih I', -0.846174, 100.332301, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(27, 'Kalumpang I', -0.838882, 100.328468, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(28, 'Pasar Lubuk Buaya I', -0.831705, 100.327402, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(29, 'Anak Air I', -0.826896, 100.327836, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(30, 'Monang I', -0.821743, 100.325331, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(31, 'SMP 15 I', -0.818582, 100.32352, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(32, 'SGO I', -0.814877, 100.320959, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(33, 'Kayu Kalek I', -0.811526, 100.31757, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(34, 'Mega Permai I', -0.810192, 100.316339, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
 	(35, 'Mega Permai II', -0.809764, 100.316159, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(36, 'Kayu Kalek II', -0.81245, 100.318686, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(37, 'SGO II', -0.814761, 100.320993, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -106,15 +106,15 @@ INSERT INTO `halte` (`id`, `nama`, `latitude`, `longitude`, `relasi`, `photo`, `
 	(68, 'Hotel Padang', -0.949483, 100.363465, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(69, 'Pasar Raya', -0.951432, 100.361747, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(70, 'Masjid Nurul Iman', -0.955383, 100.362576, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(71, 'Bulog Divre Sumbar', -0.954024, 100.36563, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(72, 'Grand Hotel Sari', -0.955377, 100.367947, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(73, 'SMK Dhuafa Nusantara', -0.956442, 100.370388, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(74, 'Simp STIA LPPN Padang', -0.956869, 100.373854, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(75, 'Apotik Raisa', -0.95695, 100.374112, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(76, 'Simp Jembatan Bual', -0.962225, 100.379278, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(77, 'Simp Cendana Mata Air', -0.972117, 100.37819, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(78, 'SMP 20', -0.973098, 100.378176, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(79, 'Klinik dan Apotik Cempaka Indah', -0.975566, 100.378552, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(71, 'Bulog Divre Sumbar', -0.954024, 100.36563, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(72, 'Grand Hotel Sari', -0.955377, 100.367947, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(73, 'SMK Dhuafa Nusantara', -0.956442, 100.370388, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(74, 'Simp STIA LPPN Padang', -0.956869, 100.373854, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(75, 'Apotik Raisa', -0.95695, 100.374112, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(76, 'Simp Jembatan Bual', -0.962225, 100.379278, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(77, 'Simp Cendana Mata Air', -0.972117, 100.37819, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(78, 'SMP 20', -0.973098, 100.378176, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
+	(79, 'Klinik dan Apotik Cempaka Indah', -0.975566, 100.378552, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
 	(80, 'Bulog Rawang Timur', -0.97786, 100.380777, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(81, 'Pool HPS', -0.981163, 100.382802, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(82, 'Lantamal', -0.988994, 100.38328, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -371,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `koridor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table trans_padang.koridor: ~11 rows (approximately)
+-- Dumping data for table trans_padang.koridor: ~12 rows (approximately)
 DELETE FROM `koridor`;
 /*!40000 ALTER TABLE `koridor` DISABLE KEYS */;
 INSERT INTO `koridor` (`id`, `nomor`, `nama`, `keterangan`, `simbol`, `line`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -385,7 +385,8 @@ INSERT INTO `koridor` (`id`, `nomor`, `nama`, `keterangan`, `simbol`, `line`, `c
 	(7, 5, '5a', NULL, 'rail-metro', 'blue', '2016-05-29 19:18:42', NULL, NULL),
 	(8, 5, '5b', NULL, 'rail-metro', 'blue', '2016-05-29 19:18:43', NULL, NULL),
 	(9, 6, '6a', NULL, 'rail-metro', 'blue', '2016-05-29 19:18:44', NULL, NULL),
-	(10, 6, '6b', NULL, 'rail-metro', 'blue', '2016-05-29 19:18:45', NULL, NULL);
+	(10, 6, '6b', NULL, 'rail-metro', 'blue', '2016-05-29 19:18:45', NULL, NULL),
+	(11, 1, '1', NULL, 'rail-metro', 'blue', '2016-06-10 16:38:33', NULL, NULL);
 /*!40000 ALTER TABLE `koridor` ENABLE KEYS */;
 
 
@@ -1356,7 +1357,8 @@ INSERT INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `crea
 	(973, 174, 100.413406, -1.07241, 'Simp Masjid Perahu Siddiq', NULL, NULL, NULL, 4, 100),
 	(974, 47, 100.316159, -0.809764, 'Mega Permai II', NULL, NULL, NULL, 2, 35),
 	(975, 57, 100.364475, -0.954066, 'Poin Bantu 1a', NULL, NULL, NULL, 1, 0),
-	(976, 58, 100.363513, -0.952708, 'RTH Imam Bonjol I', NULL, NULL, NULL, 1, 1);
+	(976, 58, 100.363513, -0.952708, 'RTH Imam Bonjol I', NULL, NULL, NULL, 1, 1),
+	(977, 57, 100.364475, -0.954066, 'Poin Bantu 1a', '2016-06-10 17:11:57', NULL, NULL, 1, 0);
 /*!40000 ALTER TABLE `point` ENABLE KEYS */;
 
 
@@ -1377,6 +1379,7 @@ CREATE TABLE IF NOT EXISTS `rute` (
 DELETE FROM `rute`;
 /*!40000 ALTER TABLE `rute` DISABLE KEYS */;
 INSERT INTO `rute` (`id`, `koridor_asal`, `koridor_tujuan`, `koridor_via`, `halte_transisi`, `created_at`, `updated_at`, `deleted_at`) VALUES
+	(0, 1, 3, 4, 1, NULL, NULL, NULL),
 	(1, 1, 1, 0, 0, NULL, NULL, NULL),
 	(2, 1, 2, 0, 1, NULL, NULL, NULL),
 	(3, 1, 3, 4, 1, NULL, NULL, NULL),
