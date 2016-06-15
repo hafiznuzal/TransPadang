@@ -162,57 +162,40 @@ L.mapbox.featureLayer()
 		var halte_datang = temp_datang.value;
 
 		if(halte_datang=='' || halte_berangkat==''){
-
 			return;
 		}
-			for (var i = 0; i < layer.length; i++) {
-				map.removeLayer(layer[i])
-			}
-			map.removeLayer(groups.blue);
-			map.removeLayer(groups.red);
-			map.removeLayer(groups.yellow);
-			map.removeLayer(groups.green);
-			map.removeLayer(groups.orange);
-		 $.get( "/TransPadang/public/pencarian_halte/"+halte_berangkat+"/"+halte_datang, function( data ) {
-	       
-	       
+
+		for (var i = 0; i < layer.length; i++) {
+			map.removeLayer(layer[i])
+		}
+		map.removeLayer(groups.blue);
+		map.removeLayer(groups.red);
+		map.removeLayer(groups.yellow);
+		map.removeLayer(groups.green);
+		map.removeLayer(groups.orange);
+
+		$.get( "/TransPadang/public/pencarian_halte/"+halte_berangkat+"/"+halte_datang, function( data ) {
 	        var geojson = JSON.parse(data);
 	        var mark = L.mapbox.featureLayer(geojson);
 	        mark.addTo(map);
 	        layer.push(mark);
-	      
-	        
 	    });
 
-		 // $.get( "/TransPadang/public/menampilkan_halte/"+halte_berangkat+"/"+halte_datang, function( data ) {
-	       
-	       
-	  //       var geojson = JSON.parse(data);
-	  //       var mark = L.mapbox.featureLayer(geojson);
-	  //       mark.addTo(map);
-	  //       layer.push(mark);
-	      
-	        
-	  //   });
-		
-		$.get( "/TransPadang/public/pencarian/"+halte_berangkat+"/"+halte_datang, function( data ) 
+		$.get( "/TransPadang/public/pencarian_optimal/"+halte_berangkat+"/"+halte_datang, function( data ) 
 		{
-			
-
-			var line_points = JSON.parse(data);       
+			data = JSON.parse(data)
+			console.log(data);
+			/* draw jalan */
+			var line_points = data.poins;
 	        var polyline_options = {
 	            color: 'red'
 	        };       
 	        var polyline = L.polyline(line_points, polyline_options).addTo(map);
 	        layer.push(polyline);  
-	        
+
+	        /* draw marker */
     	}); 
 
 	}
 	</script>
-
-
-
-	
-
 @endsection

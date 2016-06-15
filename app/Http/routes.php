@@ -41,6 +41,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('ungroup','HomeController@ungroup');
     Route::get('pencarian/{awal}/{akhir}','HomeController@pencarian');
     Route::get('pencarian_halte/{awal}/{akhir}','HomeController@pencarian_halte');
+    Route::get('pencarian_optimal/{awal}/{akhir}','HomeController@pencarian_optimal');
     Route::get('menampilkan_halte/{awal}/{akhir}','HomeController@menampilkan_halte');
 
     Route::get('k_all','HomeController@k_all');

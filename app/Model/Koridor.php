@@ -21,4 +21,8 @@ class Koridor extends Model
     {
         return $this->hasMany('App\Model\Rute');
     }
+
+    public static function opposite($nomor) {
+        return $nomor + ($nomor % 2 == 1 ? 1 : -1);
+    }
 }

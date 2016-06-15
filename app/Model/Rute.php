@@ -14,14 +14,17 @@ class Rute extends Model
      public $timestamps = true;     
      protected $dates = ['deleted_at'];
 
-    public function koridor_asal()
+    public function koridorAsal()
     {
-        return $this->belongsTo('App\Model\Koridor');
+        return $this->belongsTo('App\Model\Koridor', 'koridor_asal');
     }
-    public function koridor_tujuan()
+    public function koridorTujuan()
     {
-        return $this->belongsTo('App\Model\Koridor');
+        return $this->belongsTo('App\Model\Koridor', 'koridor_tujuan');
     }
-
+    public function halteTransisi()
+    {
+        return $this->belongsTo('App\Model\Halte', 'halte_transisi');
+    }
 
 }
