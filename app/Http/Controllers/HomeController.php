@@ -188,21 +188,38 @@ class HomeController extends Controller
                     $point_akhir = $point_akhirs[0];
                 }
             }
-
-            $nyebrang_asal = false;
-            $nyebrang_tujuan = false;
-            $nyebrang_halte_asal = null;
-            $nyebrang_halte_tujuan = null;
-
             // dd($point_awal, $point_akhir);
-            /* ************ MULAI NYARI JALAN ************ */
+
+            $nyebrang_asal = false; // apakah perlu menyeberang saat halte asal
+            $nyebrang_tujuan = false; // apakah perlu menyeberang saat halte tujuan
+            $nyebrang_halte_asal = null; // halte penyeberangan asal
+            $nyebrang_halte_tujuan = null; // halte penyeberangan tujuan
+
+            /* ************************ MULAI NYARI JALAN ************************ */
             /* Jika koridor aslinya sama, tinggal go aja, ga pake ganti ganti bis */
             if ($point_awal->Koridor->nomor == $point_akhir->Koridor->nomor) {
                 $jalan->push($point_awal);
 
+                /* jika koridornya beda, maka samain dulu dengan menyeberangkan 
+                 * salah satu */
+                if ($point_awal->koridor_id != $point_akhir->koridor_id) {
+                    if ($halte_asal->Relasi != null || $halte_tujuan->Relasi != null) {
+                        if ($halte_asal->relasi > 0) {
+                            $halte_asal = $halte_asal->Relasi;
+                            $nyebrang_asal = !$nyebrang_asal;
+                            $nyebrang_halte_asal = $halte_asal;
+                            $point_awal = $halte_asal->Point->first();
+                        } else if ($halte_tujuan->relasi > 0) {
+                            $halte_tujuan = $halte_tujuan->Relasi;
+                            $nyebrang_tujuan = !$nyebrang_tujuan;
+                            $nyebrang_halte_tujuan = $halte_tujuan;
+                            $point_akhir = $halte_tujuan->Point->first();
+                        }
+                    }
+                }
+
                 /* Jika koridor sama */
                 if ($point_awal->koridor_id == $point_akhir->koridor_id) {
-
                     /* Nomor poin awal itu sesudah nomor poin akhir */
                     if ($point_awal->nomor < $point_akhir->nomor) {
                         $tmp = Point::jalan_antara($point_awal, $point_akhir);
@@ -244,66 +261,10 @@ class HomeController extends Controller
                         }
                     }
                 }
-                /* Jika koridor beda */
+                /* Jika koridor beda dan dua duanya ga punya relasi */
                 else {
-                    if ($halte_asal->Relasi == null && $halte_tujuan->Relasi == null) {
-                        $tmp = Point::jalan_seberang($point_awal, $point_akhir);
-                        $jalan = $jalan->merge($tmp);
-                    } else {
-                        /* Samain dulu koridornya */
-                        if ($halte_asal->relasi > 0) {
-                            $halte_asal = $halte_asal->Relasi;
-                            $nyebrang_asal = !$nyebrang_asal;
-                            $nyebrang_halte_asal = $halte_asal;
-                            $point_awal = $halte_asal->Point->first();
-                        } else if ($halte_tujuan->relasi > 0) {
-                            $halte_tujuan = $halte_tujuan->Relasi;
-                            $nyebrang_tujuan = !$nyebrang_tujuan;
-                            $nyebrang_halte_tujuan = $halte_tujuan;
-                            $point_akhir = $halte_tujuan->Point->first();
-                        }
-
-                        /* Nomor poin awal itu sesudah nomor poin akhir */
-                        if ($point_awal->nomor < $point_akhir->nomor) {
-                            $tmp = Point::jalan_antara($point_awal, $point_akhir);
-                            $jalan = $jalan->merge($tmp);
-                        }
-                        /* Nomor poin awal itu sblm nomor poin akhir */
-                        else if ($point_awal->nomor > $point_akhir->nomor) {
-                            if ($halte_asal->relasi > 0 && $halte_tujuan->relasi > 0) {
-                                $halte_asal = $halte_asal->Relasi;
-                                $nyebrang_asal = !$nyebrang_asal;
-                                $nyebrang_halte_asal = $halte_asal;
-                                $point_awal = $halte_asal->Point->first();
-                                $halte_tujuan = $halte_tujuan->Relasi;
-                                $nyebrang_tujuan = !$nyebrang_tujuan;
-                                $nyebrang_halte_tujuan = $halte_tujuan;
-                                $point_akhir = $halte_tujuan->Point->first();
-
-                                $tmp = Point::jalan_antara($point_awal, $point_akhir);
-                                $jalan = $jalan->merge($tmp);
-                            } else if ($halte_asal->relasi > 0) {
-                                $halte_asal = $halte_asal->Relasi;
-                                $nyebrang_asal = !$nyebrang_asal;
-                                $nyebrang_halte_asal = $halte_asal;
-                                $point_awal = $halte_asal->Point->first();
-
-                                $tmp = Point::jalan_seberang($point_awal, $point_akhir);
-                                $jalan = $jalan->merge($tmp);
-                            } else if ($halte_tujuan->relasi > 0) {
-                                $halte_tujuan = $halte_tujuan->Relasi;
-                                $nyebrang_tujuan = !$nyebrang_tujuan;
-                                $nyebrang_halte_tujuan = $halte_tujuan;
-                                $point_akhir = $halte_tujuan->Point->first();
-
-                                $tmp = Point::jalan_seberang($point_awal, $point_akhir);
-                                $jalan = $jalan->merge($tmp);
-                            } else {
-                                $tmp = Point::jalan_mundur($point_awal, $point_akhir);
-                                $jalan = $jalan->merge($tmp);
-                            }
-                        }
-                    }
+                    $tmp = Point::jalan_seberang($point_awal, $point_akhir);
+                    $jalan = $jalan->merge($tmp);
                 }
 
                 /* Nyimpen halte perpindahannya, jika pindah */
@@ -319,7 +280,9 @@ class HomeController extends Controller
                 $halte_tujuan = $halte_akhir;
 
                 $jalan->push($point_akhir);
-            } else {
+            }
+            /* Jika koridor aslinya beda, maka cari rute nya dulu */
+            else {
                 $route = Rute::where('koridor_asal', $point_awal->koridor_id)
                         ->where('koridor_tujuan', $point_akhir->koridor_id)
                         ->first();
@@ -374,7 +337,7 @@ class HomeController extends Controller
                     'title' => $value->nama,
                     'description' => $value->keterangan,
                     'marker-color' => $warna,
-                    'marker-size' => "medium",
+                    'marker-size' => 'medium',
                     'marker-symbol' => $value->Koridor->simbol,
                 ]
             ];
@@ -382,10 +345,9 @@ class HomeController extends Controller
             $halte_markers[] = $marker;
         }
 
-        // dd($jalan);
         $output = array(
+                // 'jalan',
                 'poins',
-                'jalan',
                 'list_halte',
                 'halte_perpindahan',
                 'halte_markers',
