@@ -1348,7 +1348,7 @@ REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `cre
 	(963, 124, 100.364584, -0.947529, 'BCA', NULL, NULL, NULL, 9, 262),
 	(964, 36, 100.391775, -0.954246, 'Marapalam Jaya Teknik', NULL, NULL, NULL, 7, 227),
 	(964, 65, 100.467459, -0.956401, 'Semen Padang II', NULL, NULL, NULL, 8, 209),
-	(965, 59, 100.363636, -0.952719, 'RTH Imam Bonjol', NULL, NULL, NULL, 7, 1),
+	(965, 61, 100.363636, -0.952719, 'RTH Imam Bonjol', NULL, NULL, NULL, 7, 1),
 	(966, 92, 100.386979, -0.877099, 'Pusat Pemerintahan Aia Pacah', NULL, NULL, NULL, 6, 136),
 	(967, 91, 100.362576, -0.955383, 'Masjid Nurul Iman', NULL, NULL, NULL, 5, 0),
 	(968, 92, 100.364475, -0.954066, 'Poin Bantu 3a', NULL, NULL, NULL, 5, 0),
