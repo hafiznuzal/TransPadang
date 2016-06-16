@@ -407,7 +407,7 @@ CREATE TABLE IF NOT EXISTS `point` (
   CONSTRAINT `fk_point_rute1` FOREIGN KEY (`koridor_id`) REFERENCES `koridor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table trans_padang.point: ~946 rows (approximately)
+-- Dumping data for table trans_padang.point: ~950 rows (approximately)
 /*!40000 ALTER TABLE `point` DISABLE KEYS */;
 REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `created_at`, `updated_at`, `deleted_at`, `koridor_id`, `halte_id`) VALUES
 	(1, 1, 100.316159, -0.809764, 'Mega Permai II', NULL, NULL, NULL, 1, 35),
@@ -1448,8 +1448,8 @@ REPLACE INTO `rute` (`id`, `koridor_asal`, `koridor_tujuan`, `koridor_via`, `hal
 	(66, 7, 5, 6, 1, NULL, NULL, NULL),
 	(67, 7, 6, 0, 1, NULL, NULL, NULL),
 	(68, 7, 8, 0, 1, NULL, NULL, NULL),
-	(69, 7, 9, 0, 231, NULL, NULL, NULL),
-	(70, 7, 10, 9, 231, NULL, NULL, NULL),
+	(69, 7, 9, 0, 233, NULL, NULL, NULL),
+	(70, 7, 10, 9, 233, NULL, NULL, NULL),
 	(71, 8, 8, 0, 0, NULL, NULL, NULL),
 	(72, 8, 1, 7, 209, NULL, NULL, NULL),
 	(73, 8, 2, 7, 209, NULL, NULL, NULL),
@@ -1458,17 +1458,17 @@ REPLACE INTO `rute` (`id`, `koridor_asal`, `koridor_tujuan`, `koridor_via`, `hal
 	(76, 8, 5, 7, 209, NULL, NULL, NULL),
 	(77, 8, 6, 7, 209, NULL, NULL, NULL),
 	(78, 8, 7, 0, 209, NULL, NULL, NULL),
-	(79, 8, 9, 7, 231, NULL, NULL, NULL),
+	(79, 8, 9, 7, 233, NULL, NULL, NULL),
 	(80, 8, 10, 7, 209, NULL, NULL, NULL),
 	(81, 9, 9, 0, 0, NULL, NULL, NULL),
-	(82, 9, 1, 7, 231, NULL, NULL, NULL),
-	(83, 9, 2, 7, 231, NULL, NULL, NULL),
-	(84, 9, 3, 7, 231, NULL, NULL, NULL),
-	(85, 9, 4, 7, 231, NULL, NULL, NULL),
-	(86, 9, 5, 7, 231, NULL, NULL, NULL),
-	(87, 9, 6, 7, 231, NULL, NULL, NULL),
-	(88, 9, 7, 0, 231, NULL, NULL, NULL),
-	(89, 9, 8, 7, 231, NULL, NULL, NULL),
+	(82, 9, 1, 7, 233, NULL, NULL, NULL),
+	(83, 9, 2, 7, 233, NULL, NULL, NULL),
+	(84, 9, 3, 7, 233, NULL, NULL, NULL),
+	(85, 9, 4, 7, 233, NULL, NULL, NULL),
+	(86, 9, 5, 7, 233, NULL, NULL, NULL),
+	(87, 9, 6, 7, 233, NULL, NULL, NULL),
+	(88, 9, 7, 0, 233, NULL, NULL, NULL),
+	(89, 9, 8, 7, 233, NULL, NULL, NULL),
 	(90, 9, 10, 0, 262, NULL, NULL, NULL),
 	(91, 10, 10, 0, 0, NULL, NULL, NULL),
 	(92, 10, 1, 9, 285, NULL, NULL, NULL),
