@@ -175,25 +175,27 @@ L.mapbox.featureLayer()
 		map.removeLayer(groups.orange);
 
 		$.get( "/TransPadang/public/pencarian_halte/"+halte_berangkat+"/"+halte_datang, function( data ) {
-	        var geojson = JSON.parse(data);
-	        var mark = L.mapbox.featureLayer(geojson);
-	        mark.addTo(map);
-	        layer.push(mark);
+	        // var geojson = JSON.parse(data);
+	        // var mark = L.mapbox.featureLayer(geojson);
+	        // mark.addTo(map);
+	        // layer.push(mark);
 	    });
 
-		$.get( "/TransPadang/public/pencarian_optimal/"+halte_berangkat+"/"+halte_datang, function( data ) 
-		{
+		$.get( "/TransPadang/public/pencarian_optimal/"+halte_berangkat+"/"+halte_datang, function( data ) {
 			data = JSON.parse(data)
 			console.log(data);
 			/* draw jalan */
 			var line_points = data.poins;
 	        var polyline_options = {
-	            color: 'red'
+	            color: '#ff8730'
 	        };       
 	        var polyline = L.polyline(line_points, polyline_options).addTo(map);
-	        layer.push(polyline);  
+	        layer.push(polyline);
 
 	        /* draw marker */
+	        var mark = L.mapbox.featureLayer(data.halte_markers);
+	        mark.addTo(map);
+	        layer.push(mark);
     	}); 
 
 	}
