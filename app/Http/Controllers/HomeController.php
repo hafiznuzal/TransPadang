@@ -15,57 +15,56 @@ use App\Model\Rute;
 
 class HomeController extends Controller
 {
-	public function index()
+    public function index()
     {
-    	return view('index');	
+        return view('index');
     }
     public function koridor()
     {
-    	return view('information-koridor');	
+        return view('information-koridor');
     }
     public function jadwal()
     {
-    	return view('informasi-jadwal');	
+        return view('informasi-jadwal');
     }
     public function testline()
     {
-        return view('test-line');    
+        return view('test-line');
     }
 
     public function ungroup()
     {
-        return view('test_ungroup');    
+        return view('test_ungroup');
     }
     public function koridor_all()
     {
-        return view('koridor_all');    
+        return view('koridor_all');
     }
     public function k_all()
     {
-        return view('k_all');    
+        return view('k_all');
     }
 
     public function k1()
     {
-        return view('k1');    
+        return view('k1');
     }
-     public function k2()
+    public function k2()
     {
-        return view('k2');    
+        return view('k2');
     }
-     public function k3()
+    public function k3()
     {
-        return view('k3');    
+        return view('k3');
     }
-     public function k5()
+    public function k5()
     {
-        return view('k5');    
+        return view('k5');
     }
-     public function k6()
+    public function k6()
     {
-        return view('k6');    
+        return view('k6');
     }
-
 
     public function halte_form()
     {
@@ -127,8 +126,8 @@ class HomeController extends Controller
         $halte_asal = $halte_awal;
         $halte_tujuan = $halte_akhir;
 
-        $jalan = new Collection;
-        $halte_perpindahan = array();
+        $jalan = new Collection; // nyimpen poin poin jalan
+        $halte_perpindahan = array(); // nyimpen halte perpindahan
         while ($halte_asal != $halte_tujuan) {
             /* dapetin objek poin, 1 halte bisa jadi ada byk point. pilih slh 1 */
             $point_awals = $halte_asal->Point;
@@ -192,8 +191,8 @@ class HomeController extends Controller
 
             $nyebrang_asal = false;
             $nyebrang_tujuan = false;
-            $nyebrang_poin_asal = false;
-            $nyebrang_poin_tujuan = false;
+            $nyebrang_halte_asal = null;
+            $nyebrang_halte_tujuan = null;
 
             // dd($point_awal, $point_akhir);
             /* ************ MULAI NYARI JALAN ************ */
@@ -209,26 +208,30 @@ class HomeController extends Controller
                     }
                     /* Nomor poin awal itu sblm nomor poin akhir */
                     else if ($point_awal->nomor > $point_akhir->nomor) {
-                        if ($halte_asal->Relasi != null && $halte_tujuan->Relasi != null) {
+                        if ($halte_asal->relasi > 0 && $halte_tujuan->relasi > 0) {
                             $halte_asal = $halte_asal->Relasi;
                             $nyebrang_asal = !$nyebrang_asal;
+                            $nyebrang_halte_asal = $halte_asal;
                             $point_awal = $halte_asal->Point->first();
                             $halte_tujuan = $halte_tujuan->Relasi;
                             $nyebrang_tujuan = !$nyebrang_tujuan;
+                            $nyebrang_halte_tujuan = $halte_tujuan;
                             $point_akhir = $halte_tujuan->Point->first();
 
                             $tmp = Point::jalan_antara($point_awal, $point_akhir);
                             $jalan = $jalan->merge($tmp);
-                        } else if ($halte_asal->Relasi != null) {
+                        } else if ($halte_asal->relasi > 0) {
                             $halte_asal = $halte_asal->Relasi;
                             $nyebrang_asal = !$nyebrang_asal;
+                            $nyebrang_halte_asal = $halte_asal;
                             $point_awal = $halte_asal->Point->first();
 
                             $tmp = Point::jalan_seberang($point_awal, $point_akhir);
                             $jalan = $jalan->merge($tmp);
-                        } else if ($halte_tujuan->Relasi != null) {
+                        } else if ($halte_tujuan->relasi > 0) {
                             $halte_tujuan = $halte_tujuan->Relasi;
                             $nyebrang_tujuan = !$nyebrang_tujuan;
+                            $nyebrang_halte_tujuan = $halte_tujuan;
                             $point_akhir = $halte_tujuan->Point->first();
 
                             $tmp = Point::jalan_seberang($point_awal, $point_akhir);
@@ -246,13 +249,15 @@ class HomeController extends Controller
                         $jalan = $jalan->merge($tmp);
                     } else {
                         /* Samain dulu koridornya */
-                        if ($halte_asal->Relasi != null) {
+                        if ($halte_asal->relasi > 0) {
                             $halte_asal = $halte_asal->Relasi;
                             $nyebrang_asal = !$nyebrang_asal;
+                            $nyebrang_halte_asal = $halte_asal;
                             $point_awal = $halte_asal->Point->first();
-                        } else if ($halte_tujuan->Relasi != null) {
+                        } else if ($halte_tujuan->relasi > 0) {
                             $halte_tujuan = $halte_tujuan->Relasi;
                             $nyebrang_tujuan = !$nyebrang_tujuan;
+                            $nyebrang_halte_tujuan = $halte_tujuan;
                             $point_akhir = $halte_tujuan->Point->first();
                         }
 
@@ -263,26 +268,30 @@ class HomeController extends Controller
                         }
                         /* Nomor poin awal itu sblm nomor poin akhir */
                         else if ($point_awal->nomor > $point_akhir->nomor) {
-                            if ($halte_asal->Relasi != null && $halte_tujuan->Relasi != null) {
+                            if ($halte_asal->relasi > 0 && $halte_tujuan->relasi > 0) {
                                 $halte_asal = $halte_asal->Relasi;
                                 $nyebrang_asal = !$nyebrang_asal;
+                                $nyebrang_halte_asal = $halte_asal;
                                 $point_awal = $halte_asal->Point->first();
                                 $halte_tujuan = $halte_tujuan->Relasi;
                                 $nyebrang_tujuan = !$nyebrang_tujuan;
+                                $nyebrang_halte_tujuan = $halte_tujuan;
                                 $point_akhir = $halte_tujuan->Point->first();
 
                                 $tmp = Point::jalan_antara($point_awal, $point_akhir);
                                 $jalan = $jalan->merge($tmp);
-                            } else if ($halte_asal->Relasi != null) {
+                            } else if ($halte_asal->relasi > 0) {
                                 $halte_asal = $halte_asal->Relasi;
                                 $nyebrang_asal = !$nyebrang_asal;
+                                $nyebrang_halte_asal = $halte_asal;
                                 $point_awal = $halte_asal->Point->first();
 
                                 $tmp = Point::jalan_seberang($point_awal, $point_akhir);
                                 $jalan = $jalan->merge($tmp);
-                            } else if ($halte_tujuan->Relasi != null) {
+                            } else if ($halte_tujuan->relasi > 0) {
                                 $halte_tujuan = $halte_tujuan->Relasi;
                                 $nyebrang_tujuan = !$nyebrang_tujuan;
+                                $nyebrang_halte_tujuan = $halte_tujuan;
                                 $point_akhir = $halte_tujuan->Point->first();
 
                                 $tmp = Point::jalan_seberang($point_awal, $point_akhir);
@@ -294,6 +303,16 @@ class HomeController extends Controller
                         }
                     }
                 }
+
+                /* Nyimpen halte perpindahannya, jika pindah */
+                if ($nyebrang_asal) {
+                    $halte_perpindahan[] = $nyebrang_halte_asal;
+                }
+                if ($nyebrang_tujuan) {
+                    $halte_perpindahan[] = $nyebrang_halte_tujuan;
+                }
+
+                /* Pindah titik asal dan tujuan */
                 $halte_asal = $halte_tujuan;
                 $halte_tujuan = $halte_akhir;
             } else {
@@ -301,21 +320,26 @@ class HomeController extends Controller
                         ->where('koridor_tujuan', $point_akhir->koridor_id)
                         ->first();
                 $halte_transisi = $route->halteTransisi;
+                $halte_perpindahan[] = $halte_transisi;
+
+                /* Pindah titik tujuan ke halte transisi */
                 $halte_tujuan = $halte_transisi;
                 // dd(compact('halte_asal', 'halte_tujuan'));
             }
         }
 
         $poins = array();
-        $list_halte = array();
+        $list_halte = array(); // halte yang dilewati jalan
         $temp = null; // ini buat hapus poin yg dobel2.
         foreach ($jalan as $key => $value) {
-            if ($temp != null && $value == $temp) {
+            /* Hapus poin yg dobel dobel */
+            if ($temp != null && $value->id == $temp->id) {
                 unset($jalan[$key]);
                 continue;
             }
             $temp = $value;
-            if ($value->koridor_id > 0) {
+
+            if ($value->halte_id > 0) {
                 $list_halte[] = $value;
             }
             $poin = array();
@@ -325,32 +349,46 @@ class HomeController extends Controller
             array_push($poins, $poin);
         }
 
+        /* Generate all halte markers */
+        $halte_markers = [];
+        foreach ($list_halte as $key => $value) {
+            $warna = '#aaaaaa';
+            if ($key == 0) {
+                $warna = '#fc4353';
+            } else if ($key == count($list_halte) - 1) {
+                $warna = '#00ff00';
+            }
+            $marker = [
+                'type' => 'Feature',
+                'geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => [$value->longitude, $value->latitude],
+                ],
+                'properties' => [
+                    'title' => $value->nama,
+                    'description' => $value->keterangan,
+                    'marker-color' => $warna,
+                    'marker-size' => "medium",
+                    'marker-symbol' => $value->Koridor->simbol,
+                ]
+            ];
+
+            $halte_markers[] = $marker;
+        }
+
         // dd($jalan);
-        echo json_encode(compact('poins', 'jalan'));
-        exit();
-
-        $dd = compact('point_awal', 'point_akhir', 'koridor_awal', 'koridor_akhir', 'halte_awal', 'halte_akhir');
-        dd($dd);
-    }
-
-    public function perpindahan_halte($awal, $akhir)
-    {
-        $route = Rute::where('koridor_asal', $point_awal->koridor_id)
-                ->where('koridor_tujuan', $point_akhir->koridor_id)
-                ->first();
-        $halte_transisi = $route->halteTransisi;
+        $output = array(
+                'poins',
+                'jalan',
+                'list_halte',
+                'halte_perpindahan',
+                'halte_markers',
+            );
+        echo json_encode(compact($output));
     }
 
     public function pencarian($awal,$akhir)
     {
-      // $FeatureCollection = array();        
-      
-        // $where_brgkt = array('halte_id' => $awal);
-        // $halte_keberangkatan = Point::with('Koridor')->where($where_brgkt)->first();
-        // $where_dtg = array('halte_id' => $akhir);
-        // $halte_kedatangan = Point::with('Koridor')->where($where_dtg)->first();
-           // return json_encode($rute);
-
         $keberangkatan = array();
         $kedatangan = array();
         $halte_transisi = array();
@@ -380,22 +418,6 @@ class HomeController extends Controller
         $where = array('halte_id' => $awal);
         $temp = Point::where($where)->first();
         $temp_start = $temp->nomor;
-        // for ($i=0; $i < 10 ; $i++) 
-        // {   
-        //     $where_brgkt = array('koridor_asal' => $temp_asal);
-        //     $where_dtg = array('koridor_tujuan' => $tujuan_akhir = $akhir);
-
-        //     $cari = Rute::where($where_brgkt)->where($where_dtg)->first();
-        //     $temp_asal = $cari->koridor_via;
-        //     $hasil['berangkat'][$i] = $cari->koridor_asal;
-        //     $hasil['kedatangan'][$i] = $cari->koridor_tujuan;
-        //     $hasil['via'][$i] = $cari->koridor_via;
-        //     $hasil['halte'][$i] = $cari->halte_transisi;
-
-        //     if ($hasil['via'][$i] == 0) break;  
-        //     // $keberangkatan[$i] = $halte_keberangkatan->koridor_id;
-        //     // $halte = Rute::where('id' => $awal)->get();
-        // }
 
         $temp_start = $awal;
         // print_r($koridor_awal." ".$koridor_akhir." ".$awal." ".$akhir);
@@ -426,95 +448,18 @@ class HomeController extends Controller
             }
 
         }
-        // print_r($poins);
-        // $hasil['asal'] = $cari->koridor_asal;        
-        // $hasil['tujuan'] = $cari->koridor_tujuan;
-        // $hasil['via'] = $cari->koridor_via;
-        // $hasil['halte'] = $cari->halte_transisi;
         
         return json_encode($poins);
     }
-
-     public function pencarian_nyebrang($awal,$akhir)
-    {
-      
-
-        $keberangkatan = array();
-        $kedatangan = array();
-        $halte_transisi = array();
-        $via= array();
-
-
-        $hasil = array();
-        $hasil['berangkat'][0] = $awal;
-        $hasil['kedatangan'][0] = $akhir;
-       
-        $poins = array();
-
-
-        $where = array('halte_id' => $awal);
-        $temp = Point::where($where)->first();
-        $koridor_awal = $temp->koridor_id;
-
-        $where = array('halte_id' => $akhir);
-        $temp = Point::where($where)->first();
-        $koridor_akhir = $temp->koridor_id;
-        $nomor_akhir = $temp->nomor;
-
-
-        $temp_asal = $koridor_awal;
-        $tujuan_akhir = $koridor_akhir;
-
-        $where = array('halte_id' => $awal);
-        $temp = Point::where($where)->first();
-        $temp_start = $temp->nomor;
-        
-
-        $temp_start = $awal;
-       
-        while(1)
-        {   
-            $halte_transisi = Point::where('koridor_id',$koridor_awal)->where('halte_id',$temp_start)->first();
-            
-            if($koridor_awal==$koridor_akhir){
-                $halte_akhir = Point::where('koridor_id',$koridor_awal)->where('halte_id',$akhir)->first();
-                $poin = Point::where('koridor_id',$koridor_awal)->whereBetween('nomor',array($halte_transisi->nomor,$halte_akhir->nomor))->get();
-                
-            }
-            else $poin = Point::where('koridor_id',$koridor_awal)->where('nomor','>=',$halte_transisi->nomor)->get();
-            foreach ($poin as $key => $value) {
-                $coordinates = array();
-                array_push($coordinates, $value->latitude);
-                array_push($coordinates, $value->longitude);
-                array_push($poins,$coordinates);
-            }
-            if($koridor_awal == $koridor_akhir){
-                
-                break;
-            }
-            $next = Rute::where('koridor_asal',$koridor_awal)->where('koridor_tujuan',$koridor_akhir)->first();
-            $temp_start = $next->halte_transisi;
-            $koridor_awal = $next->koridor_via;
-            if($koridor_awal==0){
-                $koridor_awal = $next->koridor_tujuan;
-            }
-
-        }
-        // print_r($poins);
-        // $hasil['asal'] = $cari->koridor_asal;        
-        // $hasil['tujuan'] = $cari->koridor_tujuan;
-        // $hasil['via'] = $cari->koridor_via;
-        // $hasil['halte'] = $cari->halte_transisi;
-        
-        return json_encode($poins);
-    }
-
 
     public function pencarian_halte($awal,$akhir)
     {
         $FeatureCollection = array(); 
 
-        $halte = Point::with('Halte')->where('halte_id',$awal)->orWhere('halte_id',$akhir)->get();
+        $halte = Point::with('Halte')
+                ->where('halte_id',$awal)
+                ->orWhere('halte_id',$akhir)
+                ->get();
         foreach ($halte as $key => $value) {
             $feature = array();
             $feature['type'] = "Feature";
@@ -526,9 +471,12 @@ class HomeController extends Controller
             $feature['properties'] = array();
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
-            if($value->halte_id==$akhir)$feature['properties']['marker-color'] = '#fc4353';
-            else $feature['properties']['marker-color'] = '#00ff00';
-            $feature['properties']['marker-size'] = "medium";            
+            if ($value->halte_id==$akhir) {
+                $feature['properties']['marker-color'] = '#fc4353';
+            } else {
+                $feature['properties']['marker-color'] = '#00ff00';
+            }
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -559,7 +507,7 @@ class HomeController extends Controller
             if($value->halte_id==$akhir)$feature['properties']['marker-color'] = '#fc4353';
             else if($value->halte_id==$awal) $feature['properties']['marker-color'] = '#00ff00';
             else $feature['properties']['marker-color'] = $value->Halte->warna;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -571,7 +519,7 @@ class HomeController extends Controller
 
     public function halte_k1a()
     {
-        $FeatureCollection = array();        
+        $FeatureCollection = array();
         
 
         $halte = Point::with('Koridor')->get();
@@ -587,7 +535,7 @@ class HomeController extends Controller
         return json_encode($FeatureCollection);
     }
 
-     public function halte_ungroup()
+    public function halte_ungroup()
     {
         
        
@@ -606,7 +554,7 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -616,7 +564,7 @@ class HomeController extends Controller
 
     }
 
-     public function halte_ka1a()
+    public function halte_ka1a()
     {
         
        
@@ -635,7 +583,7 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -645,7 +593,7 @@ class HomeController extends Controller
 
     }
 
-     public function halte_k1b()
+    public function halte_k1b()
     {
         
        
@@ -664,7 +612,7 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Halte->warna;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -674,7 +622,7 @@ class HomeController extends Controller
 
     }
 
-     public function halte_k2a()
+    public function halte_k2a()
     {
         
        
@@ -693,20 +641,16 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
         }
-        
         return json_encode($FeatureCollection);
-
     }
 
-     public function halte_k2b()
+    public function halte_k2b()
     {
-        
-       
         $FeatureCollection = array(); 
         $where = array('koridor_id' => 4);
         $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
@@ -722,20 +666,16 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
         }
-        
         return json_encode($FeatureCollection);
-
     }
 
-     public function halte_k3a()
+    public function halte_k3a()
     {
-        
-       
         $FeatureCollection = array(); 
         $where = array('koridor_id' => 5);
         $halte = Point::with('Halte')-> where($where)->where('halte_id','>',0)->get();
@@ -751,7 +691,7 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -761,7 +701,7 @@ class HomeController extends Controller
 
     }
 
-     public function halte_k3b()
+    public function halte_k3b()
     {
         
        
@@ -780,7 +720,7 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -790,7 +730,7 @@ class HomeController extends Controller
 
     }
 
-     public function halte_k5a()
+    public function halte_k5a()
     {
         
        
@@ -809,7 +749,7 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -819,7 +759,7 @@ class HomeController extends Controller
 
     }
 
-     public function halte_k5b()
+    public function halte_k5b()
     {
         
        
@@ -838,7 +778,7 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -848,7 +788,7 @@ class HomeController extends Controller
 
     }
 
-     public function halte_k6a()
+    public function halte_k6a()
     {
         
        
@@ -867,17 +807,15 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
         }
-        
         return json_encode($FeatureCollection);
+    }
 
-    }   
-
-     public function halte_k6b()
+    public function halte_k6b()
     {
         
        
@@ -896,7 +834,7 @@ class HomeController extends Controller
             $feature['properties']['title'] = $value->nama;
             $feature['properties']['description'] = $value->keterangan;
             $feature['properties']['marker-color'] = $value->Koridor->color;
-            $feature['properties']['marker-size'] = "medium";            
+            $feature['properties']['marker-size'] = "medium";
             $feature['properties']['marker-symbol'] = $value->Koridor->simbol;
             
             array_push($FeatureCollection, $feature);
@@ -904,12 +842,12 @@ class HomeController extends Controller
         
         return json_encode($FeatureCollection);
 
-    }      
+    }
 
 
     public function rute1a()
     {
-      $FeatureCollection = array();        
+        $FeatureCollection = array();
       
         $where = array('koridor_id' => 1);
         $rute = Point::with('Koridor')->where($where)->get();
@@ -917,7 +855,7 @@ class HomeController extends Controller
         foreach ($rute as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
+            array_push($coordinate, $value->longitude);
             array_push($FeatureCollection, $coordinate);
             // temp++;
         }
@@ -927,7 +865,7 @@ class HomeController extends Controller
 
     public function rute1b()
     {
-      $FeatureCollection = array();        
+        $FeatureCollection = array();
       
         $where = array('koridor_id' => 2);
         $rute = Point::with('Koridor')->where($where)->get();
@@ -935,7 +873,7 @@ class HomeController extends Controller
         foreach ($rute as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
+            array_push($coordinate, $value->longitude);
             array_push($FeatureCollection, $coordinate);
             // temp++;
         }
@@ -943,13 +881,9 @@ class HomeController extends Controller
         return json_encode($FeatureCollection);
     }
 
-
-
-
-
     public function rute2a()
     {
-      $FeatureCollection = array();        
+        $FeatureCollection = array();
       
         $where = array('koridor_id' => 3);
         $rute = Point::with('Koridor')->where($where)->get();
@@ -957,7 +891,7 @@ class HomeController extends Controller
         foreach ($rute as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
+            array_push($coordinate, $value->longitude);
             array_push($FeatureCollection, $coordinate);
             // temp++;
         }
@@ -967,7 +901,7 @@ class HomeController extends Controller
 
     public function rute2b()
     {
-      $FeatureCollection = array();        
+        $FeatureCollection = array();
       
         $where = array('koridor_id' => 4);
         $rute = Point::with('Koridor')->where($where)->get();
@@ -975,7 +909,7 @@ class HomeController extends Controller
         foreach ($rute as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
+            array_push($coordinate, $value->longitude);
             array_push($FeatureCollection, $coordinate);
             // temp++;
         }
@@ -988,7 +922,7 @@ class HomeController extends Controller
 
     public function rute3a()
     {
-      $FeatureCollection = array();        
+        $FeatureCollection = array();
       
         $where = array('koridor_id' => 5);
         $rute = Point::with('Koridor')->where($where)->get();
@@ -996,7 +930,7 @@ class HomeController extends Controller
         foreach ($rute as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
+            array_push($coordinate, $value->longitude);
             array_push($FeatureCollection, $coordinate);
             // temp++;
         }
@@ -1005,7 +939,7 @@ class HomeController extends Controller
     } 
     public function rute3b()
     {
-      $FeatureCollection = array();        
+        $FeatureCollection = array();
       
         $where = array('koridor_id' => 6);
         $rute = Point::with('Koridor')->where($where)->get();
@@ -1013,7 +947,43 @@ class HomeController extends Controller
         foreach ($rute as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
+            array_push($coordinate, $value->longitude);
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    }
+
+    public function rute5a()
+    {
+        $FeatureCollection = array();
+      
+        $where = array('koridor_id' => 7);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);
+            array_push($FeatureCollection, $coordinate);
+            // temp++;
+        }
+        
+        return json_encode($FeatureCollection);
+    }
+
+    public function rute5b()
+    {
+        $FeatureCollection = array();
+      
+        $where = array('koridor_id' => 8);
+        $rute = Point::with('Koridor')->where($where)->get();
+        // return json_encode($rute);
+        foreach ($rute as $key => $value) {
+            $coordinate = array();
+            array_push($coordinate, $value->latitude);
+            array_push($coordinate, $value->longitude);
             array_push($FeatureCollection, $coordinate);
             // temp++;
         }
@@ -1023,47 +993,9 @@ class HomeController extends Controller
 
 
 
-
-    public function rute5a()
+    public function rute6a()
     {
-      $FeatureCollection = array();        
-      
-        $where = array('koridor_id' => 7);
-        $rute = Point::with('Koridor')->where($where)->get();
-        // return json_encode($rute);
-        foreach ($rute as $key => $value) {
-            $coordinate = array();
-            array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
-            array_push($FeatureCollection, $coordinate);
-            // temp++;
-        }
-        
-        return json_encode($FeatureCollection);
-    } 
-    public function rute5b()
-    {
-      $FeatureCollection = array();        
-      
-        $where = array('koridor_id' => 8);
-        $rute = Point::with('Koridor')->where($where)->get();
-        // return json_encode($rute);
-        foreach ($rute as $key => $value) {
-            $coordinate = array();
-            array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
-            array_push($FeatureCollection, $coordinate);
-            // temp++;
-        }
-        
-        return json_encode($FeatureCollection);
-    }    
-
-
-
-     public function rute6a()
-    {
-      $FeatureCollection = array();        
+        $FeatureCollection = array();
       
         $where = array('koridor_id' => 9);
         $rute = Point::with('Koridor')->where($where)->get();
@@ -1071,7 +1003,7 @@ class HomeController extends Controller
         foreach ($rute as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
+            array_push($coordinate, $value->longitude);
             array_push($FeatureCollection, $coordinate);
             // temp++;
         }
@@ -1080,7 +1012,7 @@ class HomeController extends Controller
     } 
     public function rute6b()
     {
-      $FeatureCollection = array();        
+        $FeatureCollection = array();
       
         $where = array('koridor_id' => 10);
         $rute = Point::with('Koridor')->where($where)->get();
@@ -1088,7 +1020,7 @@ class HomeController extends Controller
         foreach ($rute as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
-            array_push($coordinate, $value->longitude);            
+            array_push($coordinate, $value->longitude);
             array_push($FeatureCollection, $coordinate);
             // temp++;
         }
