@@ -128,7 +128,7 @@ class HomeController extends Controller
         $halte_tujuan = $halte_akhir;
 
         $jalan = new Collection; // nyimpen poin poin jalan
-        $halte_perpindahan = array(); // nyimpen halte perpindahan
+        $halte_perpindahan = new Collection; // nyimpen halte perpindahan
         while ($halte_asal != $halte_tujuan) {
             /* dapetin objek poin, 1 halte bisa jadi ada byk point. pilih slh 1 */
             $point_awals = $halte_asal->Point;
@@ -188,7 +188,6 @@ class HomeController extends Controller
                     $point_akhir = $point_akhirs[0];
                 }
             }
-            $jalan->push($point_awal);
 
             $nyebrang_asal = false;
             $nyebrang_tujuan = false;
@@ -199,6 +198,8 @@ class HomeController extends Controller
             /* ************ MULAI NYARI JALAN ************ */
             /* Jika koridor aslinya sama, tinggal go aja, ga pake ganti ganti bis */
             if ($point_awal->Koridor->nomor == $point_akhir->Koridor->nomor) {
+                $jalan->push($point_awal);
+
                 /* Jika koridor sama */
                 if ($point_awal->koridor_id == $point_akhir->koridor_id) {
 
@@ -307,21 +308,23 @@ class HomeController extends Controller
 
                 /* Nyimpen halte perpindahannya, jika pindah */
                 if ($nyebrang_asal) {
-                    $halte_perpindahan[] = $nyebrang_halte_asal;
+                    $halte_perpindahan->push($nyebrang_halte_asal);
                 }
                 if ($nyebrang_tujuan) {
-                    $halte_perpindahan[] = $nyebrang_halte_tujuan;
+                    $halte_perpindahan->push($nyebrang_halte_tujuan);
                 }
 
                 /* Pindah titik asal dan tujuan */
                 $halte_asal = $halte_tujuan;
                 $halte_tujuan = $halte_akhir;
+
+                $jalan->push($point_akhir);
             } else {
                 $route = Rute::where('koridor_asal', $point_awal->koridor_id)
                         ->where('koridor_tujuan', $point_akhir->koridor_id)
                         ->first();
                 $halte_transisi = $route->halteTransisi;
-                $halte_perpindahan[] = $halte_transisi;
+                $halte_perpindahan->push($halte_transisi);
 
                 /* Pindah titik tujuan ke halte transisi */
                 $halte_tujuan = $halte_transisi;
@@ -358,6 +361,8 @@ class HomeController extends Controller
                 $warna = '#fc4353';
             } else if ($key == count($list_halte) - 1) {
                 $warna = '#00ff00';
+            } else if ($halte_perpindahan->contains('id', $value->halte_id)) {
+                $warna = '#0000ff';
             }
             $marker = [
                 'type' => 'Feature',
