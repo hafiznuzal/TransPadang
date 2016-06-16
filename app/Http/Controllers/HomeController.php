@@ -71,6 +71,7 @@ class HomeController extends Controller
     {
        
         $halte = Halte::where('id','>',0)->get();
+        // print_r($halte);
         return view("index")->with('halte',$halte);
 
        
