@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               5.6.16 - MySQL Community Server (GPL)
+-- Server version:               10.1.10-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win32
 -- HeidiSQL Version:             9.3.0.4984
 -- --------------------------------------------------------
@@ -32,8 +32,9 @@ CREATE TABLE IF NOT EXISTS `halte` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table trans_padang.halte: ~319 rows (approximately)
+DELETE FROM `halte`;
 /*!40000 ALTER TABLE `halte` DISABLE KEYS */;
-REPLACE INTO `halte` (`id`, `nama`, `latitude`, `longitude`, `relasi`, `photo`, `keterangan`, `warna`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `halte` (`id`, `nama`, `latitude`, `longitude`, `relasi`, `photo`, `keterangan`, `warna`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(0, 'Tidak Ada', NULL, NULL, NULL, NULL, NULL, '#990000', NULL, NULL, NULL),
 	(1, 'RTH Imam Bonjol I', -0.952719, 100.363636, 0, NULL, NULL, '#990000', NULL, NULL, NULL),
 	(2, 'Kantor Pos', -0.94983, 100.363485, 68, NULL, NULL, '#990000', NULL, NULL, NULL),
@@ -371,8 +372,9 @@ CREATE TABLE IF NOT EXISTS `koridor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table trans_padang.koridor: ~12 rows (approximately)
+DELETE FROM `koridor`;
 /*!40000 ALTER TABLE `koridor` DISABLE KEYS */;
-REPLACE INTO `koridor` (`id`, `nomor`, `nama`, `keterangan`, `simbol`, `line`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `koridor` (`id`, `nomor`, `nama`, `keterangan`, `simbol`, `line`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(0, 0, 'tidak ada', NULL, NULL, NULL, '2016-05-29 20:21:05', NULL, NULL),
 	(1, 1, '1a', NULL, 'rail-metro', 'blue', '2016-05-29 19:15:46', NULL, NULL),
 	(2, 1, '1b', NULL, 'rail-metro', 'blue', '2016-05-29 19:16:17', NULL, NULL),
@@ -407,9 +409,10 @@ CREATE TABLE IF NOT EXISTS `point` (
   CONSTRAINT `fk_point_rute1` FOREIGN KEY (`koridor_id`) REFERENCES `koridor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table trans_padang.point: ~950 rows (approximately)
+-- Dumping data for table trans_padang.point: ~977 rows (approximately)
+DELETE FROM `point`;
 /*!40000 ALTER TABLE `point` DISABLE KEYS */;
-REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `created_at`, `updated_at`, `deleted_at`, `koridor_id`, `halte_id`) VALUES
+INSERT INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `created_at`, `updated_at`, `deleted_at`, `koridor_id`, `halte_id`) VALUES
 	(1, 1, 100.316159, -0.809764, 'Mega Permai II', NULL, NULL, NULL, 1, 35),
 	(2, 2, 100.318686, -0.81245, 'Kayu Kalek II', NULL, NULL, NULL, 1, 36),
 	(3, 3, 100.320993, -0.814761, 'SGO II', NULL, NULL, NULL, 1, 37),
@@ -672,9 +675,7 @@ REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `cre
 	(260, 158, 100.379125, -0.96207, 'Sinar Maju Jaya', NULL, NULL, NULL, 3, 0),
 	(261, 159, 100.379004, -0.961414, 'Point Bantu 2a', NULL, NULL, NULL, 3, 0),
 	(262, 160, 100.378721, -0.959435, 'Point Bantu 2a', NULL, NULL, NULL, 3, 0),
-	(263, 35, 100.394242, -0.955762, 'Kubang MBR', NULL, NULL, NULL, 0, 0),
 	(263, 161, 100.377899, -0.958427, 'Point Bantu 2a', NULL, NULL, NULL, 3, 0),
-	(264, 36, 100.391775, -0.954246, 'Marapalam Jaya Teknik', NULL, NULL, NULL, 0, 0),
 	(264, 162, 100.375856, -0.957424, 'Kantor Pengacara Rini Arti', NULL, NULL, NULL, 3, 0),
 	(265, 163, 100.374665, -0.957032, 'Point Bantu 2a', NULL, NULL, NULL, 3, 0),
 	(266, 164, 100.373146, -0.95694, 'Simp Seberang Padang', NULL, NULL, NULL, 3, 0),
@@ -726,10 +727,10 @@ REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `cre
 	(342, 33, 100.383232, -0.991095, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
 	(343, 35, 100.383657, -0.991894, 'Pasar Gaung', NULL, NULL, NULL, 4, 83),
 	(344, 36, 100.384836, -0.993957, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
-	(345, 40, 100.385328, -0.995099, 'Toko Gani', NULL, NULL, NULL, 4, 84),
-	(346, 37, 100.385537, -0.996126, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
-	(347, 38, 100.386271, -0.997426, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
-	(348, 39, 100.386667, -0.999803, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
+	(345, 37, 100.385328, -0.995099, 'Toko Gani', NULL, NULL, NULL, 4, 84),
+	(346, 38, 100.385537, -0.996126, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
+	(347, 39, 100.386271, -0.997426, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
+	(348, 40, 100.386667, -0.999803, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
 	(349, 41, 100.386689, -1.00052, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
 	(350, 42, 100.387179, -1.000821, 'Poin Bantu IIB', NULL, NULL, NULL, 4, 0),
 	(351, 43, 100.387856, -1.001715, 'Masjid Al Qohar', NULL, NULL, NULL, 4, 85),
@@ -904,17 +905,17 @@ REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `cre
 	(520, 41, 100.364606, -0.896689, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
 	(521, 42, 100.363408, -0.897469, 'Syifa Herbal', NULL, NULL, NULL, 5, 150),
 	(522, 43, 100.363187, -0.897606, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
-	(523, 44, 100.363394, -0.901638, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
-	(524, 45, 100.36229, -0.902169, 'Apotek Farma Indah', NULL, NULL, NULL, 5, 151),
-	(525, 46, 100.361047, -0.902918, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
-	(526, 47, 100.359527, -0.903923, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
-	(527, 48, 100.356826, -0.905477, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
-	(528, 49, 100.351775, -0.909448, 'Bakso Steak Jhoni Anwar', NULL, NULL, NULL, 5, 152),
-	(529, 50, 100.351161, -0.909953, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
-	(530, 51, 100.349904, -0.911348, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
-	(531, 52, 100.349948, -0.911784, 'Depan Zusuki', NULL, NULL, NULL, 5, 0),
-	(532, 53, 100.350165, -0.915033, 'BRI Ulak Karang', NULL, NULL, NULL, 5, 0),
-	(533, 54, 100.350308, -0.916539, 'Ajo Paris', NULL, NULL, NULL, 5, 0),
+	(523, 45, 100.363394, -0.901638, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
+	(524, 46, 100.36229, -0.902169, 'Apotek Farma Indah', NULL, NULL, NULL, 5, 152),
+	(525, 47, 100.361047, -0.902918, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
+	(526, 48, 100.359527, -0.903923, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
+	(527, 50, 100.356826, -0.905477, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
+	(528, 521, 100.351775, -0.909448, 'Bakso Steak Jhoni Anwar', NULL, NULL, NULL, 5, 155),
+	(529, 52, 100.351161, -0.909953, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
+	(530, 522, 100.349904, -0.911348, 'Point Bantu 3a', NULL, NULL, NULL, 5, 0),
+	(531, 53, 100.349948, -0.911784, 'Depan Zusuki', NULL, NULL, NULL, 5, 0),
+	(532, 54, 100.350165, -0.915033, 'BRI Ulak Karang', NULL, NULL, NULL, 5, 0),
+	(533, 55, 100.350308, -0.916539, 'Ajo Paris', NULL, NULL, NULL, 5, 0),
 	(534, 55, 100.350796, -0.921593, 'Masjid Asy Syahidin', NULL, NULL, NULL, 5, 0),
 	(535, 56, 100.351171, -0.924746, 'Gedung Rangkayo Basa', NULL, NULL, NULL, 5, 0),
 	(536, 57, 100.351391, -0.926279, 'Depan Pasar Pagi', NULL, NULL, NULL, 5, 0),
@@ -1040,8 +1041,8 @@ REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `cre
 	(656, 87, 100.394797, -0.894106, 'Mari Jaya', NULL, NULL, NULL, 6, 204),
 	(657, 88, 100.393525, -0.887074, 'Universitas Terbuka II', NULL, NULL, NULL, 6, 205),
 	(658, 89, 100.393019, -0.886207, 'Simp Diklat RSUD', NULL, NULL, NULL, 6, 206),
-	(659, 90, 100.386933, -0.877125, 'Pusat Pemetintahan Aia Pacah II', NULL, NULL, NULL, 6, 207),
-	(660, 91, 100.382369, -0.871082, 'RS Siti Rahmah', NULL, NULL, NULL, 6, 318),
+	(659, 91, 100.386933, -0.877125, 'Pusat Pemetintahan Aia Pacah II', NULL, NULL, NULL, 6, 208),
+	(660, 92, 100.382369, -0.871082, 'RS Siti Rahmah', NULL, NULL, NULL, 6, 318),
 	(661, 1, 100.467459, -0.956401, 'Semen Padang II', NULL, NULL, NULL, 7, 209),
 	(662, 2, 100.462299, -0.957958, 'Audio Mobil', NULL, NULL, NULL, 7, 210),
 	(663, 3, 100.46046, -0.958333, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
@@ -1076,30 +1077,30 @@ REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `cre
 	(692, 32, 100.400884, -0.957782, 'Praktek Drg Bersama Lubeg UPI', NULL, NULL, NULL, 7, 224),
 	(693, 33, 100.398737, -0.958385, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
 	(694, 34, 100.397286, -0.957624, 'UPI', NULL, NULL, NULL, 7, 225),
-	(695, 37, 100.39134, -0.953967, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(696, 38, 100.389861, -0.95334, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(697, 39, 100.389375, -0.9528, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(698, 40, 100.387598, -0.951687, 'Toko Dayu', NULL, NULL, NULL, 7, 228),
-	(699, 41, 100.383776, -0.949295, 'SMP 8', NULL, NULL, NULL, 7, 229),
-	(700, 42, 100.38076, -0.947428, 'Istana Perabot Marapalam', NULL, NULL, NULL, 7, 230),
-	(701, 43, 100.377824, -0.945613, 'Riau Perabot Marapalam', NULL, NULL, NULL, 7, 231),
-	(702, 44, 100.37752, -0.945628, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(703, 45, 100.377336, -0.945742, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(704, 46, 100.377173, -0.945678, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(705, 47, 100.377158, -0.945267, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(706, 48, 100.377061, -0.945121, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(707, 49, 100.37634, -0.944572, 'Seberang SMA Kartika', NULL, NULL, NULL, 7, 232),
-	(708, 50, 100.376076, -0.944181, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(709, 51, 100.375923, -0.943469, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(710, 52, 100.373573, -0.944181, 'Komplek Mandiri Simpang Haru', NULL, NULL, NULL, 7, 233),
-	(711, 53, 100.368052, -0.946019, 'Gilang Ramadhan Studio', NULL, NULL, NULL, 7, 234),
-	(712, 54, 100.36674, -0.946494, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(713, 55, 100.36472, -0.947501, 'Masjid Mubarak', NULL, NULL, NULL, 7, 235),
-	(714, 56, 100.364079, -0.947796, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(715, 57, 100.363063, -0.948087, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(716, 58, 100.363465, -0.949483, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(717, 59, 100.363764, -0.951356, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
-	(718, 60, 100.363668, -0.952795, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(695, 35, 100.39134, -0.953967, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(696, 36, 100.389861, -0.95334, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(697, 37, 100.389375, -0.9528, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(698, 38, 100.387598, -0.951687, 'Toko Dayu', NULL, NULL, NULL, 7, 226),
+	(699, 39, 100.383776, -0.949295, 'SMP 8', NULL, NULL, NULL, 7, 227),
+	(700, 40, 100.38076, -0.947428, 'Istana Perabot Marapalam', NULL, NULL, NULL, 7, 228),
+	(701, 41, 100.377824, -0.945613, 'Riau Perabot Marapalam', NULL, NULL, NULL, 7, 229),
+	(702, 42, 100.37752, -0.945628, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(703, 43, 100.377336, -0.945742, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(704, 44, 100.377173, -0.945678, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(705, 45, 100.377158, -0.945267, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(706, 46, 100.377061, -0.945121, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(707, 47, 100.37634, -0.944572, 'Seberang SMA Kartika', NULL, NULL, NULL, 7, 230),
+	(708, 48, 100.376076, -0.944181, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(709, 49, 100.375923, -0.943469, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(710, 50, 100.373573, -0.944181, 'Komplek Mandiri Simpang Haru', NULL, NULL, NULL, 7, 231),
+	(711, 51, 100.368052, -0.946019, 'Gilang Ramadhan Studio', NULL, NULL, NULL, 7, 232),
+	(712, 52, 100.36674, -0.946494, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(713, 53, 100.36472, -0.947501, 'Masjid Mubarak', NULL, NULL, NULL, 7, 233),
+	(714, 54, 100.364079, -0.947796, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(715, 55, 100.363063, -0.948087, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(716, 56, 100.363465, -0.949483, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(717, 57, 100.363764, -0.951356, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
+	(718, 58, 100.363668, -0.952795, 'Point Bantu 5a', NULL, NULL, NULL, 7, 0),
 	(719, 1, 100.363636, -0.952719, 'RTH Imam Bonjol', NULL, NULL, NULL, 8, 1),
 	(720, 2, 100.36374, -0.95132, 'Poin Bantu 5b', NULL, NULL, NULL, 8, 0),
 	(721, 3, 100.365043, -0.951044, 'Ayam Penyet Jakarta', NULL, NULL, NULL, 8, 236),
@@ -1266,11 +1267,11 @@ REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `cre
 	(882, 100, 100.377402, -0.94307, 'Point Bantu 6a', NULL, NULL, NULL, 9, 0),
 	(883, 101, 100.377293, -0.943058, 'Point Bantu 6a', NULL, NULL, NULL, 9, 0),
 	(884, 102, 100.376873, -0.943124, 'Seberang Bank Nagari Andalas', NULL, NULL, NULL, 9, 310),
-	(885, 103, 100.373573, -0.944181, 'Komp Bank Mandiri Simp Haru', NULL, NULL, NULL, 9, 233),
+	(885, 103, 100.373573, -0.944181, 'Komp Bank Mandiri Simp Haru', NULL, NULL, NULL, 9, 231),
 	(886, 104, 100.370133, -0.945308, 'Soraya Bed Sheet', NULL, NULL, NULL, 9, 311),
-	(887, 105, 100.368069, -0.946052, 'Gilang Ramadhan Studio', NULL, NULL, NULL, 9, 234),
+	(887, 105, 100.368069, -0.946052, 'Gilang Ramadhan Studio', NULL, NULL, NULL, 9, 232),
 	(888, 106, 100.36674, -0.946494, 'Point Bantu 6a', NULL, NULL, NULL, 9, 0),
-	(889, 107, 100.36472, -0.947501, 'Masjid Mubarak', NULL, NULL, NULL, 9, 235),
+	(889, 107, 100.36472, -0.947501, 'Masjid Mubarak', NULL, NULL, NULL, 9, 233),
 	(890, 108, 100.363025, -0.948081, 'Point Bantu 6a', NULL, NULL, NULL, 9, 0),
 	(891, 109, 100.362559, -0.946017, 'Point Bantu 6a', NULL, NULL, NULL, 9, 0),
 	(892, 110, 100.361312, -0.946242, 'Point Bantu 6a', NULL, NULL, NULL, 9, 0),
@@ -1344,12 +1345,9 @@ REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `cre
 	(960, 55, 100.448942, -0.922845, 'Point Bantu 6b', NULL, NULL, NULL, 10, 0),
 	(961, 56, 100.453867, -0.919095, 'Point Bantu 6b', NULL, NULL, NULL, 10, 0),
 	(962, 57, 100.455394, -0.9175, 'PKM Unand', NULL, NULL, NULL, 10, 285),
-	(963, 35, 100.394242, -0.955762, 'Kubang MBR', NULL, NULL, NULL, 7, 226),
 	(963, 124, 100.364584, -0.947529, 'BCA', NULL, NULL, NULL, 9, 262),
-	(964, 36, 100.391775, -0.954246, 'Marapalam Jaya Teknik', NULL, NULL, NULL, 7, 227),
 	(964, 65, 100.467459, -0.956401, 'Semen Padang II', NULL, NULL, NULL, 8, 209),
-	(965, 61, 100.363636, -0.952719, 'RTH Imam Bonjol', NULL, NULL, NULL, 7, 1),
-	(966, 92, 100.386979, -0.877099, 'Pusat Pemerintahan Aia Pacah', NULL, NULL, NULL, 6, 136),
+	(965, 59, 100.363636, -0.952719, 'RTH Imam Bonjol', NULL, NULL, NULL, 7, 1),
 	(967, 91, 100.362576, -0.955383, 'Masjid Nurul Iman', NULL, NULL, NULL, 5, 0),
 	(968, 92, 100.364475, -0.954066, 'Poin Bantu 3a', NULL, NULL, NULL, 5, 0),
 	(969, 93, 100.363513, -0.952708, 'RTH Imam Bonjol I', NULL, NULL, NULL, 5, 1),
@@ -1359,7 +1357,12 @@ REPLACE INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `cre
 	(974, 47, 100.316159, -0.809764, 'Mega Permai II', NULL, NULL, NULL, 2, 35),
 	(975, 57, 100.364475, -0.954066, 'Poin Bantu 1a', NULL, NULL, NULL, 1, 0),
 	(976, 58, 100.363513, -0.952708, 'RTH Imam Bonjol I', NULL, NULL, NULL, 1, 1),
-	(977, 57, 100.364475, -0.954066, 'Poin Bantu 1a', '2016-06-10 17:11:57', NULL, NULL, 1, 0);
+	(977, 57, 100.364475, -0.954066, 'Poin Bantu 1a', '2016-06-10 17:11:57', NULL, NULL, 1, 0),
+	(978, 90, 100.389564, -0.880732, 'FKG Baiturrahmah II', NULL, NULL, NULL, 6, 207),
+	(979, 0, 100.382369, -0.871082, 'RS Siti Rahmah', NULL, NULL, NULL, 5, 318),
+	(980, 44, 100.363295, -0.899764, 'Kampus ITP', NULL, NULL, NULL, 5, 151),
+	(981, 49, 100.358091, -0.904728, 'Dinas SDM', NULL, NULL, NULL, 5, 153),
+	(982, 51, 100.354149, -0.90743, 'RM Talago', NULL, NULL, NULL, 5, 154);
 /*!40000 ALTER TABLE `point` ENABLE KEYS */;
 
 
@@ -1376,9 +1379,10 @@ CREATE TABLE IF NOT EXISTS `rute` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table trans_padang.rute: ~101 rows (approximately)
+-- Dumping data for table trans_padang.rute: ~100 rows (approximately)
+DELETE FROM `rute`;
 /*!40000 ALTER TABLE `rute` DISABLE KEYS */;
-REPLACE INTO `rute` (`id`, `koridor_asal`, `koridor_tujuan`, `koridor_via`, `halte_transisi`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `rute` (`id`, `koridor_asal`, `koridor_tujuan`, `koridor_via`, `halte_transisi`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(0, 1, 3, 4, 1, NULL, NULL, NULL),
 	(1, 1, 1, 0, 0, NULL, NULL, NULL),
 	(2, 1, 2, 0, 1, NULL, NULL, NULL),
@@ -1392,14 +1396,14 @@ REPLACE INTO `rute` (`id`, `koridor_asal`, `koridor_tujuan`, `koridor_via`, `hal
 	(10, 1, 10, 8, 1, NULL, NULL, NULL),
 	(11, 2, 2, 0, 0, NULL, NULL, NULL),
 	(12, 2, 1, 0, 35, NULL, NULL, NULL),
-	(13, 2, 3, 1, 35, NULL, NULL, NULL),
-	(14, 2, 4, 1, 35, NULL, NULL, NULL),
-	(15, 2, 5, 1, 35, NULL, NULL, NULL),
-	(16, 2, 6, 1, 35, NULL, NULL, NULL),
-	(17, 2, 7, 1, 35, NULL, NULL, NULL),
-	(18, 2, 8, 1, 35, NULL, NULL, NULL),
-	(19, 2, 9, 1, 35, NULL, NULL, NULL),
-	(20, 2, 10, 1, 35, NULL, NULL, NULL),
+	(13, 2, 3, 1, 1, NULL, NULL, NULL),
+	(14, 2, 4, 1, 1, NULL, NULL, NULL),
+	(15, 2, 5, 1, 1, NULL, NULL, NULL),
+	(16, 2, 6, 1, 1, NULL, NULL, NULL),
+	(17, 2, 7, 1, 1, NULL, NULL, NULL),
+	(18, 2, 8, 1, 1, NULL, NULL, NULL),
+	(19, 2, 9, 1, 1, NULL, NULL, NULL),
+	(20, 2, 10, 1, 1, NULL, NULL, NULL),
 	(21, 3, 3, 0, 0, NULL, NULL, NULL),
 	(22, 3, 1, 2, 1, NULL, NULL, NULL),
 	(23, 3, 2, 0, 1, NULL, NULL, NULL),
@@ -1435,7 +1439,7 @@ REPLACE INTO `rute` (`id`, `koridor_asal`, `koridor_tujuan`, `koridor_via`, `hal
 	(53, 6, 2, 5, 136, NULL, NULL, NULL),
 	(54, 6, 3, 5, 136, NULL, NULL, NULL),
 	(55, 6, 4, 5, 136, NULL, NULL, NULL),
-	(56, 6, 5, 0, 136, NULL, NULL, NULL),
+	(56, 6, 5, 0, 318, NULL, NULL, NULL),
 	(57, 6, 7, 5, 136, NULL, NULL, NULL),
 	(58, 6, 8, 5, 136, NULL, NULL, NULL),
 	(59, 6, 9, 5, 136, NULL, NULL, NULL),
@@ -1448,8 +1452,8 @@ REPLACE INTO `rute` (`id`, `koridor_asal`, `koridor_tujuan`, `koridor_via`, `hal
 	(66, 7, 5, 6, 1, NULL, NULL, NULL),
 	(67, 7, 6, 0, 1, NULL, NULL, NULL),
 	(68, 7, 8, 0, 1, NULL, NULL, NULL),
-	(69, 7, 9, 0, 233, NULL, NULL, NULL),
-	(70, 7, 10, 9, 233, NULL, NULL, NULL),
+	(69, 7, 9, 0, 231, NULL, NULL, NULL),
+	(70, 7, 10, 9, 231, NULL, NULL, NULL),
 	(71, 8, 8, 0, 0, NULL, NULL, NULL),
 	(72, 8, 1, 7, 209, NULL, NULL, NULL),
 	(73, 8, 2, 7, 209, NULL, NULL, NULL),
@@ -1458,17 +1462,17 @@ REPLACE INTO `rute` (`id`, `koridor_asal`, `koridor_tujuan`, `koridor_via`, `hal
 	(76, 8, 5, 7, 209, NULL, NULL, NULL),
 	(77, 8, 6, 7, 209, NULL, NULL, NULL),
 	(78, 8, 7, 0, 209, NULL, NULL, NULL),
-	(79, 8, 9, 7, 233, NULL, NULL, NULL),
+	(79, 8, 9, 7, 231, NULL, NULL, NULL),
 	(80, 8, 10, 7, 209, NULL, NULL, NULL),
 	(81, 9, 9, 0, 0, NULL, NULL, NULL),
-	(82, 9, 1, 7, 233, NULL, NULL, NULL),
-	(83, 9, 2, 7, 233, NULL, NULL, NULL),
-	(84, 9, 3, 7, 233, NULL, NULL, NULL),
-	(85, 9, 4, 7, 233, NULL, NULL, NULL),
-	(86, 9, 5, 7, 233, NULL, NULL, NULL),
-	(87, 9, 6, 7, 233, NULL, NULL, NULL),
-	(88, 9, 7, 0, 233, NULL, NULL, NULL),
-	(89, 9, 8, 7, 233, NULL, NULL, NULL),
+	(82, 9, 1, 7, 231, NULL, NULL, NULL),
+	(83, 9, 2, 7, 231, NULL, NULL, NULL),
+	(84, 9, 3, 7, 231, NULL, NULL, NULL),
+	(85, 9, 4, 7, 231, NULL, NULL, NULL),
+	(86, 9, 5, 7, 231, NULL, NULL, NULL),
+	(87, 9, 6, 7, 231, NULL, NULL, NULL),
+	(88, 9, 7, 0, 231, NULL, NULL, NULL),
+	(89, 9, 8, 7, 231, NULL, NULL, NULL),
 	(90, 9, 10, 0, 262, NULL, NULL, NULL),
 	(91, 10, 10, 0, 0, NULL, NULL, NULL),
 	(92, 10, 1, 9, 285, NULL, NULL, NULL),
