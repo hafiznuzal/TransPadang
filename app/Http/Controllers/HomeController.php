@@ -800,7 +800,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 1);
-        $rute = Point::with('Koridor')->where($where)->get();
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
             $coordinate = array();
@@ -817,7 +817,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 2);
-        $rute = Point::with('Koridor')->where($where)->get();
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
             $coordinate = array();
@@ -834,7 +834,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 3);
-        $rute = Point::with('Koridor')->where($where)->get();
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
             $coordinate = array();
@@ -851,8 +851,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 4);
-        $rute = Point::with('Koridor')->where($where)->get();
-        // return json_encode($rute);
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         foreach ($rute as $key => $value) {
             $coordinate = array();
             array_push($coordinate, $value->latitude);
@@ -868,7 +867,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 5);
-        $rute = Point::with('Koridor')->where($where)->get();
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
             $coordinate = array();
@@ -885,7 +884,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 6);
-        $rute = Point::with('Koridor')->where($where)->get();
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
             $coordinate = array();
@@ -902,7 +901,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 7);
-        $rute = Point::with('Koridor')->where($where)->get();
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
             $coordinate = array();
@@ -919,7 +918,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 8);
-        $rute = Point::with('Koridor')->where($where)->get();
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
             $coordinate = array();
@@ -936,7 +935,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 9);
-        $rute = Point::with('Koridor')->where($where)->get();
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
             $coordinate = array();
@@ -953,7 +952,7 @@ class HomeController extends Controller
         $FeatureCollection = array();
       
         $where = array('koridor_id' => 10);
-        $rute = Point::with('Koridor')->where($where)->get();
+        $rute = Point::with('Koridor')->where($where)->orderBy('nomor', 'desc')->get();
         // return json_encode($rute);
         foreach ($rute as $key => $value) {
             $coordinate = array();
