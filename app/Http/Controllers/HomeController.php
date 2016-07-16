@@ -23,9 +23,29 @@ class HomeController extends Controller
     {
         return view('information-koridor');
     }
-    public function jadwal()
+    public function jadwal($id=1)
     {
-        return view('informasi-jadwal');
+        // $id = 1;
+        $halte = Point::basisdata_point($id);
+        // print_r($tmp);
+        // $halte = $halte->merge($tmp);
+        return view('informasi-jadwal')->with('halte',$halte);
+    }
+    public function manajemen_halte($id=1)
+    {
+        // $id = 1;
+        $halte = Halte::basisdata_halte($id);
+        // print_r($tmp);
+        // $halte = $halte->merge($tmp);
+        return view('manajemen_halte')->with('halte',$halte);
+    }
+    public function manajemen_koridor($id=1)
+    {
+        // $id = 1;
+        $halte = Halte::basisdata_halte($id);
+        // print_r($tmp);
+        // $halte = $halte->merge($tmp);
+        return view('manajemen_koridor')->with('halte',$halte);
     }
     public function testline()
     {

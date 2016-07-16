@@ -33,27 +33,12 @@
 @endsection
 
 @section('content')
-	<div class="row">
-		<div class="col-md-8" style="height: 400px;">
-			<div class="map-responsive">
-    		<div id="halte" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>    	
-    		<div id="map" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>
-			
-			</div>
-			<!-- <div id="map" > </div> -->
 
-		</div>
-		<div class="col-sm-4">
 			<div class="form-horizontal" role="form">
 			<div class="form-group">
 			<div class="col-sm-4">
 				<label class="control-label no-padding-right" for="form-field-1"> Keberangkatan </label>
-				<br>
-				<label class="control-label no-padding-right" for="form-field-1"> Kedatangan </label>
-			</div>	
-				<div class="col-sm-8">
-					
-						<div class="ui fluid search selection dropdown">
+				<div class="ui fluid search selection dropdown">
  							  <i class="ace-icon fa fa-bus blue"></i>
 
 							  <input id="keberangkatan" type="hidden" name="country">
@@ -66,7 +51,10 @@
 							  <?php } ?>
 							</div>
 						</div>
-
+			</div>	
+				<div class="col-sm-4">
+					<label class="control-label no-padding-right" for="form-field-1"> Kedatangan </label>
+					
 						<div class="ui fluid search selection dropdown">
  							  <i class="ace-icon fa fa-bus blue"></i>
 
@@ -81,7 +69,11 @@
 							  
 							</div>
 						</div>
-
+				</div>
+						
+				<div class="col-sm-4">
+					<label class="control-label no-padding-right" for="form-field-1"> <br> </label>
+					<div>
 						<button class="btn btn-sm btn-primary" onclick="telusuri()">
 							<i class="ace-icon fa fa-flask"></i>
 							Telusur
@@ -90,11 +82,26 @@
 							<i class="ace-icon fa fa-flask"></i>
 							Reset
 						</button>
+					<div>
+						
 				</div>		
 				
 			</div>
 			</div>
+			</div>
+	<!-- <div class="row"> -->
+
+		<div>
+			<div class="map-responsive" >
+    		<!-- <div id="halte" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>    	 -->
+    		<div id="map"></div>
+			
+			</div>
+			<!-- <div id="map" > </div> -->
+
 		</div>
+		
+		<!-- </div> -->
 		</div>
 
 	

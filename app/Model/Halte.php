@@ -24,4 +24,12 @@ class Halte extends Model
         return $this->belongsTo('App\Model\Halte', 'relasi');
     }
 
+     public static function basisdata_halte($id)
+    {
+        $tmp = static::where('id','>',0)
+                ->distinct()->get();       
+                
+        return $tmp;
+    }
+
 }

@@ -32,7 +32,7 @@
 					<tr>
 						
 						<th>Id</th>
-						
+						<th>Nama</th>
 						<th class="hidden-480">Longitude</th>
 
 						<th>
@@ -49,11 +49,12 @@
 				<tbody>
 				<?php foreach ($halte as $key => $value) {?>
 					<tr>  	
-						
 						<td>
 							<?php echo $value->id?>
 						</td>
-						
+						<td>
+							<?php echo $value->nama?>
+						</td>
 						<td class="hidden-480"><?php echo $value->longitude?></td>
 						<td><?php echo $value->latitude?></td>
 
@@ -63,8 +64,7 @@
 						
 						<td>
 							<div class="hidden-sm hidden-xs action-buttons">
-									<input type="hidden" class="id-tersembunyi" value="<?php echo $value->id?>">
-								<a class="blue" href="#" onclick="view(this);">
+								<a class="blue" href="#">
 									<i class="ace-icon fa fa-search-plus bigger-130"></i>
 								</a>
 
@@ -86,7 +86,7 @@
 									<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 											<input type="hidden" class="id-tersembunyi" value="<?php echo $value->id?>">
 										<li>
-											<a href="#"  class="tooltip-info" data-rel="tooltip" title="View">
+											<a href="#" onclick="view(this);" class="tooltip-info" data-rel="tooltip" title="View">
 												<span class="blue">
 													<i class="ace-icon fa fa-search-plus bigger-120"></i>
 												</span>
@@ -116,14 +116,14 @@
 
 
 					<?php } ?>
-					
 					<script type="text/javascript">
 						function view(e){
-							a = $(e).parent().parent().find(".id-tersembunyi").val();
+							a = e.parent().parent().find(".id-tersembunyi").val();
 							alert(a);
 						}
 
 					</script>
+
 				</tbody>
 			</table>
 		</div>

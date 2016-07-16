@@ -21,6 +21,28 @@ class Point extends Model
     {
         return $this->belongsTo('App\Model\Koridor');
     }
+    /*
+        Mendapatkan database dari koridor
+    */
+
+     public static function basisdata_point($id)
+    {
+        $tmp = static::where('koridor_id',$id)                
+                ->orderBy('nomor', 'asc')
+                ->get();
+        return $tmp;
+    }
+
+    
+
+     public static function update_nomor_poin($id)
+    {
+        $tmp = static::where('koridor_id', $id->koridor_id)                
+                ->orderBy('nomor', 'asc')
+                ->get();
+        return $tmp;
+    }
+
 
     /**
      * Mendapatkan jalan diantara dua point yang koridor sama dan searah

@@ -31,6 +31,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('index','HomeController@index');
     Route::get('koridor','HomeController@koridor');
     Route::get('jadwal','HomeController@jadwal');
+    Route::get('jadwal/{id}','HomeController@jadwal');
+    Route::get('manajemen_halte/{id}','HomeController@manajemen_halte');
+    Route::get('manajemen_halte','HomeController@manajemen_halte');
+    Route::get('manajemen_koridor/{id}','HomeController@manajemen_koridor');
+    Route::get('manajemen_koridor','HomeController@manajemen_koridor');
     Route::get('halte','HomeController@halte');
     Route::get('halte_k1a','HomeController@halte_k1a');
    

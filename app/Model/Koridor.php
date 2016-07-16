@@ -25,4 +25,11 @@ class Koridor extends Model
     public static function opposite($nomor) {
         return $nomor + ($nomor % 2 == 1 ? 1 : -1);
     }
+    public static function basisdata_koridor($id)
+    {
+        $tmp = static::where('id', $id->koridor_id)                
+                ->orderBy('nomor', 'asc')
+                ->get();
+        return $tmp;
+    }
 }
