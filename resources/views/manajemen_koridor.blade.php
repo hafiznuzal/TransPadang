@@ -3,13 +3,16 @@
 @section('content-tabel')
 	<div class="row">
 	<div class="col-xs-12">
-		<h3 class="header smaller lighter blue">Basis Data Point</h3>
+		<h3 class="header smaller lighter blue">Basis Data Koridor</h3>
 
 		<div class="clearfix">
 			<div class="pull-right tableTools-container"></div>
 		</div>
 		<div class="table-header">
-			Point
+			Koridor
+			<a class="white pull-right" style="padding-right:5px" href="#" onclick="add_koridor();"> Tambah Koridor
+				<i class="fa fa-plus-circle fa-2x"></i>
+			</a>
 		</div>
 
 		<!-- div.table-responsive -->
@@ -17,51 +20,42 @@
 		<!-- div.dataTables_borderWrap -->
 		<div>
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-				<div class="id_100">
-				  <select id="selectBox" onchange="changekor();">
-				    <option value="1">Koridor 1</option>
-				    <option value="2">Koridor 2</option>
-				    <option value="3">Koridor 3</option>
-				    <option value="5">Koridor 5</option>
-				    <option value="6">Koridor 6</option>
-				  </select>
-				</div>
-
 
 				<thead>
 					<tr>
 						
 						<th>Id</th>
+						<th>Nomor</th>
 						<th>Nama</th>
-						<th class="hidden-480">Longitude</th>
+						<th class="hidden-480">Keterangan</th>
+						<th class="hidden-480">Simbol</th>
 
 						<th>
 							<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-							Latitude
+							Line
 						</th>
-						<th class="hidden-480">Keterangan</th>
-						
-
 						<th>Aksi</th>
 					</tr>
 				</thead>
 
 				<tbody>
-				<?php foreach ($halte as $key => $value) {?>
+				<?php foreach ($koridor as $key => $value) {?>
 					<tr>  	
 						<td>
 							<?php echo $value->id?>
 						</td>
 						<td>
+							<?php echo $value->nomor?>
+						</td>
+						<td>
 							<?php echo $value->nama?>
 						</td>
-						<td class="hidden-480"><?php echo $value->longitude?></td>
-						<td><?php echo $value->latitude?></td>
-
 						<td class="hidden-480">
 							<?php echo $value->keterangan?>
 						</td>
-						
+						<td class="hidden-480"><?php echo $value->simbol?></td>
+						<td><?php echo $value->line?></td>
+
 						<td>
 							<div class="hidden-sm hidden-xs action-buttons">
 								<a class="blue" href="#">

@@ -27,9 +27,15 @@ class Koridor extends Model
     }
     public static function basisdata_koridor($id)
     {
-        $tmp = static::where('id', $id->koridor_id)                
-                ->orderBy('nomor', 'asc')
-                ->get();
+        $tmp = static::where('id','>',0)
+                ->distinct()->get(); 
         return $tmp;
     }
+     public static function delete_koridor($id)
+    {
+        $tmp = static::find($id)          
+                ->delete();
+        return $tmp;
+    }
+   
 }

@@ -30,14 +30,17 @@ Route::group(['middleware' => ['web']], function () {
     //
     Route::get('index','HomeController@index');
     Route::get('koridor','HomeController@koridor');
-    Route::get('jadwal','HomeController@jadwal');
-    Route::get('jadwal/{id}','HomeController@jadwal');
+    Route::get('manajemen_point','HomeController@manajemen_point');
+    Route::get('manajemen_point/{id}','HomeController@manajemen_point');
     Route::get('manajemen_halte/{id}','HomeController@manajemen_halte');
     Route::get('manajemen_halte','HomeController@manajemen_halte');
     Route::get('manajemen_koridor/{id}','HomeController@manajemen_koridor');
     Route::get('manajemen_koridor','HomeController@manajemen_koridor');
+    Route::get('manajemen_rute/{id}','HomeController@manajemen_rute');
+    Route::get('manajemen_rute','HomeController@manajemen_rute');
     Route::get('halte','HomeController@halte');
     Route::get('halte_k1a','HomeController@halte_k1a');
+   
    
     Route::get('test','HomeController@testline');
     Route::get('koridor_all','HomeController@koridor_all');    
@@ -78,4 +81,27 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('halte_k3b','HomeController@halte_k3b');
     Route::get('halte_k5b','HomeController@halte_k5b');
     Route::get('halte_k6b','HomeController@halte_k6b');
+
+    Route::get('tambah_halte','HomeController@tambah_halte');
+    Route::post('tambah_halte','HomeController@tambah_halte');
+    Route::get('tambah_point','HomeController@tambah_point');
+    Route::post('tambah_point','HomeController@tambah_point');
+    Route::get('tambah_koridor','HomeController@tambah_koridor');
+    Route::post('tambah_koridor','HomeController@tambah_koridor');
+    Route::get('tambah_rute','HomeController@tambah_rute');
+    Route::post('tambah_rute','HomeController@tambah_rute');
+
+    Route::get('edit_halte/{id}','HomeController@edit_halte');
+    Route::post('edit_halte/{id}','HomeController@edit_halte');
+    Route::get('edit_point/{id}','HomeController@edit_point');
+    Route::post('edit_point/{id}','HomeController@edit_point');
+    Route::get('edit_koridor/{id}','HomeController@edit_koridor');
+    Route::post('edit_koridor/{id}','HomeController@edit_koridor');
+    Route::get('edit_rute/{id}','HomeController@edit_rute');
+    Route::post('edit_rute/{id}','HomeController@edit_rute');
+
+    Route::get('delete_point/{id}','HomeController@delete_point');
+    Route::get('delete_halte/{id}','HomeController@delete_halte');
+    Route::get('delete_koridor/{id}','HomeController@delete_koridor');
+    Route::get('delete_rute/{id}','HomeController@delete_point');  
 });

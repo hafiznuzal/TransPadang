@@ -26,5 +26,17 @@ class Rute extends Model
     {
         return $this->belongsTo('App\Model\Halte', 'halte_transisi');
     }
+    public static function basisdata_rute($id)
+    {
+        $tmp = static::where('id','>',0)
+                ->distinct()->get(); 
+        return $tmp;
+    }
+     public static function delete_rute($id)
+    {
+        $tmp = static::find($id)          
+                ->delete();
+        return $tmp;
+    }
 
 }

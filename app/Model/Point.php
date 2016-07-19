@@ -43,6 +43,28 @@ class Point extends Model
         return $tmp;
     }
 
+     public static function delete_poin($id)
+    {
+        $tmp = static::find($id)          
+                ->delete();
+        return $tmp;
+    }
+
+     public static function jumlah_point($id,$nomor)
+    {
+        $tmp = static::where('koridor_id',$id)  
+                ->where('nomor', '>=', $nomor)              
+                ->count();
+        return $tmp;
+    }
+
+     public static function point_sementara($id,$nomor)
+    {
+        $tmp = static::where('koridor_id',$id)  
+                ->where('nomor',$nomor)              
+                ->first();
+        return $tmp;
+    }
 
     /**
      * Mendapatkan jalan diantara dua point yang koridor sama dan searah

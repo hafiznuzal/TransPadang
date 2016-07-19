@@ -18,13 +18,13 @@ class HomeController extends Controller
     {
         return view('information-koridor');
     }
-    public function jadwal($id=1)
+    public function manajemen_point($id=1)
     {
         // $id = 1;
         $halte = Point::basisdata_point($id);
         // print_r($tmp);
         // $halte = $halte->merge($tmp);
-        return view('informasi-jadwal')->with('halte',$halte);
+         return view('manajemen_point', ['halte' => $halte,'id' => $id]);
     }
     public function manajemen_halte($id=1)
     {
@@ -32,15 +32,25 @@ class HomeController extends Controller
         $halte = Halte::basisdata_halte($id);
         // print_r($tmp);
         // $halte = $halte->merge($tmp);
-        return view('manajemen_halte')->with('halte',$halte);
+        return view('manajemen_halte', ['halte' => $halte,'id' => $id]);
     }
     public function manajemen_koridor($id=1)
     {
         // $id = 1;
-        $halte = Halte::basisdata_halte($id);
+        $koridor = Koridor::basisdata_koridor($id);
         // print_r($tmp);
         // $halte = $halte->merge($tmp);
-        return view('manajemen_koridor')->with('halte',$halte);
+        return view('manajemen_koridor', ['koridor' => $koridor,'id' => $id]);
+        // return view('manajemen_koridor')->with('halte',$halte);
+    }
+    public function manajemen_rute($id=1)
+    {
+        // $id = 1;
+        $rute = Rute::basisdata_rute($id);
+        // print_r($tmp);
+        // $halte = $halte->merge($tmp);
+        return view('manajemen_rute', ['rute' => $rute,'id' => $id]);
+        // return view('manajemen_koridor')->with('halte',$halte);
     }
     public function testline()
     {
@@ -77,6 +87,229 @@ class HomeController extends Controller
     public function k6()
     {
         return view('k6');
+    }
+    public function delete_point($id)
+    {
+        $point = Point::delete_poin($id);
+    }
+    public function delete_halte($id)
+    {
+        $halte = Halte::delete_halte($id);
+    }
+    public function delete_koridor($id)
+    {
+        $koridor = Koridor::delete_koridor($id);
+    }
+    public function delete_rute($id)
+    {
+        $point = Rute::delete_rute($id);
+    }
+    public function tambah_halte(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            $halte = Halte::get();
+            $koridor = Koridor::get();
+            return view('addhalte', ['halte' => $halte,'koridor' => $koridor]);
+        }
+
+        else if($request->isMethod('post'))
+        {
+            $halte = new Halte;
+            $halte->nama = $request->input('Nama');
+            $halte->longitude = $request->input('Longitude');
+            $halte->latitude = $request->input('Latitude');
+            $halte->keterangan = $request->input('Keterangan');
+            $halte->warna = $request->input('Warna');
+            $halte->save();
+            // $halte = Halte::find($halte->id);
+            // dd($halte);
+        }
+        
+    }
+    public function tambah_point(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            $halte = Halte::get();
+            $koridor = Koridor::get();
+            return view('addpoint', ['halte' => $halte,'koridor' => $koridor]);
+        }
+        else if($request->isMethod('post'))
+        {
+
+            $jumlah = Point::jumlah_point($request->input('Koridor'),$request->input('Nomor'));
+            $nomor_sementara = $request->input('Nomor');
+            $jumlah--;
+            $nomor_maksimal = $nomor_sementara+$jumlah;
+            $point = new Point;
+            $point->nomor = $request->input('Nomor');
+            $point->longitude = $request->input('Longitude');
+            $point->latitude = $request->input('Latitude');
+            $point->keterangan = $request->input('Keterangan');
+            $point->koridor_id = $request->input('Koridor');
+            // print_r($nomor_maksimal);
+            $point_sementara = Point::point_sementara($request->input('Koridor'),$nomor_sementara);
+            if($point_sementara)
+            {
+                for ($i=$nomor_maksimal; $i >=$nomor_sementara; $i--) {
+                $point_sementara = Point::point_sementara($request->input('Koridor'),$i);
+                $nomor_simpan= $i+1;
+                $point_sementara->nomor = $nomor_simpan;
+                // $nomor_sementara--;
+                $point_sementara->save();
+                // print_r($point_sementara);
+            //     // 
+            //     // print_r($nomor_sementara);
+                
+            //     $nomor_sementara++;
+                }
+            }
+            
+            // // $nomor= $request->input('Nomor');
+            // // $point = new Point;
+            // // $point->nomor = $nomor;
+            // // dd($point);
+            $point->save();
+            // $halte = Halte::find($halte->id);
+        }
+
+        
+        // dd($halte);
+    }
+    public function tambah_koridor(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            // $halte = Halte::get();
+            // $koridor = Koridor::get();
+            return view('addkoridor');
+        }
+        else if($request->isMethod('post'))
+        {
+            $koridor = new Koridor;
+            $koridor->Nomor = $request->input('Nomor');
+            $koridor->Nama = $request->input('Nama');
+            $koridor->Keterangan = $request->input('Keterangan');
+            $koridor->Simbol = $request->input('Simbol');
+            $koridor->Line = $request->input('Line');
+            // $koridor->warna = $request->input('Warna');
+            $koridor->save();
+            // $koridor = Koridor::find($koridor->id);
+            // dd($koridor);
+        }
+        
+    }
+    public function tambah_rute(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            $halte = Halte::get();
+            $koridor = Koridor::get();
+            return view('addrute', ['halte' => $halte,'koridor' => $koridor]);
+        }
+        else if($request->isMethod('post'))
+        {
+
+            // $nomor= $request->input('Nomor');
+            $rute = new Rute;
+            $rute->koridor_asal = $request->input('Koridor_Asal');
+            $rute->koridor_tujuan = $request->input('Koridor_Tujuan');
+            $rute->koridor_via = $request->input('Koridor_Via');
+            $rute->halte_transisi = $request->input('Halte_Transisi');
+            // $koridor->Line = $request->input('Line');
+            $rute->save();
+            // $halte = Halte::find($halte->id);
+        }
+
+        
+        // dd($halte);
+    }
+
+        public function edit_halte(Request $request,$id)
+    {
+        if ($request->isMethod('get')) {
+            $halte_terpilih = Halte::find($id);
+            $halte = Halte::get();
+            $koridor = Koridor::get();
+            return view('edithalte', ['halte' => $halte,'halte_terpilih' => $halte_terpilih,'koridor' => $koridor]);
+        }
+
+        else if($request->isMethod('post'))
+        {
+            $halte = Halte::find($id);
+            $halte->nama = $request->input('Nama');
+            $halte->longitude = $request->input('Longitude');
+            $halte->latitude = $request->input('Latitude');
+            $halte->keterangan = $request->input('Keterangan');
+            $halte->warna = $request->input('Warna');
+            $halte->save();
+            // $halte = Halte::find($halte->id);
+        }
+        
+    }
+    public function edit_point(Request $request,$id)
+    {
+        if ($request->isMethod('get')) {
+            $point_terpilih = Point::find($id);
+            $halte = Halte::get();
+            $koridor = Koridor::get();
+            return view('editpoint', ['halte' => $halte,'point_terpilih' => $point_terpilih,'koridor' => $koridor]);
+        }
+        else if($request->isMethod('post'))
+        {
+
+            $point = Point::find($id);
+            $point->nomor = $request->input('Nomor');
+            $point->longitude = $request->input('Longitude');
+            $point->latitude = $request->input('Latitude');
+            $point->keterangan = $request->input('Keterangan');
+            $point->koridor_id = $request->input('Koridor');
+            $point->save();
+            // $halte = Halte::find($halte->id);
+        }
+
+        
+        // dd($halte);
+    }
+    public function edit_koridor(Request $request,$id)
+    {
+        if ($request->isMethod('get')) {
+            $koridor_terpilih = Koridor::find($id);
+            // $halte = Halte::get();
+            // $koridor = Koridor::get();
+            return view('editkoridor')->with('koridor_terpilih',$koridor_terpilih);
+        }
+        else if($request->isMethod('post'))
+        {
+            $koridor = Koridor::find($id);
+            $koridor->Nomor = $request->input('Nomor');
+            $koridor->Nama = $request->input('Nama');
+            $koridor->Keterangan = $request->input('Keterangan');
+            $koridor->Simbol = $request->input('Simbol');
+            $koridor->Line = $request->input('Line');
+            $koridor->save();
+            // dd($koridor);
+        }
+        
+    }
+    public function edit_rute(Request $request,$id)
+    {
+        if ($request->isMethod('get')) {
+            $rute_terpilih = Rute::find($id);
+            $halte = Halte::get();
+            $koridor = Koridor::get();
+            return view('editrute', ['halte' => $halte,'koridor' => $koridor,'rute_terpilih' => $rute_terpilih]);
+        }
+        else if($request->isMethod('post'))
+        {
+            $rute = Rute::find($id);
+            $rute->koridor_asal = $request->input('Koridor_Asal');
+            $rute->koridor_tujuan = $request->input('Koridor_Tujuan');
+            $rute->koridor_via = $request->input('Koridor_Via');
+            $rute->halte_transisi = $request->input('Halte_Transisi');
+            $rute->save();
+            // $halte = Halte::find($halte->id);
+        }
+
+        
+        // dd($halte);
     }
     public function halte_form()
     {

@@ -17,7 +17,7 @@ USE `trans_padang`;
 
 -- Dumping structure for table trans_padang.halte
 CREATE TABLE IF NOT EXISTS `halte` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(45) DEFAULT NULL,
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,
@@ -359,7 +359,7 @@ INSERT INTO `halte` (`id`, `nama`, `latitude`, `longitude`, `relasi`, `photo`, `
 
 -- Dumping structure for table trans_padang.koridor
 CREATE TABLE IF NOT EXISTS `koridor` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nomor` int(11) DEFAULT NULL,
   `nama` varchar(45) DEFAULT NULL,
   `keterangan` varchar(45) DEFAULT NULL,
@@ -392,7 +392,7 @@ INSERT INTO `koridor` (`id`, `nomor`, `nama`, `keterangan`, `simbol`, `line`, `c
 
 -- Dumping structure for table trans_padang.point
 CREATE TABLE IF NOT EXISTS `point` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nomor` int(11) DEFAULT NULL,
   `longitude` double DEFAULT NULL,
   `latitude` double DEFAULT NULL,
@@ -1370,7 +1370,7 @@ INSERT INTO `point` (`id`, `nomor`, `longitude`, `latitude`, `keterangan`, `crea
 
 -- Dumping structure for table trans_padang.rute
 CREATE TABLE IF NOT EXISTS `rute` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `koridor_asal` int(11) DEFAULT NULL,
   `koridor_tujuan` int(11) DEFAULT NULL,
   `koridor_via` int(11) DEFAULT NULL,
