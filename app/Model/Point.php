@@ -61,8 +61,9 @@ class Point extends Model
      public static function point_sementara($id,$nomor)
     {
         $tmp = static::where('koridor_id',$id)  
-                ->where('nomor',$nomor)              
-                ->first();
+                ->where('nomor', '>=', $nomor)
+                ->orderBy('nomor', 'asc')
+                ->get();
         return $tmp;
     }
 

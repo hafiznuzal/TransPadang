@@ -1,4 +1,3 @@
-
 @extends('template-manajemen')
 @section('content-tabel')
 	<div class="row">

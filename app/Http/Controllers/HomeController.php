@@ -150,17 +150,12 @@ class HomeController extends Controller
             $point_sementara = Point::point_sementara($request->input('Koridor'),$nomor_sementara);
             if($point_sementara)
             {
-                for ($i=$nomor_maksimal; $i >=$nomor_sementara; $i--) {
-                $point_sementara = Point::point_sementara($request->input('Koridor'),$i);
-                $nomor_simpan= $i+1;
-                $point_sementara->nomor = $nomor_simpan;
-                // $nomor_sementara--;
-                $point_sementara->save();
-                // print_r($point_sementara);
-            //     // 
-            //     // print_r($nomor_sementara);
-                
-            //     $nomor_sementara++;
+                for ($i=0; $i < $jumlah; $i++) {
+                    $nomor_sementara++;                       
+                    $point_sementara[$i]->nomor=$nomor_sementara;
+                                        
+                    $point_sementara[$i]->save();
+           
                 }
             }
             
@@ -477,7 +472,7 @@ class HomeController extends Controller
                         }
                     }
                 }
-                /* Jika koridor beda */
+                /* Jika koridor beda, cari rute ke koridor tujuan */
                 else {
                     if ($halte_asal->Relasi == null && $halte_tujuan->Relasi == null) {
                         $tmp = Point::jalan_seberang($point_awal, $point_akhir);

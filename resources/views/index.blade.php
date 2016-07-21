@@ -15,12 +15,15 @@
 	  /*#map {  }*/
 	  #map{
 		 width:600px; 
-		 height:350px;
 		 position:absolute; 
 		 top:0; 
 		 bottom:0; 
 		 width:100%;
 		}
+	.map-responsive {
+		padding-bottom: 0%;
+		height: 350px;
+	}
 	</style>
 @endsection
 
@@ -103,6 +106,58 @@
 		
 		<!-- </div> -->
 		</div>
+		<div class="row">
+	<div class="col-xs-12">
+		<h3 class="header smaller lighter blue">List Halte</h3>
+
+		<div class="clearfix">
+			<div class="pull-right tableTools-container"></div>
+		</div>
+		<div class="table-header">
+			Halte yang Dilewati
+			<!-- <a class="white pull-right" style="padding-right:5px" href="#" > Tambah Koridor
+				<i class="fa fa-plus-circle fa-2x"></i>
+			</a> -->
+		</div>
+
+		<!-- div.table-responsive -->
+
+		<!-- div.dataTables_borderWrap -->
+		<div>
+			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+
+				<thead>
+					<tr>
+						
+						<th>Nama Halte</th>
+						<th>Koridor</th>
+						<th>Status</th>
+						
+					</tr>
+				</thead>
+
+				<tbody id="halte_yg_dilalui">
+					<!-- <tr>  	
+						<td>
+							aaa
+						</td>
+						<td>
+							bbb
+						</td>
+						<td>
+							bb
+						</td>
+						
+						
+					</tr> -->
+
+
+										
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
 
 	
 @endsection
@@ -203,6 +258,45 @@ L.mapbox.featureLayer()
 	        var mark = L.mapbox.featureLayer(data.halte_markers);
 	        mark.addTo(map);
 	        layer.push(mark);
+
+        	$("#halte_yg_dilalui").html("");
+
+	        list_halte = data.list_halte;
+	        halte_perpindahan = data.halte_perpindahan;
+	        for (var i = 0; i < list_halte.length; i++) {
+	        	halte = list_halte[i];
+	        	if (i < list_halte.length-1) {
+	        		halte_setelah = list_halte[i+1];
+	        	}
+	        	else
+	        	{
+	        		halte_setelah = null;
+	        	}	        	
+	        	var status = "Tetap";
+	        	if (halte_perpindahan) {
+	        		for (var j = 0; j < halte_perpindahan.length; j++) {
+	        		halte_status = halte_perpindahan[j];
+		        		if(halte_status.id==halte.halte_id)
+		        		{
+		        			status = "Tetap"
+		        			if (halte_setelah!=null) 
+		        			{
+		        				if (halte.keterangan!=halte_setelah.keterangan)
+		        				{
+		        					status = "Menyeberang"
+		        				}
+		        			}
+		        		}
+		        	}
+	        	}
+	        	
+	        	
+	        	tr = $("<tr>").append(
+	        		"<td>" + halte.keterangan +"<td>" + halte.koridor.nomor  +"<td>" + status
+	        		)
+	        	$("#halte_yg_dilalui").append(tr);
+	        }
+	        ;
     	}); 
 
 	}

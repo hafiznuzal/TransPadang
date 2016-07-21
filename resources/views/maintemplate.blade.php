@@ -77,8 +77,16 @@
 		</div>
 
 		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
 
-			<div id="sidebar" class="sidebar responsive">
+
+			<div id="sidebar" class="sidebar responsive menu-min">
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+				</script>
+
 
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
@@ -109,9 +117,9 @@
 						<span class="btn btn-danger"></span>
 					</div> -->
 				</div><!-- /.sidebar-shortcuts -->
-					<div>
+					
 				<ul class="nav nav-list">
-					<li>
+					<li class="active">
 						<a href="{{ URL::to('/halte_form') }}">
 							<i class="menu-icon fa fa-tachometer"></i>
 							<span class="menu-text"> Dashboard </span>
@@ -121,7 +129,7 @@
 					</li>
 
 					
-					<li>
+					<li class="">
 						<a href="{{ URL::to('/index') }}" class="dropdown-toggle">
 							<i class="menu-icon fa fa-info"></i>
 							<span class="menu-text"> Informasi Koridor </span>
@@ -188,8 +196,56 @@
 						</ul>
 					</li>
 
-					
-</div>
+					<li class="">
+						<a href="{{ URL::to('/index') }}" class="dropdown-toggle">
+							<i class="menu-icon fa fa-database"></i>
+							<span class="menu-text"> Manajemen Data </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="{{ URL::to('/manajemen_halte') }}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Halte
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							<li class="">
+								<a href="{{ URL::to('/manajemen_point') }}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Point
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="{{ URL::to('/manajemen_koridor') }}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Koridor
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="">
+								<a href="{{ URL::to('/manajemen_rute') }}">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Rute
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							
+						</ul>
+					</li>
+
 				</ul><!-- /.nav-list -->
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -316,7 +372,7 @@
             $this.addClass('active');
 	        }
 	    	});
-		});
+		})		;
 
 		</script>
 
