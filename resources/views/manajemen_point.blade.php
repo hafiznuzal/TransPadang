@@ -22,11 +22,15 @@
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 				<div class="id_100">
 				  <select id="selectBox" onchange="changekor_point();">
-				     <option <?php if($id==1)echo "selected"; ?> value="1">Koridor 1</option>
-				    <option <?php if($id==2)echo "selected"; ?> value="2">Koridor 2</option>
-				    <option <?php if($id==3)echo "selected"; ?> value="3">Koridor 3</option>
-				    <option <?php if($id==5)echo "selected"; ?> value="5">Koridor 5</option>
-				    <option <?php if($id==6)echo "selected"; ?> value="6">Koridor 6</option>
+				     <option <?php if($id==1)echo "selected"; ?> value="1">Koridor id 1</option>
+				    <option <?php if($id==2)echo "selected"; ?> value="2">Koridor id 2</option>
+				    <option <?php if($id==3)echo "selected"; ?> value="3">Koridor id 3</option>
+				    <option <?php if($id==5)echo "selected"; ?> value="5">Koridor id 5</option>
+				    <option <?php if($id==6)echo "selected"; ?> value="6">Koridor id 6</option>   
+				    <option <?php if($id==7)echo "selected"; ?> value="7">Koridor id 7</option>
+				    <option <?php if($id==8)echo "selected"; ?> value="8">Koridor id 8</option>
+				    <option <?php if($id==9)echo "selected"; ?> value="9">Koridor id 9</option>
+				    <option <?php if($id==10)echo "selected"; ?> value="10">Koridor id 10</option>
 				  </select>
 
 				</div>
@@ -39,10 +43,9 @@
 						<th>Id</th>
 						<th>Nomor</th>
 						
-						<th class="hidden-480">Longitude</th>
+						<th>Longitude</th>
 
 						<th>
-							<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 							Latitude
 						</th>
 						<th class="hidden-480">Keterangan</th>
@@ -64,7 +67,7 @@
 							<?php echo $value->nomor?>
 						</td>
 						
-						<td class="hidden-480"><?php echo $value->longitude?></td>
+						<td><?php echo $value->longitude?></td>
 						<td><?php echo $value->latitude?></td>
 
 						<td class="hidden-480">

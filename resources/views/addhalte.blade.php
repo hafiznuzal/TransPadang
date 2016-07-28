@@ -9,6 +9,7 @@ Halte
 @section('content-tabel')
 	<form class="form-horizontal" role="form" method="post" action="tambah_halte">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 		<div class="form-group">
 			<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama </label>
 			<div class="col-sm-9">
@@ -48,6 +49,24 @@ Halte
 				<?php foreach ($koridor as $key => $value){ ?>
 					<option value="<?php echo $value->id?>"><?php echo $value->id?> : <?php echo $value->nama?></option>
 					<?php } ?>
+				</select>
+				</div>
+				</div>
+		</div> -->
+	<!-- 	<div class="form-group">
+			<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Koridor</label>
+
+				<div class="col-sm-9">
+				<div class="col-xs-10 col-sm-5 no-padding">
+				<select class="chosen-select form-control " name="Halte" data-placeholder="Id Halte Seberang">
+				
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					
 				</select>
 				</div>
 				</div>

@@ -103,5 +103,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('delete_point/{id}','HomeController@delete_point');
     Route::get('delete_halte/{id}','HomeController@delete_halte');
     Route::get('delete_koridor/{id}','HomeController@delete_koridor');
-    Route::get('delete_rute/{id}','HomeController@delete_point');  
+    Route::get('delete_rute/{id}','HomeController@delete_rute');  
 });

@@ -39,7 +39,7 @@
 
 			<div class="form-horizontal" role="form">
 			<div class="form-group">
-			<div class="col-sm-4">
+			<div class="col-sm-5">
 				<label class="control-label no-padding-right" for="form-field-1"> Keberangkatan </label>
 				<div class="ui fluid search selection dropdown">
  							  <i class="ace-icon fa fa-bus blue"></i>
@@ -55,7 +55,7 @@
 							</div>
 						</div>
 			</div>	
-				<div class="col-sm-4">
+				<div class="col-sm-5">
 					<label class="control-label no-padding-right" for="form-field-1"> Kedatangan </label>
 					
 						<div class="ui fluid search selection dropdown">
@@ -74,7 +74,7 @@
 						</div>
 				</div>
 						
-				<div class="col-sm-4">
+				<div class="col-sm-2">
 					<label class="control-label no-padding-right" for="form-field-1"> <br> </label>
 					<div>
 						<button class="btn btn-sm btn-primary" onclick="telusuri()">
@@ -175,7 +175,7 @@
 var fL = []
 var groups= {};
 var map = L.mapbox.map('map')
-    .setView([-0.908667,100.3872087], 13)
+    .setView([-0.923498,100.408001], 12)
     .addLayer(L.mapbox.tileLayer('mapbox.streets'));
 
 
@@ -199,7 +199,7 @@ L.mapbox.featureLayer()
     groups = {
       red: makeGroup('red'),
       green: makeGroup('green'),
-      orange: makeGroup('orange'),
+      gray: makeGroup('gray'),
       blue: makeGroup('blue'),
       yellow: makeGroup('yellow')
     };
@@ -234,7 +234,7 @@ L.mapbox.featureLayer()
 		map.removeLayer(groups.red);
 		map.removeLayer(groups.yellow);
 		map.removeLayer(groups.green);
-		map.removeLayer(groups.orange);
+		map.removeLayer(groups.gray);
 
 		$.get( "/TransPadang/public/pencarian_halte/"+halte_berangkat+"/"+halte_datang, function( data ) {
 	        // var geojson = JSON.parse(data);
@@ -264,13 +264,18 @@ L.mapbox.featureLayer()
 	        list_halte = data.list_halte;
 	        halte_perpindahan = data.halte_perpindahan;
 	        for (var i = 0; i < list_halte.length; i++) {
+	        	
 	        	halte = list_halte[i];
+	        	
 	        	if (i < list_halte.length-1) {
 	        		halte_setelah = list_halte[i+1];
 	        	}
 	        	else
 	        	{
 	        		halte_setelah = null;
+	        	}
+	        	if ((halte.halte_id==halte_setelah.halte_id)&&(halte.koridor.nomor==halte_setelah.koridor.nomor)) {
+	        		continue;
 	        	}	        	
 	        	var status = "Tetap";
 	        	if (halte_perpindahan) {
@@ -279,17 +284,23 @@ L.mapbox.featureLayer()
 		        		if(halte_status.id==halte.halte_id)
 		        		{
 		        			status = "Tetap"
-		        			if (halte_setelah!=null) 
+		        			if (halte.koridor.nomor != halte_setelah.koridor.nomor)
 		        			{
-		        				if (halte.keterangan!=halte_setelah.keterangan)
-		        				{
-		        					status = "Menyeberang"
-		        				}
+		        					status = "Pindah Koridor"
 		        			}
+		        			
+		        			
 		        		}
 		        	}
 	        	}
-	        	
+	        	if (halte_setelah!=null) 
+    			{
+    				if ((halte.koridor.id!=halte_setelah.koridor.id)&&(halte.koridor.nomor==halte_setelah.koridor.nomor))
+    				{
+    					status = "Menyeberang"
+    				}
+    			}
+				
 	        	
 	        	tr = $("<tr>").append(
 	        		"<td>" + halte.keterangan +"<td>" + halte.koridor.nomor  +"<td>" + status

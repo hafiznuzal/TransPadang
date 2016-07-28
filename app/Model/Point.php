@@ -67,6 +67,16 @@ class Point extends Model
         return $tmp;
     }
 
+     public static function utama($id,$nomor)
+    {
+        $tmp = DB::table('point')
+            ->join('koridor', 'koridor.id', '=', 'point.koridor_id')
+            ->join('halte', 'halte.id', '=', 'point.halte_id')
+           
+            ->get();
+        return $tmp;
+    }
+
     /**
      * Mendapatkan jalan diantara dua point yang koridor sama dan searah
      * @param Point awal

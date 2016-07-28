@@ -26,8 +26,8 @@
 						<th>Id</th>
 						<th>Koridor Asal</th>
 						<th>Koridor Tujuan</th>
-						<th class="hidden-480">Koridor Via</th>
-						<th class="hidden-480">Halte Transisi</th>
+						<th>Koridor Via</th>
+						<th>Halte Transisi</th>
 						<th>Aksi</th>
 					</tr>
 				</thead>
@@ -44,22 +44,19 @@
 						<td>
 							<?php echo $value->koridor_tujuan?>
 						</td>
-						<td class="hidden-480">
+						<td>
 							<?php echo $value->koridor_via?>
 						</td>
-						<td class="hidden-480"><?php echo $value->halte_transisi?></td>
+						<td><?php echo $value->halte_transisi?></td>
 						
 						<td>
 							<div class="hidden-sm hidden-xs action-buttons">
-								<a class="blue" href="#">
-									<i class="ace-icon fa fa-search-plus bigger-130"></i>
-								</a>
-
-								<a class="green" href="#">
+								
+								<a class="green" href="#"onclick="edit_rute(<?php echo $value->id?>);">
 									<i class="ace-icon fa fa-pencil bigger-130"></i>
 								</a>
 
-								<a class="red" href="#">
+								<a class="red" href="#"onclick="delete_rute(<?php echo $value->id?>);">
 									<i class="ace-icon fa fa-trash-o bigger-130"></i>
 								</a>
 							</div>

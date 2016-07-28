@@ -11,14 +11,17 @@
 	<style>
 	  /*body { margin:0; padding:0; }*/
 	  /*#map {  }*/
-	  #map{
+	     #map{
 		 width:600px; 
-		 height:350px;
 		 position:absolute; 
 		 top:0; 
 		 bottom:0; 
 		 width:100%;
 		}
+		.map-responsive {
+		padding-bottom: 0%;
+		height: 450px;
+	}
 	</style>
 	<style>
 	.ui-select {
@@ -45,16 +48,16 @@
 @endsection
 
 @section('page-header')
-	Dashboard
+	Informasi Koridor
 	<small>
 		<i class="ace-icon fa fa-angle-double-right"></i>
-		overview &amp; stats
+		Perkoridor
 	</small>
 @endsection
 
 @section('content')
 	<div class="row">
-		<div class="col-md-8" style="height: 400px;">
+		<!-- <div class="col-md-8" style="height: 400px;"> -->
 			<div class="map-responsive">
     		<div id='filters' class='ui-select'>
 				  <div><input type='checkbox' class='filter'
@@ -68,15 +71,15 @@
 				             <div><input type='checkbox' class='filter'
 				             name='filter' id='Pergi' value='js_koridor_6' onclick="change()"/><label for='Koridor6'>Koridor 6</label></div>				  
 			</div>			
-    		<div id="map" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></div>
+    		<div id="map"></div>
 			
 			</div>
 			
 
-		</div>
-		<div class="col-sm-4">
+		<!-- </div> -->
+		<!-- <div class="col-sm-4">
 			
-		</div>
+		</div> -->
 	</div>
 @endsection
 
@@ -86,7 +89,7 @@
 <script>
 L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5aXYyYyJ9.hqCnz0PJe-5uNssgTKgM1Q';
 var map = L.mapbox.map('map')
-.setView([-0.908667,100.3872087], 13)
+.setView([-0.951647,100.427828], 11)
 .addLayer(L.mapbox.tileLayer('mapbox.streets'));
 
 var filters = document.getElementById('filters');

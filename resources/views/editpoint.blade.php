@@ -1,6 +1,6 @@
 @extends('template-manajemen')
 @section('judul')
-Halte
+Point
 <small>
 	<i class="ace-icon fa fa-angle-double-right"></i>
 	Edit
@@ -33,12 +33,7 @@ Halte
 				<input type="text" name="Keterangan" placeholder="Nama Point" class="col-xs-10 col-sm-5" value="<?php echo $point_terpilih->keterangan?>" />
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Warna </label>
-			<div class="col-sm-9">
-				<input type="text" name="Keterangan" placeholder="null" class="col-xs-10 col-sm-5" value="<?php echo $point_terpilih->warna?>" />
-			</div>
-		</div>
+		
 		<div class="form-group">
 			<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Koridor Id</label>
 

@@ -21,6 +21,7 @@
 	<script src="{{ url('js/jquery.dataTables.bootstrap.min.js')}}"></script>
 	<script src="{{ url('js/dataTables.tableTools.min.js')}}"></script>
 	<script src="{{ url('js/dataTables.colVis.min.js')}}"></script>
+	<script src="{{ url('js/sweetalert.min.js')}}"></script>
 	<script>
 		function changekor_halte() 
 		{
@@ -51,8 +52,14 @@
 		}
 		function delete_koridor($id)
 		{	
-			var selectedValue = $id;
-			window.location="/TransPadang/public/delete_koridor/"+selectedValue;
+			swal({   title: "Apakah Anda Yakin Akan Menghapus?",   text: "Koridor Yang Dipilih Akan Terhapus",   type: "warning",   showCancelButton: true, cancelButtonText: "Batalkan",   confirmButtonColor: "#DD6B55",   confirmButtonText: "Ya, Hapus!",   closeOnConfirm: false }, 
+				function(){   
+					swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
+					var selectedValue = $id;
+					window.location="/TransPadang/public/delete_koridor/"+selectedValue;
+				}
+			);
+			
 		}
 		function delete_rute($id)
 		{	

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Routing\Redirector;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Halte;
@@ -91,18 +92,22 @@ class HomeController extends Controller
     public function delete_point($id)
     {
         $point = Point::delete_poin($id);
+        return redirect()->action('HomeController@manajemen_point',[1]);
     }
     public function delete_halte($id)
     {
         $halte = Halte::delete_halte($id);
+        return redirect()->action('HomeController@manajemen_halte',[1]);
     }
     public function delete_koridor($id)
     {
         $koridor = Koridor::delete_koridor($id);
+        return redirect()->action('HomeController@manajemen_koridor',[1]);
     }
     public function delete_rute($id)
     {
-        $point = Rute::delete_rute($id);
+        $rute = Rute::delete_rute($id);
+        return redirect()->action('HomeController@manajemen_rute',[1]);
     }
     public function tambah_halte(Request $request)
     {
@@ -124,6 +129,7 @@ class HomeController extends Controller
             // $halte = Halte::find($halte->id);
             // dd($halte);
         }
+        return redirect()->action('HomeController@manajemen_halte',[1]);
         
     }
     public function tambah_point(Request $request)
@@ -164,6 +170,7 @@ class HomeController extends Controller
             // // $point->nomor = $nomor;
             // // dd($point);
             $point->save();
+            return redirect()->action('HomeController@manajemen_point',[$request->input('Koridor')]);
             // $halte = Halte::find($halte->id);
         }
 
@@ -187,9 +194,11 @@ class HomeController extends Controller
             $koridor->Line = $request->input('Line');
             // $koridor->warna = $request->input('Warna');
             $koridor->save();
+            return redirect()->action('HomeController@manajemen_koridor',[1]);
             // $koridor = Koridor::find($koridor->id);
             // dd($koridor);
         }
+
         
     }
     public function tambah_rute(Request $request)
@@ -210,6 +219,7 @@ class HomeController extends Controller
             $rute->halte_transisi = $request->input('Halte_Transisi');
             // $koridor->Line = $request->input('Line');
             $rute->save();
+            return redirect()->action('HomeController@manajemen_koridor',[1]);
             // $halte = Halte::find($halte->id);
         }
 
@@ -235,6 +245,7 @@ class HomeController extends Controller
             $halte->keterangan = $request->input('Keterangan');
             $halte->warna = $request->input('Warna');
             $halte->save();
+            return redirect()->action('HomeController@manajemen_halte',[1]);
             // $halte = Halte::find($halte->id);
         }
         
@@ -255,8 +266,10 @@ class HomeController extends Controller
             $point->longitude = $request->input('Longitude');
             $point->latitude = $request->input('Latitude');
             $point->keterangan = $request->input('Keterangan');
+            // $point->warna = $request->input('Warna');
             $point->koridor_id = $request->input('Koridor');
             $point->save();
+            return redirect()->action('HomeController@manajemen_point',[1]);
             // $halte = Halte::find($halte->id);
         }
 
@@ -280,6 +293,7 @@ class HomeController extends Controller
             $koridor->Simbol = $request->input('Simbol');
             $koridor->Line = $request->input('Line');
             $koridor->save();
+            return redirect()->action('HomeController@manajemen_koridor',[1]);
             // dd($koridor);
         }
         
@@ -300,6 +314,7 @@ class HomeController extends Controller
             $rute->koridor_via = $request->input('Koridor_Via');
             $rute->halte_transisi = $request->input('Halte_Transisi');
             $rute->save();
+            return redirect()->action('HomeController@manajemen_rute',[1]);
             // $halte = Halte::find($halte->id);
         }
 
@@ -326,8 +341,7 @@ class HomeController extends Controller
         $FeatureCollection['features'] = array();
         // $where = array('koridor_id' => 1);
         // $
-        $halte = Point::with('Koridor')-> where('halte_id','>',0)->
-        get();
+        $halte = Point::with('Koridor')-> where('halte_id','>',0)->get();
         // return json_encode($halte);
         foreach ($halte as $key => $value) {
             $feature = array();

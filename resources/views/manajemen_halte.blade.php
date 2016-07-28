@@ -23,7 +23,7 @@
 		<!-- div.dataTables_borderWrap -->
 		<div>
 			<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-				<div class="id_100">
+				<!-- <div class="id_100">
 				  <select id="selectBox" onchange="changekor_halte();">
 				    <option <?php if($id==1)echo "selected"; ?> value="1">Koridor 1</option>
 				    <option <?php if($id==2)echo "selected"; ?> value="2">Koridor 2</option>
@@ -33,17 +33,15 @@
 				  </select>
 
 				</div>
-
+ -->
 				<thead>
 					<tr>
 						
 						<th>Id</th>
 						<th>Nama</th>
-						<th class="hidden-480">Longitude</th>
+						<th>Longitude</th>
 
-						<th>
-							<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
-							Latitude
+						<th>Latitude
 						</th>
 						<th class="hidden-480">Keterangan</th>
 						
@@ -61,7 +59,7 @@
 						<td>
 							<?php echo $value->nama?>
 						</td>
-						<td class="hidden-480"><?php echo $value->longitude?></td>
+						<td><?php echo $value->longitude?></td>
 						<td><?php echo $value->latitude?></td>
 
 						<td class="hidden-480">
@@ -70,15 +68,11 @@
 						
 						<td>
 							<div class="hidden-sm hidden-xs action-buttons">
-								<a class="blue" href="#">
-									<i class="ace-icon fa fa-search-plus bigger-130"></i>
-								</a>
-
-								<a class="green" href="#">
+								<a class="green" href="#"onclick="edit_halte(<?php echo $value->id?>);">
 									<i class="ace-icon fa fa-pencil bigger-130"></i>
 								</a>
 
-								<a class="red" href="#">
+								<a class="red" href="#"onclick="delete_halte(<?php echo $value->id?>);">
 									<i class="ace-icon fa fa-trash-o bigger-130"></i>
 								</a>
 							</div>
@@ -90,7 +84,7 @@
 									</button>
 
 									<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-											<input type="hidden" class="id-tersembunyi" value="<?php echo $value->id?>">
+											
 										<li>
 											<a href="#" onclick="view(this);" class="tooltip-info" data-rel="tooltip" title="View">
 												<span class="blue">

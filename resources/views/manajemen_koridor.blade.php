@@ -28,7 +28,7 @@
 						<th>Nomor</th>
 						<th>Nama</th>
 						<th class="hidden-480">Keterangan</th>
-						<th class="hidden-480">Simbol</th>
+						<th>Simbol</th>
 
 						<th>
 							<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
@@ -53,20 +53,17 @@
 						<td class="hidden-480">
 							<?php echo $value->keterangan?>
 						</td>
-						<td class="hidden-480"><?php echo $value->simbol?></td>
+						<td><?php echo $value->simbol?></td>
 						<td><?php echo $value->line?></td>
 
 						<td>
 							<div class="hidden-sm hidden-xs action-buttons">
-								<a class="blue" href="#">
-									<i class="ace-icon fa fa-search-plus bigger-130"></i>
-								</a>
-
-								<a class="green" href="#">
+								
+								<a class="green" href="#"onclick="edit_koridor(<?php echo $value->id?>);">
 									<i class="ace-icon fa fa-pencil bigger-130"></i>
 								</a>
 
-								<a class="red" href="#">
+								<a class="red" href="#"onclick="delete_koridor(<?php echo $value->id?>);">
 									<i class="ace-icon fa fa-trash-o bigger-130"></i>
 								</a>
 							</div>
