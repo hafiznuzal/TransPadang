@@ -14,6 +14,11 @@ class Halte extends Model
     public $timestamps = true;
     protected $dates = ['deleted_at'];
 
+    protected $casts = [
+        'longitude' => 'double',
+        'latitude' => 'double',
+    ];
+
     public function Point()
     {
         return $this->hasMany('App\Model\Point');
