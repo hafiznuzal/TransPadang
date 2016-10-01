@@ -12,6 +12,11 @@ class Point extends Model
     public $timestamps = true;
     protected $dates = ['deleted_at'];//
 
+    protected $casts = [
+        'longitude' => 'double',
+        'latitude' => 'double',
+    ];
+
     public function Halte()
     {
         return $this->belongsTo('App\Model\Halte');
