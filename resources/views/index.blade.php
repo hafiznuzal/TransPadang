@@ -180,7 +180,7 @@ var map = L.mapbox.map('map')
 
 
 L.mapbox.featureLayer()
-    .loadURL('{{ base_url() }}halte')
+    .loadURL('{{ url('/') }}halte')
     .on('ready', function(e) {
     // create a new MarkerClusterGroup that will show special-colored
     // numbers to indicate the type of rail stations it contains
@@ -236,14 +236,14 @@ L.mapbox.featureLayer()
 		map.removeLayer(groups.green);
 		map.removeLayer(groups.gray);
 
-		$.get( "{{ base_url() }}pencarian_halte/"+halte_berangkat+"/"+halte_datang, function( data ) {
+		$.get( "{{ url('/') }}pencarian_halte/"+halte_berangkat+"/"+halte_datang, function( data ) {
 	        // var geojson = JSON.parse(data);
 	        // var mark = L.mapbox.featureLayer(geojson);
 	        // mark.addTo(map);
 	        // layer.push(mark);
 	    });
 
-		$.get( "{{ base_url() }}pencarian_optimal/"+halte_berangkat+"/"+halte_datang, function( data ) {
+		$.get( "{{ url('/') }}pencarian_optimal/"+halte_berangkat+"/"+halte_datang, function( data ) {
 			data = JSON.parse(data)
 			console.log(data);
 			/* draw jalan */
