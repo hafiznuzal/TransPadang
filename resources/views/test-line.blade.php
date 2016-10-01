@@ -94,7 +94,7 @@ L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5a
 // //     .addLayer(L.mapbox.tileLayer('mapbox.dark'));
 
 // map.on('load', function () {
-//     $.get( "/TransPadang/public/halte_k1a", function( data ) {
+//     $.get( "{{ base_url() }}halte_k1a", function( data ) {
 //         console.log(JSON.parse(data))
 //         // map.addSource()
 //     });
@@ -127,7 +127,7 @@ L.mapbox.accessToken = 'pk.eyJ1Ijoib2tkZXYiLCJhIjoiY2ltdDFzZ3loMDF2OXZsbTQycDc5a
 //         }
 //     });
 // // });
-// var halte_kor = $.get( "/TransPadang/public/halte_k1a", function( data ) {
+// var halte_kor = $.get( "{{ base_url() }}halte_k1a", function( data ) {
 //        data = data + ";";
 //        alert(data)
 //     });
@@ -143,7 +143,7 @@ var map = L.mapbox.map('map')
 
 
 
- $.get( "/TransPadang/public/halte_k1a", function( data ) {
+ $.get( "{{ base_url() }}halte_k1a", function( data ) {
        // data = data + ";";
        var line_points = JSON.parse(data);
 

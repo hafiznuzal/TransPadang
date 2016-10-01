@@ -2,7 +2,7 @@
 
 @section('rute_js_pulang')
 
- $.get( "/TransPadang/public/rute6a", function( data ) {
+ $.get( "{{ base_url() }}rute6a", function( data ) {
        
        var line_points = JSON.parse(data);       
         var polyline_options = {
@@ -12,7 +12,7 @@
         layer.push(polyline);
     });
 
- $.get( "/TransPadang/public/halte_k6a", function( data ) {
+ $.get( "{{ base_url() }}halte_k6a", function( data ) {
        
        
         var geojson = JSON.parse(data);
@@ -26,7 +26,7 @@
 
 @section('rute_js_pergi')
 
- $.get( "/TransPadang/public/rute6b", function( data ) {
+ $.get( "{{ base_url() }}rute6b", function( data ) {
        
        var line_points = JSON.parse(data);       
         var polyline_options = {
@@ -37,7 +37,7 @@
 
     });
 
- $.get( "/TransPadang/public/halte_k6b", function( data ) {
+ $.get( "{{ base_url() }}halte_k6b", function( data ) {
        
        
         var geojson = JSON.parse(data);

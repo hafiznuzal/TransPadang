@@ -75,7 +75,7 @@ var map = L.mapbox.map('map')
     .addLayer(L.mapbox.tileLayer('mapbox.dark'));
 
 L.mapbox.featureLayer()
-    .loadURL('/TransPadang/public/halte')
+    .loadURL('{{ base_url() }}halte')
     .on('ready', function(e) {
     // create a new MarkerClusterGroup that will show special-colored
     // numbers to indicate the type of rail stations it contains
