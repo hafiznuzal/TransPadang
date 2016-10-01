@@ -29,7 +29,7 @@
 		    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 
 		    console.log(selectedValue);
-		    window.location="{{ url('/') }}manajemen_halte/"+selectedValue;
+		    window.location="{{ url('/') }}/manajemen_halte/"+selectedValue;
 		}
 		function changekor_point() 
 		{
@@ -37,18 +37,18 @@
 		    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 
 		    console.log(selectedValue);
-		    window.location="{{ url('/') }}manajemen_point/"+selectedValue;
+		    window.location="{{ url('/') }}/manajemen_point/"+selectedValue;
 		}
 
 		function delete_point($id)
 		{	
 			var selectedValue = $id;
-			window.location="{{ url('/') }}delete_point/"+selectedValue;
+			window.location="{{ url('/') }}/delete_point/"+selectedValue;
 		}
 		function delete_halte($id)
 		{	
 			var selectedValue = $id;
-			window.location="{{ url('/') }}delete_halte/"+selectedValue;
+			window.location="{{ url('/') }}/delete_halte/"+selectedValue;
 		}
 		function delete_koridor($id)
 		{	
@@ -56,7 +56,7 @@
 				function(){   
 					swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
 					var selectedValue = $id;
-					window.location="{{ url('/') }}delete_koridor/"+selectedValue;
+					window.location="{{ url('/') }}/delete_koridor/"+selectedValue;
 				}
 			);
 			
@@ -64,47 +64,47 @@
 		function delete_rute($id)
 		{	
 			var selectedValue = $id;
-			window.location="{{ url('/') }}delete_rute/"+selectedValue;
+			window.location="{{ url('/') }}/delete_rute/"+selectedValue;
 		}
 		function add_point()
 		{	
 			// var selectedValue = $id;
-			window.location="{{ url('/') }}tambah_point";
+			window.location="{{ url('/') }}/tambah_point";
 		}
 		function add_halte()
 		{	
 			// var selectedValue = $id;
-			window.location="{{ url('/') }}tambah_halte";
+			window.location="{{ url('/') }}/tambah_halte";
 		}
 		function add_koridor()
 		{	
 			// var selectedValue = $id;
-			window.location="{{ url('/') }}tambah_koridor";
+			window.location="{{ url('/') }}/tambah_koridor";
 		}
 		function add_rute()
 		{	
 			// var selectedValue = $id;
-			window.location="{{ url('/') }}tambah_rute";
+			window.location="{{ url('/') }}/tambah_rute";
 		}
 		function edit_point($id)
 		{	
 			var selectedValue = $id;
-			window.location="{{ url('/') }}edit_point/"+selectedValue;
+			window.location="{{ url('/') }}/edit_point/"+selectedValue;
 		}
 		function edit_halte($id)
 		{	
 			var selectedValue = $id;
-			window.location="{{ url('/') }}edit_halte/"+selectedValue;
+			window.location="{{ url('/') }}/edit_halte/"+selectedValue;
 		}
 		function edit_koridor($id)
 		{	
 			var selectedValue = $id;
-			window.location="{{ url('/') }}edit_koridor/"+selectedValue;
+			window.location="{{ url('/') }}/edit_koridor/"+selectedValue;
 		}
 		function edit_rute($id)
 		{	
 			var selectedValue = $id;
-			window.location="{{ url('/') }}edit_rute/"+selectedValue;
+			window.location="{{ url('/') }}/edit_rute/"+selectedValue;
 		}
 		var oTable1 = 
 				$('#dynamic-table')

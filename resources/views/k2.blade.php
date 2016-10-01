@@ -2,7 +2,7 @@
 
 @section('rute_js_pulang')
 
- $.get( "{{ url('/') }}rute2a", function( data ) {
+ $.get( "{{ url('/') }}/rute2a", function( data ) {
        
        var line_points = JSON.parse(data);       
         var polyline_options = {
@@ -12,7 +12,7 @@
         layer.push(polyline);
     });
 
- $.get( "{{ url('/') }}halte_k2a", function( data ) {
+ $.get( "{{ url('/') }}/halte_k2a", function( data ) {
        
        
       	var geojson = JSON.parse(data);
@@ -26,7 +26,7 @@
 
 @section('rute_js_pergi')
 
- $.get( "{{ url('/') }}rute2b", function( data ) {
+ $.get( "{{ url('/') }}/rute2b", function( data ) {
        
        var line_points = JSON.parse(data);       
         var polyline_options = {
@@ -37,7 +37,7 @@
 
     });
 
- $.get( "{{ url('/') }}halte_k2b", function( data ) {
+ $.get( "{{ url('/') }}/halte_k2b", function( data ) {
        
        
       	var geojson = JSON.parse(data);
